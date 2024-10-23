@@ -1,0 +1,13 @@
+1. Largest Element in Array
+https://www.geeksforgeeks.org/problems/largest-element-in-array4009/0?utm_source=youtube&utm_medium=collab_striver_ytdescription&utm_campaign=largest-element-in-array
+
+
+#### Medium #####
+1.Two Sum  
+//Indexing changing on sorting so sorting
+https://leetcode.com/problems/two-sum/
+2.Sort Colors ***
+https://leetcode.com/problems/sort-colors/description/
+
+
+
