@@ -100,3 +100,252 @@ class Solution {
         return ele;
     }
 }
+
+4.Maximum Subarray
+class Solution {
+    public int maxSubArray(int[] nums) {
+        int INF = -10000;
+        int ms = INF;
+        int meh = INF;
+
+        for(int i = 0 ; i < nums.length ; i++){
+            meh = Math.max(meh + nums[i], nums[i]);
+            ms = Math.max(meh, ms);
+        }
+
+        return ms;
+    }
+}
+
+5.Leaders in an Array problem
+class Solution {
+    static ArrayList<Integer> leaders(int arr[]) {
+        Stack<Integer> st = new Stack<>();
+        for(int i = arr.length-1 ; i >= 0 ; i--){
+            if(st.isEmpty() || st.peek() <= arr[i]){
+                st.push(arr[i]);
+            }
+        }
+        ArrayList<Integer> ans = new ArrayList<>();
+        while(!st.isEmpty()){
+            ans.add(st.pop());
+        }
+        
+        return ans;
+    }
+}
+
+
+6.Longest Consecutive Sequence in an Array *** 
+
+6.a. TC: O(nlogn + n)
+     SC: O(1)
+class Solution {
+    public int findLongestConseqSubseq(int[] arr) {
+        Arrays.sort(arr);
+        int ans = 1;
+        int meh = 1;
+        for(int i = 1 ; i < arr.length ; i++){
+            if(arr[i] == arr[i-1]) continue;
+            else if(arr[i]-arr[i-1] == 1){
+                meh++;
+            }else{
+                ans = Math.max(ans,meh);
+                meh = 1;
+            }
+        }
+        ans = Math.max(ans,meh);
+        return ans;
+    }
+}
+
+6.b TC: O(n + n)
+    SC: O(n)
+class Solution {
+    public int findLongestConseqSubseq(int[] arr) {
+        Set<Integer> st = new HashSet<>();
+        for(int i: arr){
+            st.add(i);
+        }
+        int ans = 1;
+        for(int i: arr){
+            if(!st.contains(i-1)){
+                int num = i;
+                int count = 1;
+                while(st.contains(num+1)){
+                    count++;
+                    num++;
+                }
+                ans = Math.max(count,ans);
+            }
+        }
+        return ans;
+    }
+}
+
+7.Set Matrix Zeroes *
+7.a TC: O(2*n*m)
+    SC: O(n+m)
+class Solution {
+    public void setZeroes(int[][] matrix) {
+        int n = matrix.length;
+        int m = matrix[0].length;
+        int[] row = new int[n];
+        int[] col = new int[m];
+        for(int i = 0 ; i < n ; i++){
+            for(int j = 0 ; j < m ; j++){
+                if(matrix[i][j] == 0){
+                    row[i] = -1;
+                    col[j] = -1;
+                }
+            }
+        } 
+        for(int i = 0; i < n ; i++){
+            for(int j = 0 ; j < m ; j++){
+                if(row[i] == -1 || col[j] == -1){
+                    matrix[i][j] = 0;
+                }
+            }
+        }
+    }
+}
+
+7.b TC: O(2*n*m)
+    SC: O(1)
+
+class Solution {
+    public void setZeroes(int[][] matrix) {
+        int zeroCol = 1;
+        int n = matrix.length;
+        int m = matrix[0].length;
+        for(int i = 0; i < n ; i++){
+            for(int j = 0 ; j < m ; j++){
+                if(matrix[i][j] == 0){
+                    if(j == 0){
+                        zeroCol = 0;
+                        matrix[i][0] = 0;
+                    }else{
+                         matrix[i][0] = 0;
+                        matrix[0][j] = 0;
+                    }
+                }                
+            }
+        }
+
+        for(int i = 1 ; i < n ; i++){
+            for(int j = 1 ; j < m ; j++){
+                if(matrix[i][0] == 0 || matrix[0][j] == 0){
+                    matrix[i][j] = 0;
+                }
+            }
+        }
+        //If initially filled these inidices, whole matrix could become zero
+        if(matrix[0][0] == 0) Arrays.fill(matrix[0],0);
+
+        if(zeroCol == 0){
+            for(int i = 0 ; i < n ; i++){
+                matrix[i][0] = 0;
+            }
+        }
+
+    }
+}
+
+9. Rotate Array
+9.a TC: O(2*n)
+    SC: O(n)
+class Solution {
+    public void rotate(int[] nums, int k) {
+        int n = nums.length;
+        k %= n;
+
+        int[] ans = new int[n];
+        for(int i= 0 ; i < n ; i++){
+            int j = (i + k) % n;
+            System.out.println(i + " " + j);
+            ans[j] = nums[i];
+        }
+
+        for(int i = 0 ; i < n ; i++){
+            nums[i] = ans[i];
+        }
+    }
+}
+
+9.b TC: O(n)
+    SC: O(1)
+
+class Solution {
+    private void reverse(int[] array, int i ,int j){
+        int low = i ;
+        int high = j;
+
+        while(low <= high){
+            int t = array[low];
+            array[low] = array[high];
+            array[high] = t;
+
+            low++;
+            high--;
+        }
+    }
+    public void rotate(int[] nums, int k) {
+        int n = nums.length;
+        k%=n;
+        reverse(nums, 0,n-k-1);
+        reverse(nums, n-k, n-1);
+        reverse(nums,0,n-1);
+    }
+}
+
+11. Longest subarray with sum K (Positives + Negatives)
+//Prefix Map
+TC: O(n)
+SC: O(n) 
+
+class Solution {
+    public static int lenOfLongSubarr(int A[], int N, int K) {
+        Map<Integer,Integer> prefixMap = new HashMap<>();
+        int prefixSum = 0;
+        int ans = 0;
+        prefixMap.put(prefixSum, -1);
+        for(int i = 0 ; i < N ; i++){
+            prefixSum += A[i];
+            int subtract = prefixSum - K;
+            if(prefixMap.containsKey(subtract)){
+                ans = Math.max(ans, i - prefixMap.get(subtract));
+            }   
+            if(!prefixMap.containsKey(prefixSum)){
+                prefixMap.put(prefixSum,i);
+            }
+        }
+        return ans;
+    }
+}
+
+12. 12. Subarray Sum Equals K
+//Prefix Map
+TC: O(n)
+SC: O(n) 
+
+class Solution {
+    public int subarraySum(int[] nums, int k) {
+        //sum, count
+        Map<Long,Integer> preMap = new HashMap<>();
+        preMap.put(0L,1);
+        long preSum = 0L;
+        int subCount = 0;
+        for(int i : nums){
+            preSum += i;
+            long subtract = preSum - k;
+
+            if(preMap.containsKey(subtract)){
+                subCount += preMap.get(subtract);
+            }
+
+            preMap.put(preSum, preMap.getOrDefault(preSum,0)+1);
+        }
+
+        return subCount;
+    }
+}

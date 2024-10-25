@@ -3,11 +3,58 @@ https://www.geeksforgeeks.org/problems/largest-element-in-array4009/0?utm_source
 
 
 #### Medium #####
-1.Two Sum  
+1.Two Sum  | Medium
 //Indexing changing on sorting so sorting
 https://leetcode.com/problems/two-sum/
-2.Sort Colors ***
+
+2.Sort Colors *** | Medium
 https://leetcode.com/problems/sort-colors/description/
 
+3.Majority Element *** | Medium
+https://leetcode.com/problems/majority-element/description/
 
+4.Maximum Subarray | Medium
+https://leetcode.com/problems/maximum-subarray/description/
 
+5.Leaders in an Array problem | Medium
+https://www.geeksforgeeks.org/problems/leaders-in-an-array-1587115620/1?utm_source=youtube&utm_medium=collab_striver_ytdescription&utm_campaign=leaders-in-an-array
+
+6.Longest Consecutive Sequence in an Array *** | Medium
+//Consider the case when number can be equal
+//If checking condition between loop(ex. comparision with previous index) don't forget to check after loop too
+
+        for(int t : nums){
+            if( t == 0){
+                mx = Math.max(mx,sum);
+                sum = 0;
+            }else{
+                sum++;
+            }
+        }
+
+        mx = Math.max(mx,sum); //checked condition after loop too
+
+https://www.geeksforgeeks.org/problems/longest-consecutive-subsequence2449/1
+
+7.Set Matrix Zeroes *** | Medium
+//Remeber the default value of array
+//In place code, if the initial row are set first, the whole matrix could become zero
+https://leetcode.com/problems/set-matrix-zeroes/description/
+
+8.Rotate Image
+https://leetcode.com/problems/rotate-image/description/
+
+9. Rotate Array
+https://leetcode.com/problems/rotate-array/
+
+10. Longest subarray with given sum K(positives) *** | Medium
+//For sum question always take long
+//Prefix Sum, Sliding Window
+
+11. Longest subarray with sum K (Positives + Negatives) *** | Medium
+//Prefix, No Sliding Window (does'nt work with -ve number, -ve could contribute in future when window moved ahead too)
+https://www.geeksforgeeks.org/problems/longest-sub-array-with-sum-k0809/1
+
+12. Subarray Sum Equals K
+//Prefix Sum , Sliding window does'nt work with -ve values
+https://leetcode.com/problems/subarray-sum-equals-k/description/
