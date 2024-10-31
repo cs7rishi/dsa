@@ -58,3 +58,23 @@ https://www.geeksforgeeks.org/problems/longest-sub-array-with-sum-k0809/1
 12. Subarray Sum Equals K
 //Prefix Sum , Sliding window does'nt work with -ve values
 https://leetcode.com/problems/subarray-sum-equals-k/description/
+
+13. Majority Element II || Medium || ***
+//Remember to check if element occurs more than mojority times
+https://leetcode.com/problems/majority-element-ii/description/
+
+14. 3Sum || Medium  || ***
+//Code implementation is important
+//Complexity for brute force is important
+//Also check how arraylist is created from HashSet
+//Handle the cases for duplicates when removing set structure
+
+15. Largest subarray with 0 sum || Medium || ***
+//Make sure to don't override the first index in preSum question
+
+16. Subarray with given XOR || Easy || *
+// Make a zero Input in the map
+
+17. 4Sum || Medium || *
+//Take care of the duplicates
+

@@ -1,0 +1,88 @@
+1. Binary Search
+
+class Solution {
+    public int search(int[] nums, int target) {
+        int low = 0 , high = nums.length-1, mid = 0;
+        while(low <= high){
+            mid = low + (high-low)/2;
+            if(nums[mid] == target){
+                return mid;
+            }else if(nums[mid] > target){
+                high = mid -1;
+            }else{
+                low = mid+1;
+            }
+        }
+        return -1;
+    }
+}
+
+2. Lower Bound *** | Medium
+2. A.
+class Solution {
+    static int findFloor(long arr[], int n, long x) {
+        int ans = -1;
+        int low = 0 , high = arr.length -1 ;
+        while(low <= high){
+            int mid = low + (high - low)/2;
+            if(arr[mid] == x){
+                return mid;
+            }else if(arr[mid] < x){
+                ans = mid;
+                low = mid+1;
+            } else {
+                high = mid-1;
+            }
+        }
+        return ans;
+    }
+}
+
+2. B.
+class Solution {
+    static int findFloor(long arr[], int n, long x) {
+        int ans = -1;
+        int low = 0 , high = arr.length -1 ;
+        while(low <= high){
+            int mid = low + (high - low)/2;
+            if(arr[mid] <= x){
+                ans = mid;
+                low = mid+1;
+            } else {
+                high = mid-1;
+            }
+        }
+        return ans;
+    }
+}
+
+2. C.
+//Utilizez concept of bounds
+class Solution {
+    static int findFloor(long arr[], int n, long x) {
+        int low = 0 , high = arr.length -1 ;
+        while(low <= high){
+            int mid = low + (high - low)/2;
+            if(arr[mid] <= x){
+                low = mid+1;
+            } else {
+                high = mid-1;
+            }
+        }
+        return high;
+    }
+}
+
+3. Upper Bound | Medium
+    public static int upperBound(int []arr, int x, int n){
+        int low = 0 , high = n -1 ;
+        while(low <= high){
+            int mid = low + (high - low)/2;
+            if(arr[mid] > x){
+                high = mid - 1;
+            }else{
+                low = mid + 1;
+            }
+        }
+        return low;
+    }

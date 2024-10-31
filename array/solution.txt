@@ -349,3 +349,264 @@ class Solution {
         return subCount;
     }
 }
+
+
+13. Majority Element II
+
+TC : O(n + n)
+SC : O(1)
+    public List<Integer> majorityElement(int[] nums) {
+        int INF = 1000_000_001;
+        int count_a = 0;
+        int a = INF;
+        int count_b = 0;
+        int b = INF;
+
+        for(int i : nums){
+            if(count_a == 0 && i != b){
+                a = i;
+            }else if(count_b == 0 && i != a){
+                b = i;
+            }
+
+            if(i == a){
+                count_a++;
+            }else if(i == b){
+                count_b++;
+            }else{
+                count_a--;
+                count_b--;
+            }
+        }
+
+        count_a = 0;
+        count_b = 0;
+
+        for(int i : nums){
+            if(i == a) count_a++;
+            else if(i == b) count_b++;
+        }
+
+        int mn = (int)(nums.length / 3)+1;
+        List<Integer> ans = new ArrayList<>();
+        if(count_a >= mn) ans.add(a);
+        if(count_b >= mn) ans.add(b);
+
+
+        return ans;
+    }
+
+14. 3Sum
+
+14.a 
+TC: O(n^3*log(k) k is no. of unique triplet, not considering the time complexity of sorting the element)
+SC: O(2*k) k is unique triplet
+
+public List<List<Integer>> threeSum(int[] nums) {
+    Set<List<Integer>> st = new HashSet<>();
+    for(int i = 0 ; i < nums.length ; i++){
+        for(int j = i+1 ; j < nums.length ; j++){
+            for(int k = j+1; k < nums.length ; k++){
+                if(nums[i] + nums[j] + nums[k] == 0){
+                    List<Integer> arr = new ArrayList<>(List.of(nums[i], nums[j], nums[k]));
+                    Collections.sort(arr);
+                    st.add(arr);
+                }
+            }
+        }
+    }
+    List<List<Integer>> ans = new ArrayList<>();
+    for(List<Integer> list : st){
+        ans.add(list);
+    }
+    return ans;
+}
+
+14.b
+TC: O(n^2*log(k), k is unique triplet, log(k) required to add in the set)
+SC: O(k(st) + k(arr) + n(preSet))
+public List<List<Integer>> threeSum(int[] nums) {
+    Set<List<Integer>> st = new HashSet<>();
+    for(int i = 0 ; i < nums.length ; i++){
+        Set<Integer> preSet = new HashSet<>();
+        for(int j = i+1 ; j < nums.length ; j++){
+            int required = -(nums[i] + nums[j]);
+            if(preSet.contains(required)){
+                List<Integer> arr = new ArrayList<>(List.of(nums[i], nums[j], required));
+                Collections.sort(arr);
+                st.add(arr); //contribute toward complexity
+            }
+            preSet.add(nums[j]);
+        }
+    }
+    List<List<Integer>> ans = new ArrayList<>(st); <<<<<<<<<<<<<<<<< how 2d list is created from set
+    return ans;
+}
+
+14.c
+TC: O(n^2)
+SC: O(k , where k is all the triplets)
+//Handle the case of duplicates
+
+    public List<List<Integer>> threeSum(int[] nums) {
+        int n = nums.length;
+        Arrays.sort(nums);
+        List<List<Integer>> ans = new ArrayList<>();
+        for(int i = 0 ; i < n ; i++){
+            
+            int low = i + 1;
+            int high = n - 1;
+
+            while(low < high){
+                int sum = nums[low] + nums[high];
+                if(sum == -nums[i]){
+                    ans.add(List.of(nums[i],nums[low],nums[high]));
+                    while(low < high && nums[low+1] == nums[low]){
+                        low++;
+                    }
+                    low++;
+                    while(low < high && nums[high-1] == nums[high]){
+                        high--;
+                    }
+                    high--;
+                }else if(sum > -nums[i]){
+                    high--;
+                }else{
+                    low++;
+                }
+            }
+            while(i < n && i+1 < n && nums[i+1] == nums[i]){
+                i++;
+            }
+        }
+        return ans;
+    }
+
+
+
+15. Largest subarray with 0 sum
+TC: O(n)
+SC: O(n)
+    int maxLen(int arr[], int n)
+    {
+        Map<Integer,Integer> mp = new HashMap<>();
+        mp.put(0,-1);
+        int preSum = 0;
+        int ans = 0;
+        for(int i = 0; i < arr.length ; i++){
+            preSum += arr[i];
+            
+            if(mp.containsKey(preSum)){
+                ans = Math.max(ans, i - mp.get(preSum));
+            }
+            
+            if(mp.get(preSum) == null){
+                mp.put(preSum, i);
+            }
+        }
+        
+        return ans;
+    }
+
+
+16. Subarray with given XOR
+    public int solve(int[] A, int B) {
+        Map<Integer,Integer> mp = new HashMap<>();
+        mp.put(0,1); <<<<<<<<<<<<<<<< important
+        int count = 0;
+        int preXor = 0;
+        for(int i = 0 ; i < A.length ; i++){
+            preXor ^= A[i];
+            int required = preXor ^ B;
+            
+            count+= mp.getOrDefault(required,0);
+        
+            mp.put(preXor, mp.getOrDefault(preXor,0)+1);
+        }
+        
+        return count;
+    }
+
+17. 4Sum
+17.a
+TC: O(n^4*log(k), where k is no of the quadraple)
+SC: O(2*k)
+
+    public List<List<Integer>> fourSum(int[] nums, int target) {
+        int n = nums.length;
+        Set<List<Integer>> st = new HashSet<>();
+        for(int i = 0 ; i < n ; i++){
+            for(int j = i+1 ; j < n ; j++){
+                for(int k = j+1 ; k < n ; k++){
+                    for(int l = k+1 ; l < n ; l++){
+                        if(nums[i] + nums[j] + nums[k] + nums[l] == target){
+                            List<Integer> list = new ArrayList<>(List.of(nums[i], nums[j], nums[k], nums[l]));
+                            Collections.sort(list);
+                            st.add(list);
+                        }
+                    }
+                }
+            }
+        }
+        List<List<Integer>> ans = new ArrayList<>(st);
+        return ans;
+    }
+
+17.b //take care of long numbers;
+TC: O(n^3*logk)
+SC: O(k)
+    public List<List<Integer>> fourSum(int[] nums, int target) {
+        int n = nums.length;
+        Set<List<Integer>> ansSet = new HashSet<>();
+        for(int i = 0 ; i < n ; i++){
+            for(int j = i+1 ; j < n ; j++){
+                long total = target - (long)nums[i] - (long)nums[j];
+                Set<Long> hashSet = new HashSet<>();
+                for(int k = j+1 ; k < n ; k++){
+                    long required = total - (long)nums[k];
+                    if(hashSet.contains(required)){
+                        List<Integer> list = new ArrayList<>(List.of(nums[i], nums[j], nums[k] , (int)required));
+                        Collections.sort(list);
+                        ansSet.add(list);
+                    }
+                    hashSet.add((long)nums[k]);
+                }
+            }
+        }
+        List<List<Integer>> ans = new ArrayList<>(ansSet);
+        return ans;
+    }
+
+17.c
+TC: O(n^3)
+SC: O(k)
+
+public List<List<Integer>> fourSum(int[] nums, int target) {
+        Arrays.sort(nums);
+        List<List<Integer>> ans = new ArrayList<>();
+        for(int i = 0 ; i < nums.length ; i++){
+            for(int j = i+1 ; j < nums.length ; j++){
+                long total = target - (long) nums[i] - (long) nums[j];
+                int low = j + 1 , high = nums.length - 1;
+                while(low < high){
+                    // System.out.println(low + " " + high);
+                    long sum = (long)nums[low] + (long)nums[high];
+                    if(sum == total){
+                        List<Integer> list = new ArrayList<>(List.of(nums[i],nums[j], nums[low],nums[high]));
+                        ans.add(list);
+                        while(low < high && low + 1 < high && nums[low] == nums[low+1])low++;
+                        while(low < high && low < high - 1 && nums[high-1] == nums[high])high--;
+                        low++;
+                        high--;
+                    }else if(sum < total){
+                        low++;
+                    }else{
+                        high--;
+                    }
+                }
+                while(j < nums.length && j + 1 < nums.length && nums[j] == nums[j+1]) j++;
+            }
+            while(i < nums.length && i + 1 < nums.length && nums[i] == nums[i+1]) i++;
+        }
+        return ans;
+    }
