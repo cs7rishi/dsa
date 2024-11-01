@@ -78,3 +78,9 @@ https://leetcode.com/problems/majority-element-ii/description/
 17. 4Sum || Medium || *
 //Take care of the duplicates
 
+18. Merge Overlapping Sub-intervals || Medium
+//Easy implementation, learn how to shorten native array
+
+19. Merge two Sorted Arrays Without Extra Space || Medium || ***
+//Just learn the logic, nothing logical
+
