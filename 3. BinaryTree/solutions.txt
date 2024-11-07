@@ -1,0 +1,28 @@
+3001.Morris Inorder Traversal of a Binary Tree
+//Important reduces the space complexity to O(1)
+TC: O(n)
+SC: O(1)
+    public List<Integer> inorderTraversal(TreeNode root) {
+        List<Integer> ans = new ArrayList<>();
+        while(root != null){
+            if(root.left == null){
+                ans.add(root.val);
+                root = root.right;
+            }else{
+                TreeNode rightMost = root.left;
+                while(rightMost.right != null && rightMost.right != root){
+                    rightMost = rightMost.right;
+                }
+                if(rightMost.right == null){
+                    rightMost.right = root;
+                    root = root.left;
+                } 
+                else{
+                    rightMost.right = null;
+                    ans.add(root.val);
+                    root = root.right;
+                } 
+            }
+        }
+        return ans;
+    }

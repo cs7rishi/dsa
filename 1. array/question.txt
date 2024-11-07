@@ -1,25 +1,20 @@
-1. Largest Element in Array
-https://www.geeksforgeeks.org/problems/largest-element-in-array4009/0?utm_source=youtube&utm_medium=collab_striver_ytdescription&utm_campaign=largest-element-in-array
-
-
-#### Medium #####
-1.Two Sum  | Medium
+1001.Two Sum  | Medium
 //Indexing changing on sorting so sorting
 https://leetcode.com/problems/two-sum/
 
-2.Sort Colors *** | Medium
+1002.Sort Colors *** | Medium
 https://leetcode.com/problems/sort-colors/description/
 
-3.Majority Element *** | Medium
+1003.Majority Element *** | Medium
 https://leetcode.com/problems/majority-element/description/
 
-4.Maximum Subarray | Medium
+1004.Maximum Subarray | Medium
 https://leetcode.com/problems/maximum-subarray/description/
 
-5.Leaders in an Array problem | Medium
+1005.Leaders in an Array problem | Medium
 https://www.geeksforgeeks.org/problems/leaders-in-an-array-1587115620/1?utm_source=youtube&utm_medium=collab_striver_ytdescription&utm_campaign=leaders-in-an-array
 
-6.Longest Consecutive Sequence in an Array *** | Medium
+1006.Longest Consecutive Sequence in an Array *** | Medium
 //Consider the case when number can be equal
 //If checking condition between loop(ex. comparision with previous index) don't forget to check after loop too
 
@@ -36,51 +31,63 @@ https://www.geeksforgeeks.org/problems/leaders-in-an-array-1587115620/1?utm_sour
 
 https://www.geeksforgeeks.org/problems/longest-consecutive-subsequence2449/1
 
-7.Set Matrix Zeroes *** | Medium
+1007.Set Matrix Zeroes *** | Medium
 //Remeber the default value of array
 //In place code, if the initial row are set first, the whole matrix could become zero
 https://leetcode.com/problems/set-matrix-zeroes/description/
 
-8.Rotate Image
+1008.Rotate Image
 https://leetcode.com/problems/rotate-image/description/
 
-9. Rotate Array
+1009. Rotate Array
 https://leetcode.com/problems/rotate-array/
 
-10. Longest subarray with given sum K(positives) *** | Medium
+1010. Longest subarray with given sum K(positives) *** | Medium
 //For sum question always take long
 //Prefix Sum, Sliding Window
 
-11. Longest subarray with sum K (Positives + Negatives) *** | Medium
+1011. Longest subarray with sum K (Positives + Negatives) *** | Medium
 //Prefix, No Sliding Window (does'nt work with -ve number, -ve could contribute in future when window moved ahead too)
 https://www.geeksforgeeks.org/problems/longest-sub-array-with-sum-k0809/1
 
-12. Subarray Sum Equals K
+1012. Subarray Sum Equals K
 //Prefix Sum , Sliding window does'nt work with -ve values
 https://leetcode.com/problems/subarray-sum-equals-k/description/
 
-13. Majority Element II || Medium || ***
+1013. Majority Element II || Medium || ***
 //Remember to check if element occurs more than mojority times
 https://leetcode.com/problems/majority-element-ii/description/
 
-14. 3Sum || Medium  || ***
+1014. 3Sum || Medium  || ***
 //Code implementation is important
 //Complexity for brute force is important
 //Also check how arraylist is created from HashSet
 //Handle the cases for duplicates when removing set structure
 
-15. Largest subarray with 0 sum || Medium || ***
+1015. Largest subarray with 0 sum || Medium || ***
 //Make sure to don't override the first index in preSum question
 
-16. Subarray with given XOR || Easy || *
+1016. Subarray with given XOR || Easy || *
 // Make a zero Input in the map
 
-17. 4Sum || Medium || *
+1017. 4Sum || Medium || *
 //Take care of the duplicates
 
-18. Merge Overlapping Sub-intervals || Medium
+1018. Merge Overlapping Sub-intervals || Medium ||
 //Easy implementation, learn how to shorten native array
 
-19. Merge two Sorted Arrays Without Extra Space || Medium || ***
+1019. Merge two Sorted Arrays Without Extra Space || Medium || ***
 //Just learn the logic, nothing logical
+
+1020. Find the repeating and missing number || Medium || ***
+//Use 1 to n for both the operation, calculating xor 
+    and dividing in 2 groups, based on set bits
+
+1021. Count Inversion || Hard || ***
+//Make sure you know merge sort
+//Make sure the condition of counting is correct
+
+1022. Reverse Pairs || Hard || *****
+//ALways have optimal condition for counting pairs
+//Use brackets for Precedence Issue (j - (mid+1)) + 1;
 

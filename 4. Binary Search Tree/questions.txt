@@ -1,0 +1,29 @@
+4001. Ceil in BST || Easy || *
+//Use Iterative Approach
+https://www.geeksforgeeks.org/problems/implementing-ceil-in-bst/1
+
+4002. Floor in BST || Easy || * 
+//Similar to above
+https://www.geeksforgeeks.org/problems/floor-in-bst/1
+
+4003. Insert into a Binary Search Tree || Easy || *
+//Use Iterative, Recursive code is quite simple
+https://leetcode.com/problems/insert-into-a-binary-search-tree/description/
+
+4004. Kth Smallest Element in a BST || Medium || ***
+//Use Iterative, use iterative preorder without DS
+//Use Morris traversal for reducing space complexity
+//With Morris, return the ans before moving ahead
+https://leetcode.com/problems/kth-smallest-element-in-a-bst/description/
+
+4005. Validate Binary Search Tree || Easy || ***
+//Iterative traversal
+//Use Morris traversal for reducing space complexity
+//With Morris, return the ans before moving ahead
+//Also there is a bound method too, check that out too, PENDING ********
+https://leetcode.com/problems/validate-binary-search-tree/description/
+
+4006. Construct Binary Search Tree from Preorder Traversal || Medium || ***
+//Morris also works in O(n), time complexity
+//Check for algo works with upperBound in O(n) || Very Simple Code
+https://leetcode.com/problems/construct-binary-search-tree-from-preorder-traversal/description/
