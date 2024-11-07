@@ -1,0 +1,15 @@
+Min Heap: The minimum key element is present at the root.
+Max Heap: The maximum key element is present at the root.
+
+Heap is used to reduce the logN operation to logK.
+eg NlogN sorting to NlogK, based on question
+
+5001. Kth Largest Element in an Array || Easy || *
+//Learn quickSort approach with the fact that average TC is N^2 resulting TLE
+
+5002. Kth Smallest Element in an Array || Easy 
+//Learn quickSort approach with the fact that average TC is N^2 resulting TLE
+
+5003. Sort K sorted array || Easy || *
+//Heap reduces the logN to logK
+

@@ -1,0 +1,122 @@
+5001. Kth Largest Element in an Array || Easy || *
+
+5001.a.
+TC: O(NlogN)
+SC: O(1)
+    public int findKthLargest(int[] nums, int k) {
+        int n = nums.length;
+        Arrays.sort(nums);
+        return nums[n-k];
+    }
+
+5001.b.
+TC: O(NLogK) // only added K elements in PQ
+SC: O(K)
+
+    public int findKthLargest(int[] nums, int k) {
+        PriorityQueue<Integer> pq = new PriorityQueue<>();
+
+        for(int i = 0 ; i < k ; i++) pq.add(nums[i]);
+        for(int i = k ; i < nums.length ; i++){
+            if(nums[i] > pq.peek()){
+                pq.poll();
+                pq.add(nums[i]);
+            }
+        }
+
+        return pq.peek();
+    }
+
+
+5002. Kth Smallest
+TC: O(NLogK) // only added K elements in PQ
+SC: O(K)
+
+    public static int kthSmallest(int[] arr, int k) {
+        PriorityQueue<Integer> pq = new PriorityQueue<>((a,b)->b-a);
+        for(int i = 0 ; i < k ; i++){
+            pq.add(arr[i]);
+        }
+        
+        for(int i = k ; i < arr.length ; i++){
+            if(arr[i] < pq.peek()){
+                pq.poll();
+                pq.add(arr[i]);
+            }
+        }
+        
+        return pq.peek();
+    }
+
+5003. Sort K sorted array || Easy
+5003.a.
+TC: O(K^2LogK^2) // only added K elements in PQ
+SC: O(K^2)
+    
+    public static ArrayList<Integer> mergeKArrays(int[][] arr,int K) 
+    {
+        ArrayList<Integer> ans = new ArrayList<>();
+        PriorityQueue<Integer> pq = new PriorityQueue<>();
+        for(int[] row : arr){
+            for(int n : row){
+                pq.add(n);
+            }
+        }
+        
+        while(!pq.isEmpty()){
+            ans.add(pq.poll());
+        }
+        
+        return ans;
+    }
+
+5003.b. 
+TC: O(K^2LogK) // only added K elements in PQ
+SC: O(K)
+
+    public static ArrayList<Integer> mergeKArrays(int[][] arr,int K) 
+    {
+        ArrayList<Integer> ans = new ArrayList<>();
+        PriorityQueue<int[]> pq = new PriorityQueue<>((a,b)->a[0]-b[0]);
+        for(int i = 0 ; i < K ; i++){
+            pq.add(new int[]{arr[i][0], i,0});
+        }
+        
+        while(!pq.isEmpty()){
+            int[] top = pq.poll();
+            int ele = top[0];
+            int row = top[1];
+            int col = top[2];
+            
+            ans.add(ele);
+            
+            if(col+1 < K){
+                pq.add(new int[]{arr[row][col+1], row, col+1});
+            }
+        }
+        return ans;
+    }
+
+5004. Merge M sorted Lists || Easy 
+TC: O(NLogK) // N all elements , and K is size of initial array
+SC: O(K)
+
+    public ListNode mergeKLists(ListNode[] lists) {
+        int INF = Integer.MIN_VALUE;
+        ListNode head = new ListNode(INF);
+        ListNode prev = head;
+        PriorityQueue<ListNode> pq = new PriorityQueue<>((a,b)-> a.val - b.val);
+
+        for(ListNode node : lists){
+            if(node != null) pq.add(node);
+        }
+
+        while(!pq.isEmpty()){
+            ListNode top = pq.poll();
+            if(top.next != null) pq.add(top.next);
+            prev = prev.next = top;
+        }
+
+        prev.next = null;
+        return head.next;
+    }
