@@ -1,4 +1,4 @@
-3001.Morris Inorder Traversal of a Binary Tree
+3020.Morris Inorder Traversal of a Binary Tree
 //Important reduces the space complexity to O(1)
 TC: O(n)
 SC: O(1)
@@ -25,4 +25,336 @@ SC: O(1)
             }
         }
         return ans;
+    }
+
+
+Diameter of Binary Tree || Easy || *
+TC: 
+SC: 
+class Solution {
+    private int ans = 0;
+    private int recursion(TreeNode root){
+        if(root == null) return 0;
+
+        int left = recursion(root.left);
+        int right = recursion(root.right);
+
+        int mx = Math.max(left,right); // these 2 line are important
+        ans = Math.max(ans,1+left+right);
+
+        return 1+mx;
+    }
+    public int diameterOfBinaryTree(TreeNode root) {
+        recursion(root);
+
+        return ans-1;
+    }
+}
+
+Binary Tree Maximum Path Sum || Hard || *
+TC: 
+SC: 
+private int ans = -1001;
+    private int recursion(TreeNode root){
+        if(root == null) return 0;
+
+        int left = recursion(root.left);
+        int right = recursion(root.right);
+        int mx = Math.max(left,right);
+        mx = Math.max(root.val, mx + root.val);
+        ans = Math.max(ans, Math.max(mx, root.val + left + right));
+
+        return mx;
+
+    }
+    public int maxPathSum(TreeNode root) {
+        recursion(root);
+        return ans;
+    }
+
+Same Tree || Easy
+TC: 
+SC: 
+    public boolean isSameTree(TreeNode p, TreeNode q) {
+        if(p == null && q == null) return true;
+        if(p == null || q == null) return false;
+
+        return (p.val == q.val) && isSameTree(p.left,q.left) && isSameTree(p.right,q.right); 
+    }
+
+Binary Tree Zigzag Level Order Traversal || Easy
+TC: 
+SC: 
+    public List<List<Integer>> zigzagLevelOrder(TreeNode root) {
+        List<List<Integer>> ans = new ArrayList<>();
+        if(root == null) return ans;
+        Queue<TreeNode> q = new LinkedList<>();
+        q.add(root);
+        int l = 0;
+
+        while(!q.isEmpty()){
+            int size = q.size();
+            l++;
+            List<Integer> level = new ArrayList<>();
+            while(size-- > 0){
+                TreeNode node = q.poll();
+                level.add(node.val);
+
+                if(node.left != null) q.add(node.left);
+                if(node.right != null) q.add(node.right);
+            }
+            if(l%2==0)
+            Collections.reverse(level);
+            ans.add(level);
+        }
+
+        return ans;
+    }
+
+Vertical Order Traversal of Binary Tree || Easy || *
+TC: O(N + NlogN)
+SC: O(N + N + N/2) N/2 for the queue, in the worst it could be N/2
+public List<List<Integer>> verticalTraversal(TreeNode root) {
+        List<List<Integer>> ans = new ArrayList<>();
+        Map<Integer, List<Node>> mp = new HashMap<>();
+        if(root == null) return ans;
+
+        Queue<Node> q = new LinkedList<>();
+        q.add(new Node(root,1,0));
+        int minCol = 0;
+
+        while(!q.isEmpty()){
+            Node node = q.poll();
+            TreeNode treeNode = node.treeNode;
+            int col = node.col;
+            int row = node.row;
+
+            minCol = Math.min(minCol,col);
+            List<Node> colList = mp.getOrDefault(col, new ArrayList<Node>());
+            colList.add(node);
+            mp.put(col, colList);
+
+            if(treeNode.left != null) q.add(new Node(treeNode.left, row+1, col-1));
+            if(treeNode.right != null) q.add(new Node(treeNode.right, row+1, col+1));
+        }
+
+        while(mp.containsKey(minCol)){
+            List<Node> nodeLevel = mp.get(minCol++);
+            Collections.sort(nodeLevel, (a,b)->{
+                if(a.row == b.row){
+                    return a.treeNode.val - b.treeNode.val;
+                }
+                return a.row - b.row;
+            });
+            List<Integer> intLevel = new ArrayList<>();
+            for(Node node: nodeLevel){
+                intLevel.add(node.treeNode.val);
+            }
+            ans.add(intLevel);
+        }
+
+        return ans;
+
+    }
+
+    class Node{
+        public TreeNode treeNode;
+        public int row;
+        public int col;
+
+        Node(TreeNode treeNode, int row, int col){
+            this.treeNode = treeNode;
+            this.row = row;
+            this.col = col;
+        }
+    }
+
+Top View of Binary Tree || Easy
+TC: 
+SC: 
+class Solution
+{
+    //Function to return a list containing the bottom view of the given tree.
+    public ArrayList <Integer> bottomView(Node root)
+    {
+        Map<Integer,Integer> mp = new HashMap<>();
+        
+        ArrayList<Integer> ans = new ArrayList<>();
+        if(root == null) return ans;
+        
+        Queue<TreeNode> q = new LinkedList<>();
+        q.add(new TreeNode(root, 0, 0));
+        int minCol = 0;
+        
+        while(!q.isEmpty()){
+            Node node = q.peek().node;
+            int row = q.peek().row;
+            int col = q.peek().col;
+            q.poll();
+            
+            minCol = Math.min(minCol, col);
+            
+            
+            if(!mp.containsKey(col)){
+                mp.put(col, node.data);
+            }
+            
+            if(node.left != null) q.add(new TreeNode(node.left,row+1,col-1));
+            if(node.right != null) q.add(new TreeNode(node.right,row+1,col+1));
+        }
+        
+        while(mp.containsKey(minCol)){
+            ans.add(mp.get(minCol++));
+        }
+        
+        return ans;
+    }
+    
+    static class TreeNode{
+        public Node node;
+        public int col, row;
+        
+        TreeNode(Node node, int row, int col){
+            this.node = node;
+            this.row = row;
+            this.col = col;
+        }
+    }
+}
+
+Bottom View of Binary Tree || Easy
+TC: 
+SC: 
+class Solution
+{
+    //Function to return a list containing the bottom view of the given tree.
+    public ArrayList <Integer> bottomView(Node root)
+    {
+        Map<Integer,Integer> mp = new HashMap<>();
+        
+        ArrayList<Integer> ans = new ArrayList<>();
+        if(root == null) return ans;
+        
+        Queue<TreeNode> q = new LinkedList<>();
+        q.add(new TreeNode(root, 0, 0));
+        int minCol = 0;
+        
+        while(!q.isEmpty()){
+            Node node = q.peek().node;
+            int row = q.peek().row;
+            int col = q.peek().col;
+            q.poll();
+            
+            minCol = Math.min(minCol, col);
+            
+            
+            // if(!mp.containsKey(col)){
+                mp.put(col, node.data);
+            // }
+            
+            if(node.left != null) q.add(new TreeNode(node.left,row+1,col-1));
+            if(node.right != null) q.add(new TreeNode(node.right,row+1,col+1));
+        }
+        
+        while(mp.containsKey(minCol)){
+            ans.add(mp.get(minCol++));
+        }
+        
+        return ans;
+    }
+    
+    static class TreeNode{
+        public Node node;
+        public int col, row;
+        
+        TreeNode(Node node, int row, int col){
+            this.node = node;
+            this.row = row;
+            this.col = col;
+        }
+    }
+}
+
+Binary Tree Right Side View || Easy
+TC: 
+SC: 
+public List<Integer> rightSideView(TreeNode root) {
+       Map<Integer,Integer> mp = new HashMap<>();
+       
+       List<Integer> ans = new ArrayList<>();
+       if(root == null) return ans;
+
+       Queue<Pair<TreeNode,Integer>> q = new LinkedList<>();
+       q.add(new Pair(root,0)); 
+
+       while(!q.isEmpty()){
+            TreeNode node = q.peek().getKey();
+            int row = q.peek().getValue();
+            q.poll();
+
+            mp.put(row, node.val);
+            if(node.left != null) q.add(new Pair(node.left,row+1));
+            if(node.right != null) q.add(new Pair(node.right,row+1));
+       }
+
+       int row = 0;
+       while(mp.containsKey(row)){
+        ans.add(mp.get(row++));
+       }
+
+       return ans;
+    }
+
+B. 
+TC: 
+SC: 
+public List<Integer> rightSideView(TreeNode root) {
+       List<Integer> ans = new ArrayList<>();
+       if(root == null) return ans;
+
+       Queue<Pair<TreeNode,Integer>> q = new LinkedList<>();
+       q.add(new Pair(root,1)); 
+
+       while(!q.isEmpty()){
+            TreeNode node = q.peek().getKey();
+            int row = q.peek().getValue();
+            q.poll();
+
+            if(ans.size() >= row){
+                ans.set(row-1,node.val);
+            }else{
+                ans.add(node.val);
+            }
+            if(node.left != null) q.add(new Pair(node.left,row+1));
+            if(node.right != null) q.add(new Pair(node.right,row+1));
+       }
+       return ans;
+    }
+
+Symmetric Tree || Easy
+class Solution {
+    private boolean isSameTree(TreeNode p , TreeNode q){
+        if(p == null && q == null) return true;
+        if(p == null || q == null) return false;
+        return p.val == q.val && isSameTree(p.left,q.right) && isSameTree(p.right,q.left);
+    }
+    public boolean isSymmetric(TreeNode root) {
+        if(root == null) return true;
+        return isSameTree(root.left, root.right);
+    }
+}
+
+Lowest Common Ancestor of a Binary Tree || Medium || ***
+TC: O(N)
+SC: O(N), Auxillary space complexity
+public TreeNode lowestCommonAncestor(TreeNode root, TreeNode p, TreeNode q) {
+        if(root == null) return null;
+        if(root.val == p.val || root.val == q.val) return root;
+
+        TreeNode left = lowestCommonAncestor(root.left, p , q);
+        TreeNode right = lowestCommonAncestor(root.right, p , q);
+
+        if(left != null && right != null) return root;
+        else if(left != null) return left;
+        else return right;
     }
