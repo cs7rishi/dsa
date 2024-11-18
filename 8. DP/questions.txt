@@ -1,0 +1,88 @@
+> 1D DP:
+8001. Climbing Stars || EASY
+https://leetcode.com/problems/climbing-stairs/description/
+
+8002. Frog Jump || EASY || *
+//Remeber you are standing on the first step, so can't jump to 2 directly
+https://www.geeksforgeeks.org/problems/geek-jump/1
+
+8003. Frog Jump with k distances || EASY 
+https://www.geeksforgeeks.org/problems/minimal-cost/1
+
+8004. Maximum sum of non-adjacent elements || EASY
+https://leetcode.com/problems/house-robber/description/
+
+8005. House Robber || PENDING
+
+> 2D/3D DP and DP on Grids:
+8006. Ninja's Training
+https://www.geeksforgeeks.org/problems/geeks-training/1
+
+8007. Grid Unique Paths : DP on Grids
+https://leetcode.com/problems/unique-paths/submissions/1452555011/
+
+8008. Grid Unique Paths 2
+https://leetcode.com/problems/unique-paths-ii/description/
+
+8009. Minimum path sum in Grid
+https://leetcode.com/problems/minimum-path-sum/
+
+8010. Minimum path sum in Triangular Grid
+
+8011. Minimum/Maximum Falling Path Sum
+8012. Ninja and his friends
+
+> DP on Subsequence
+8013. Subset sum equal to target
+8014. Partition Equal Subset Sum
+8015. Partition Set Into 2 Subsets With Min Absolute Sum Diff
+8016. Count Subsets with Sum K
+8017. Count Partitions with Given Difference
+8018. Assign Cookies
+8019. Minimum Coins 
+8020. Target Sum 
+8021. Coin Change 2 
+8022. Unbounded Knapsack 
+8023. Rod Cutting Problem
+
+> DP on Strings
+8024. Longest Common Subsequence
+8025. Print Longest Common Subsequence
+8026. Longest Common Substring
+8027. Longest Palindromic Subsequence
+8028. Minimum insertions to make stri
+8029. Minimum Insertions/Deletions to Convert String
+8030. Shortest Common Supersequence
+8031. Distinct Subsequence
+8032. Edit Distance
+8033. Wildcard Matching
+
+> DP on Stocks
+8034. Best Time to Buy and Sell Stock 
+8035. Buy and Sell Stock - II
+8036. Buy and Sell Stocks III
+8037. Buy and Stock Sell IV 
+8038. Buy and Sell Stocks With Cooldown
+8039. Buy and Sell Stocks With Transaction Fee
+
+> DP on LIS
+8040. Longest Increasing Subsequence 
+8041. Printing Longest Increasing Subsequence
+8042. Longest Increasing Subsequence 
+8043. Largest Divisible Subset
+8044. Longest String Chain
+8045. Longest Bitonic Subsequence 
+8046. Number of Longest Increasing Subsequences
+
+> MCM DP
+8047. Matrix Chain Multiplication
+8048. Matrix Chain Multiplication | Bottom-Up
+8049. Minimum Cost to Cut the Stick
+8050. Burst Balloons
+8051. Evaluate Boolean Expression to True
+8052. Palindrome Partitioning - II
+8053. Partition Array for Maximum Sum
+
+>DP on Squares
+8054. Maximum Rectangle Area with all 1's
+8055. Count Square Submatrices with All Ones
