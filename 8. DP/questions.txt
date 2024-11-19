@@ -15,74 +15,172 @@ https://leetcode.com/problems/house-robber/description/
 8005. House Robber || PENDING
 
 > 2D/3D DP and DP on Grids:
-8006. Ninja's Training
+// Could be performed with n * n 
+// Prefill the initiall row and column
+
+8006. Ninja's Training || EASY
 https://www.geeksforgeeks.org/problems/geeks-training/1
 
-8007. Grid Unique Paths : DP on Grids
+8007. Grid Unique Paths : DP on Grids || MEDIUM
 https://leetcode.com/problems/unique-paths/submissions/1452555011/
 
-8008. Grid Unique Paths 2
+8008. Grid Unique Paths 2 || EASY
 https://leetcode.com/problems/unique-paths-ii/description/
 
-8009. Minimum path sum in Grid
+8009. Minimum path sum in Grid || EASY
 https://leetcode.com/problems/minimum-path-sum/
 
-8010. Minimum path sum in Triangular Grid
+8010. Minimum path sum in Triangular Grid || EASY
+https://leetcode.com/problems/triangle/
 
-8011. Minimum/Maximum Falling Path Sum
+8011. Minimum/Maximum Falling Path Sum || EASY
+https://leetcode.com/problems/minimum-falling-path-sum/
+
 8012. Ninja and his friends
 
 > DP on Subsequence
+//Based on Knapsack
+
 8013. Subset sum equal to target
+https://www.geeksforgeeks.org/problems/subset-sum-problem-1611555638/1
+
 8014. Partition Equal Subset Sum
+https://leetcode.com/problems/partition-equal-subset-sum/
+
 8015. Partition Set Into 2 Subsets With Min Absolute Sum Diff
+https://leetcode.com/problems/partition-array-into-two-arrays-to-minimize-sum-difference/
+
 8016. Count Subsets with Sum K
+https://www.geeksforgeeks.org/problems/perfect-sum-problem5633/1
+
 8017. Count Partitions with Given Difference
+https://www.geeksforgeeks.org/problems/partitions-with-given-difference/1
+
 8018. Assign Cookies
+https://leetcode.com/problems/assign-cookies/
+
 8019. Minimum Coins 
+https://leetcode.com/problems/coin-change/description/
+
 8020. Target Sum 
+https://leetcode.com/problems/target-sum/
+
 8021. Coin Change 2 
+https://leetcode.com/problems/coin-change-ii/description/
+
 8022. Unbounded Knapsack 
+https://www.geeksforgeeks.org/problems/knapsack-with-duplicate-items4201/1
+
 8023. Rod Cutting Problem
+https://www.geeksforgeeks.org/problems/rod-cutting0840/1
+
 
 > DP on Strings
+//Recursion feels good
+
 8024. Longest Common Subsequence
+https://leetcode.com/problems/longest-common-subsequence/
+
 8025. Print Longest Common Subsequence
+https://www.geeksforgeeks.org/problems/print-all-lcs-sequences3413/1
+
 8026. Longest Common Substring
+https://www.geeksforgeeks.org/problems/longest-common-substring1452/1
+
 8027. Longest Palindromic Subsequence
-8028. Minimum insertions to make stri
+https://leetcode.com/problems/longest-palindromic-subsequence/description/
+
+8028. Minimum insertions to make string Palindrome
+https://leetcode.com/problems/minimum-insertion-steps-to-make-a-string-palindrome/description/
+
 8029. Minimum Insertions/Deletions to Convert String
+https://leetcode.com/problems/delete-operation-for-two-strings/description/
+
 8030. Shortest Common Supersequence
+https://leetcode.com/problems/shortest-common-supersequence/
+
 8031. Distinct Subsequence
+https://leetcode.com/problems/distinct-subsequences/
+
 8032. Edit Distance
+https://leetcode.com/problems/edit-distance/description/
+
 8033. Wildcard Matching
+https://leetcode.com/problems/wildcard-matching/
+
 
 > DP on Stocks
+
 8034. Best Time to Buy and Sell Stock 
+https://leetcode.com/problems/best-time-to-buy-and-sell-stock/description/
+
 8035. Buy and Sell Stock - II
+https://leetcode.com/problems/best-time-to-buy-and-sell-stock-ii/
+
 8036. Buy and Sell Stocks III
+https://leetcode.com/problems/best-time-to-buy-and-sell-stock-iii/description/
+
 8037. Buy and Stock Sell IV 
+https://leetcode.com/problems/best-time-to-buy-and-sell-stock-iv/
+
 8038. Buy and Sell Stocks With Cooldown
+https://leetcode.com/problems/best-time-to-buy-and-sell-stock-with-cooldown/
+
 8039. Buy and Sell Stocks With Transaction Fee
+https://leetcode.com/problems/best-time-to-buy-and-sell-stock-with-transaction-fee/
+
 
 > DP on LIS
 8040. Longest Increasing Subsequence 
+https://leetcode.com/problems/longest-increasing-subsequence/description/
+
 8041. Printing Longest Increasing Subsequence
+https://www.geeksforgeeks.org/problems/printing-longest-increasing-subsequence/1
+
 8042. Longest Increasing Subsequence 
+https://www.geeksforgeeks.org/problems/longest-increasing-subsequence-1587115620/1
+
 8043. Largest Divisible Subset
+https://leetcode.com/problems/largest-divisible-subset/
+
 8044. Longest String Chain
+https://leetcode.com/problems/longest-string-chain/
+
 8045. Longest Bitonic Subsequence 
+https://www.geeksforgeeks.org/problems/longest-bitonic-subsequence0824/1
+
 8046. Number of Longest Increasing Subsequences
+https://leetcode.com/problems/number-of-longest-increasing-subsequence/
+
 
 > MCM DP
+
 8047. Matrix Chain Multiplication
+https://www.geeksforgeeks.org/problems/matrix-chain-multiplication0303/1
+
 8048. Matrix Chain Multiplication | Bottom-Up
+https://www.geeksforgeeks.org/problems/matrix-chain-multiplication0303/1
+
 8049. Minimum Cost to Cut the Stick
+https://leetcode.com/problems/minimum-cost-to-cut-a-stick/description/
+
 8050. Burst Balloons
+https://leetcode.com/problems/burst-balloons/
+
 8051. Evaluate Boolean Expression to True
+https://leetcode.com/problems/parsing-a-boolean-expression/
+
 8052. Palindrome Partitioning - II
+https://leetcode.com/problems/palindrome-partitioning-ii/
+
 8053. Partition Array for Maximum Sum
+https://leetcode.com/problems/partition-array-for-maximum-sum/description/
+
 
 >DP on Squares
+
 8054. Maximum Rectangle Area with all 1's
+https://leetcode.com/problems/maximal-rectangle/description/
+
 8055. Count Square Submatrices with All Ones
+https://leetcode.com/problems/count-square-submatrices-with-all-ones/description/
