@@ -119,8 +119,10 @@ https://leetcode.com/problems/wildcard-matching/
 
 
 >>>>>>> DP on Stocks <<<<<<<<
+// subtrack the fees on 1 step
 
-8034. Best Time to Buy and Sell Stock 
+
+8034. Best Time to Buy and Sell Stock || EASY
 https://leetcode.com/problems/best-time-to-buy-and-sell-stock/description/
 
 8035. Buy and Sell Stock - II
