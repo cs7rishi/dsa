@@ -14,7 +14,8 @@ https://leetcode.com/problems/house-robber/description/
 
 8005. House Robber || PENDING
 
-> 2D/3D DP and DP on Grids:
+>>>>>> 2D/3D DP and DP on Grids: <<<<<<<
+
 // Could be performed with n * n 
 // Prefill the initiall row and column
 
@@ -38,13 +39,16 @@ https://leetcode.com/problems/minimum-falling-path-sum/
 
 8012. Ninja and his friends
 
-> DP on Subsequence
+>>>>> DP on Subsequence <<<<<<
 //Based on Knapsack
 
-8013. Subset sum equal to target
+8013. Subset sum equal to target || EASY || *
+//make sure of the pre assignment of dp array
+//Base condition start from 0,0
 https://www.geeksforgeeks.org/problems/subset-sum-problem-1611555638/1
 
-8014. Partition Equal Subset Sum
+8014. Partition Equal Subset Sum || EASY || *
+//Base condition start from 0,0
 https://leetcode.com/problems/partition-equal-subset-sum/
 
 8015. Partition Set Into 2 Subsets With Min Absolute Sum Diff
@@ -56,47 +60,52 @@ https://www.geeksforgeeks.org/problems/perfect-sum-problem5633/1
 8017. Count Partitions with Given Difference
 https://www.geeksforgeeks.org/problems/partitions-with-given-difference/1
 
-8018. Assign Cookies
+8018. Assign Cookies || EASY || Greedy
 https://leetcode.com/problems/assign-cookies/
 
-8019. Minimum Coins 
+8019. Minimum Coins || EASY || *
+//Base condition start from 0, 0 ways to achieve 0 target
 https://leetcode.com/problems/coin-change/description/
 
 8020. Target Sum 
 https://leetcode.com/problems/target-sum/
 
-8021. Coin Change 2 
+8021. Coin Change 2 || EASY || *
+//Think of how does the solution works
 https://leetcode.com/problems/coin-change-ii/description/
 
-8022. Unbounded Knapsack 
+8022. Unbounded Knapsack || EASY
 https://www.geeksforgeeks.org/problems/knapsack-with-duplicate-items4201/1
 
-8023. Rod Cutting Problem
+8023. Rod Cutting Problem || EASY
 https://www.geeksforgeeks.org/problems/rod-cutting0840/1
 
 
-> DP on Strings
+>>>>>>>> DP on Strings <<<<<<<<<
 //Recursion feels good
 
-8024. Longest Common Subsequence
+8024. Longest Common Subsequence || EASY || Pending
+//Pending Shorter code are present too
+//Iterative and recursive both easy
 https://leetcode.com/problems/longest-common-subsequence/
 
-8025. Print Longest Common Subsequence
+8025. Print ALL Longest Common Subsequence
 https://www.geeksforgeeks.org/problems/print-all-lcs-sequences3413/1
 
-8026. Longest Common Substring
+8026. Longest Common Substring || EASY
 https://www.geeksforgeeks.org/problems/longest-common-substring1452/1
 
-8027. Longest Palindromic Subsequence
+8027. Longest Palindromic Subsequence || EASY
 https://leetcode.com/problems/longest-palindromic-subsequence/description/
 
-8028. Minimum insertions to make string Palindrome
+8028. Minimum insertions to make string Palindrome || EASY
 https://leetcode.com/problems/minimum-insertion-steps-to-make-a-string-palindrome/description/
 
-8029. Minimum Insertions/Deletions to Convert String
+8029. Minimum Insertions/Deletions to Convert String || EASY
 https://leetcode.com/problems/delete-operation-for-two-strings/description/
 
-8030. Shortest Common Supersequence
+8030. Shortest Common Supersequence || MEDIUM
+//Visualization is hard
 https://leetcode.com/problems/shortest-common-supersequence/
 
 8031. Distinct Subsequence
@@ -109,7 +118,7 @@ https://leetcode.com/problems/edit-distance/description/
 https://leetcode.com/problems/wildcard-matching/
 
 
-> DP on Stocks
+>>>>>>> DP on Stocks <<<<<<<<
 
 8034. Best Time to Buy and Sell Stock 
 https://leetcode.com/problems/best-time-to-buy-and-sell-stock/description/
@@ -130,7 +139,8 @@ https://leetcode.com/problems/best-time-to-buy-and-sell-stock-with-cooldown/
 https://leetcode.com/problems/best-time-to-buy-and-sell-stock-with-transaction-fee/
 
 
-> DP on LIS
+>>>>>>>> DP on LIS <<<<<<<<<
+
 8040. Longest Increasing Subsequence 
 https://leetcode.com/problems/longest-increasing-subsequence/description/
 
