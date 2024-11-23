@@ -120,24 +120,29 @@ https://leetcode.com/problems/wildcard-matching/
 
 >>>>>>> DP on Stocks <<<<<<<<
 // subtrack the fees on 1 step
+// Try Tabulation for these question *********
 
 
 8034. Best Time to Buy and Sell Stock || EASY
 https://leetcode.com/problems/best-time-to-buy-and-sell-stock/description/
 
-8035. Buy and Sell Stock - II
+8035. Buy and Sell Stock - II || EASY || *
+//Explore the Iterative Approch
 https://leetcode.com/problems/best-time-to-buy-and-sell-stock-ii/
 
-8036. Buy and Sell Stocks III
+8036. Buy and Sell Stocks III || EASY
 https://leetcode.com/problems/best-time-to-buy-and-sell-stock-iii/description/
 
-8037. Buy and Stock Sell IV 
+8037. Buy and Stock Sell IV || EASY || *
+//Explore the Iterative Approch
 https://leetcode.com/problems/best-time-to-buy-and-sell-stock-iv/
 
-8038. Buy and Sell Stocks With Cooldown
+8038. Buy and Sell Stocks With Cooldown || EASY || ***
+//Use 3d DP or use index+1
+//Explore if your could use index +1 , with more cooldown value
 https://leetcode.com/problems/best-time-to-buy-and-sell-stock-with-cooldown/
 
-8039. Buy and Sell Stocks With Transaction Fee
+8039. Buy and Sell Stocks With Transaction Fee || EASY 
 https://leetcode.com/problems/best-time-to-buy-and-sell-stock-with-transaction-fee/
 
 
