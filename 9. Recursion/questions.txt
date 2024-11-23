@@ -1,0 +1,8 @@
+Q. Reverse String || EASY
+Q. Fibonacci Number || EASY
+Q. Print N to 1 without loop || EASY
+
+Power of Two || EASY || *
+// 2^x cant be 0 or -ve
+
+
