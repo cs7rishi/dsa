@@ -1,0 +1,28 @@
+7001. BFS || EASY
+https://www.geeksforgeeks.org/problems/bfs-traversal-of-graph/1
+
+7002. DFS || EASY
+https://www.geeksforgeeks.org/problems/depth-first-traversal-for-a-graph/1
+
+7003. Number of provinces || EASY
+//Plain BFS while parent loop for unvisited
+//Try Union Find Logic
+https://leetcode.com/problems/number-of-provinces/submissions/1451226182/
+
+
+7004. Connected Components Problem in Matrix || EASY
+https://www.geeksforgeeks.org/problems/number-of-provinces/1
+
+7005. Rotten Oranges || EASY
+//https://leetcode.com/problems/rotting-oranges/description/
+
+7006. Flood Fill || EASY || *
+//In graph, always think of if isVisited array is required or not
+//For flood fill, if initial == finalColor, don't iterate
+https://leetcode.com/problems/flood-fill/
+
+7007. 01 Matrix || EASY
+https://leetcode.com/problems/01-matrix/description/
+
+7008. Surrounded Regions || EASY
+https://leetcode.com/problems/surrounded-regions/description/

@@ -1,0 +1,8 @@
+6001. Assign Cookies || Easy
+
+6002. Fractional Knapsack Problem || EASY || *
+//Make custom comparator, handle double efficiently
+
+
+
+

@@ -1,0 +1,290 @@
+7001. BFS || Easy
+TC: O(2E+N) // we visit each node twice, from either side parent-child and child-parent
+SC: O(3N)
+
+    public ArrayList<Integer> bfsOfGraph(ArrayList<ArrayList<Integer>> adj) {
+        int n = adj.size();
+        boolean isVisited[] = new boolean[n];
+        
+        Queue<Integer> q = new LinkedList<>();
+        q.add(0);
+        isVisited[0] = true;
+        
+        ArrayList<Integer> ans = new ArrayList<>();
+        
+        while(!q.isEmpty()){
+            int node = q.poll();
+            ans.add(node);    
+            for(Integer t : adj.get(node)){
+                if(!isVisited[t]){
+                    q.add(t);
+                    isVisited[t] = true;
+                }
+            }
+        }
+        
+        return ans;
+    }
+
+7002. DFS || EASY
+TC: O(2E+N) // we visit each node twice, from either side parent-child and child-parent
+SC: O(3N)
+class Solution {
+    ArrayList<Integer> ans = new ArrayList<>();
+    public void dfs(ArrayList<ArrayList<Integer>> adj, int node, boolean[] isVisited){
+        if(isVisited[node]) return;
+        ans.add(node);
+        isVisited[node] = true;
+        for(int t : adj.get(node)){
+            dfs(adj, t, isVisited);
+        }
+    }
+    public ArrayList<Integer> dfsOfGraph(ArrayList<ArrayList<Integer>> adj) {
+        int n = adj.size();
+        boolean[] isVisited = new boolean[n];
+        dfs(adj, 0, isVisited);
+        return ans;
+    }
+}
+
+7003. Number of provinces || EASY
+TC: O(N) + O(2E+N) // we visit each node twice, from either side parent-child and child-parent
+SC: O(N)
+class Solution {
+    private void bfs (int node, boolean[] isVisited, int[][] isConnected){
+        int n = isVisited.length;
+        Queue<Integer> q = new LinkedList<>();
+        q.add(node);
+        isVisited[node] = true;
+        while(!q.isEmpty()){
+            int t = q.poll();
+            for(int i = 0; i < n ; i++){
+                if(isConnected[t][i] == 1 && !isVisited[i]){
+                    q.add(i);
+                    isVisited[i] = true;
+                }
+            }
+        }
+    }
+    public int findCircleNum(int[][] isConnected) {
+        int n = isConnected.length;
+        boolean[] isVisited = new boolean[n];
+        int province = 0;
+        for(int i = 0 ; i < n ; i++){
+            if(!isVisited[i]){
+                province++;
+                bfs(i,isVisited, isConnected);
+            }
+        }
+        return province;
+    }
+}
+
+7004. Connected Components Problem in Matrix || EASY
+TC: O(N) + O(2E+N) // we visit each node twice, from either side parent-child and child-parent
+SC: O(N) + O(N) recursion
+
+class Solution {
+    static void dfs(int u, ArrayList<ArrayList<Integer>> adj , boolean[] isVisited){
+        int n = isVisited.length;
+        if(isVisited[u]) return;
+        
+        isVisited[u] = true;
+        
+        for(int i = 0 ; i < n ; i++){
+            if(adj.get(u).get(i) == 1)
+                dfs(i,adj,isVisited);
+        }
+    }
+    static int numProvinces(ArrayList<ArrayList<Integer>> adj, int V) {
+        boolean[] isVisited = new boolean[V];
+        Queue<Integer> q = new LinkedList<>();
+        int p = 0;
+        for(int i = 0 ; i < V ; i++){
+            if(!isVisited[i]){
+                p++;
+                dfs(i, adj, isVisited);
+            }
+        }
+        
+        return p;
+    }
+};
+
+7005. Rotten Oranges || EASY
+TC: O(4*N*M + N*M)
+SC: O(N*M)
+    public int orangesRotting(int[][] grid) {
+        int m = grid.length;
+        int n = grid[0].length;
+        int total = 0;
+        int rotten = 0;
+        Queue<Pair<Integer,Integer>> q = new LinkedList<>();
+        for(int i = 0 ; i < m ; i++){
+            for(int j = 0 ; j < n ; j++){
+                if(grid[i][j] == 2){
+                    q.add(new Pair(i,j));
+                    total++;
+                }
+                else if(grid[i][j] == 1) total++;
+            }
+        } 
+
+        if(rotten == total) return 0;
+
+        int time = -1;
+        int[] dx = new int[]{1,-1,0,0};
+        int[] dy = new int[]{0,0,-1,1};
+
+        while(!q.isEmpty()){
+            int size = q.size();
+            time++;
+            while(size-- > 0){
+                int row = q.peek().getKey();
+                int col = q.peek().getValue();
+
+                q.poll();
+                rotten++;
+
+                for(int k = 0 ; k < 4 ; k++){
+                    int adjRow = row + dx[k];
+                    int adjCol = col + dy[k];
+
+                    if(adjRow >= 0 && adjRow < m && adjCol >= 0 && adjCol < n && grid[adjRow][adjCol] == 1){
+                        grid[adjRow][adjCol] = 2;
+                        q.add(new Pair(adjRow, adjCol));
+                    }
+                }
+            }
+        }
+        return total == rotten ? time : -1;
+    }
+
+7006. Flood Fill || EASY || *
+TC: O(4*N*M)
+SC: O(N*M)
+    public int[][] floodFill(int[][] image, int sr, int sc, int color) {
+        int m = image.length;
+        int n = image[0].length;
+        int initColor = image[sr][sc];
+
+        Queue<Pair<Integer,Integer>> q = new LinkedList<>();
+        q.add(new Pair(sr,sc));
+
+        int[] dx = new int[]{1,-1,0,0};
+        int[] dy = new int[]{0,0,-1,1};
+        while(!q.isEmpty()){
+            int row = q.peek().getKey();
+            int col = q.peek().getValue();
+            image[row][col] = color;
+            q.poll();
+            for(int k = 0 ; k < 4 ; k++){
+                int adjRow = row + dx[k];
+                int adjCol = col + dy[k];
+                //************************************** below condition is important
+                if(adjRow >= 0 && adjRow < m && adjCol >= 0 && adjCol < n && image[adjRow][adjCol] != color && image[adjRow][adjCol] == initColor){
+                    q.add(new Pair(adjRow,adjCol));
+                }
+            }
+        }
+        return image;
+    }
+
+7007. 01 Matrix || EASY
+TC: O(4*N*M + N*M)
+SC: O(2*N*M)
+    public int[][] updateMatrix(int[][] mat) {
+        int m = mat.length;
+        int n = mat[0].length;
+
+        int[][] ans = new int[m][n];
+        Queue<Pair<Integer,Integer>> q = new LinkedList<>();
+
+        for(int i = 0 ; i < m ; i++){
+            for(int j = 0 ; j < n ; j++){
+                if(mat[i][j] == 1){
+                    ans[i][j] = Integer.MAX_VALUE;
+                }else{
+                    q.add(new Pair(i,j));
+                }
+            }
+        }
+
+        int dist = 0;
+        int[] dx = new int[]{1,-1,0,0};
+        int[] dy = new int[]{0,0,-1,1};
+        while(!q.isEmpty()){
+            int size = q.size();
+            dist++;
+            while(size-- > 0){
+                int row = q.peek().getKey();
+                int col = q.peek().getValue();
+                q.poll();
+
+                for(int i = 0 ; i < 4 ; i++){
+                    int adjRow = row + dx[i];
+                    int adjCol = col + dy[i];
+
+                    if(adjRow >= 0 && adjRow < m && adjCol >= 0 && adjCol < n && ans[adjRow][adjCol] > dist){
+                        ans[adjRow][adjCol] = dist;
+                        q.add(new Pair(adjRow, adjCol));
+                    }
+                }
+
+            }
+        }
+        return ans;
+    }
+
+7008. Surrounded Regions || EASY
+TC: O(4*N*M + N*M)
+SC: O(4*N*M)
+
+class Solution {
+    private int[] dx = new int[]{1,-1,0,0};
+    private int[] dy = new int[]{0,0,-1,1};
+    private void dfs(char[][] board, int row, int col, int m, int n){
+        if(row < 0 || col < 0 || row >= m || col >= n || board[row][col] == '#' || board[row][col] == 'X') return;
+
+        board[row][col] = '#';
+        for(int k = 0 ; k < 4 ; k++){
+            int adjRow = row + dx[k];
+            int adjCol = col + dy[k];
+            dfs(board, adjRow, adjCol, m, n);
+        }
+    }
+    public void solve(char[][] board) {
+        int m = board.length;
+        int n = board[0].length;
+
+        for(int i = 0 ; i < m ; i++){
+            if(board[i][0] == 'O'){
+                dfs(board, i, 0, m , n);
+            }
+
+            if(board[i][n-1] == 'O'){
+                dfs(board,i ,n-1, m, n);
+            }
+        }
+
+        for(int j = 0 ; j < n ; j++){
+            if(board[0][j] == 'O'){
+                dfs(board, 0, j, m , n);
+            }
+
+            if(board[m-1][j] == 'O'){
+                dfs(board, m-1, j, m, n);
+            }
+        }
+
+        for(int i = 0 ; i < m ; i++){
+            for(int j= 0 ; j < n ; j++){
+                if(board[i][j] == '#'){
+                    board[i][j] = 'O';
+                }else{
+                    board[i][j] = 'X';
+                }
+            }
+        }
+    }
+}

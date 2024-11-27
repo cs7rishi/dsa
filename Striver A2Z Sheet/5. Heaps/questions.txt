@@ -13,3 +13,6 @@ eg NlogN sorting to NlogK, based on question
 5003. Sort K sorted array || Easy || *
 //Heap reduces the logN to logK
 
+5004. Merge M sorted Lists || Easy 
+//Could use inplace, but time complexity could be as n^2, hence use heap
+
