@@ -1,0 +1,150 @@
+2. Minimum Obstacle Removal to Reach Corner || Medium || *
+
+class Solution {
+    int[][] dp;
+    int[] dx = new int[]{1,-1,0,0};
+    int[] dy = new int[]{0,0,1,-1};
+    public int minimumObstacles(int[][] grid) {
+        int m = grid.length;
+        int n = grid[0].length;
+        dp = new int[m][n];
+
+        for(int[] t : dp) Arrays.fill(t,Integer.MAX_VALUE);
+
+        PriorityQueue<Pair<Integer,Pair<Integer,Integer>>> pq 
+                = new PriorityQueue<>((a,b) -> a.getKey()-b.getKey());
+        pq.add(new Pair(grid[0][0], new Pair(0,0)));
+
+        while(!pq.isEmpty()){
+            int dist = pq.peek().getKey();
+            int i = pq.peek().getValue().getKey();
+            int j = pq.peek().getValue().getValue();
+            pq.poll();
+
+            if(dp[i][j] != Integer.MAX_VALUE) continue;
+
+            dp[i][j] = dist;
+
+            for(int k = 0 ; k < 4; k++){
+                int adjRow = i + dx[k];
+                int adjCol = j + dy[k];
+
+                if(adjRow < 0 || adjCol < 0 || adjRow >= m || adjCol >=n || dp[adjRow][adjCol] <= dist) continue;
+                else {
+                    pq.add(
+                        new Pair(dist + grid[adjRow][adjCol]
+                            , new Pair(adjRow,adjCol)));
+                }
+            }
+        }
+
+        // for(int[] t : dp)Arrays.toString(t);
+
+        return dp[m-1][n-1];
+    }
+}
+
+3. Shortest Distance After Road Addition Queries I || EASY || *
+TC: O(q*(V+E))
+SC: O(N^2 + N + Q) + O(N + N)
+
+class Solution {
+    List<List<Integer>> adjList;
+    int[] dist;
+    private void bfs(int root, int n){
+        Queue<Pair<Integer,Integer>> q = new LinkedList<>();
+        boolean isVisited[] = new boolean[n];
+        
+        q.add(new Pair(dist[root],root));
+        isVisited[root] = true;
+
+
+        while(!q.isEmpty()){
+            int d = q.peek().getKey();
+            int u = q.peek().getValue();
+            q.poll();
+
+            for(int v : adjList.get(u)){
+                if(!isVisited[v] && d + 1 < dist[v]){
+                    dist[v] = d+1;
+                    isVisited[v] = true;
+                    q.add(new Pair(d+1,v));
+                }
+            }
+        }
+    }
+    public int[] shortestDistanceAfterQueries(int n, int[][] queries) {
+        adjList = new ArrayList<>();
+        dist = new int[n];
+        int[] ans = new int[queries.length];
+
+        for(int i = 0 ; i < n ; i++){
+            List<Integer> neigh = new ArrayList<>();
+            if(i < n-1) neigh.add(i+1);
+            adjList.add(neigh);
+        }
+        Arrays.fill(dist,Integer.MAX_VALUE);
+        dist[0] = 0;
+        bfs(0,n);
+
+        for(int q = 0 ; q < queries.length ; q++){
+            int u = queries[q][0];
+            int v = queries[q][1];
+
+            adjList.get(u).add(v);
+            if(dist[v] > dist[u] + 1){
+                dist[v] = dist[u] + 1;
+                bfs(v, n);
+            }
+
+            ans[q] = dist[n-1];
+        }
+
+        return ans;
+    }
+}
+
+4. Minimum Time to Visit a Cell In a Grid || ***
+public int minimumTime(int[][] grid) {
+        if(grid[0][1] > 1 && grid[1][0] > 1) return -1;
+
+        int INF = Integer.MAX_VALUE;
+        int m = grid.length;
+        int n = grid[0].length;
+
+        boolean isVisited[][] = new boolean[m][n];
+        PriorityQueue<int[]> pq = new PriorityQueue<>((a,b) -> a[0] - b[0]);
+        pq.add(new int[]{0,0,0});
+
+        int[] dx = new int[]{1,-1,0,0};
+        int[] dy = new int[]{0,0,1,-1};
+
+        while(!pq.isEmpty()){
+            int time = pq.peek()[0];
+            int row = pq.peek()[1];
+            int col = pq.peek()[2];
+            pq.poll();
+
+            if(row == m-1 && col == n-1) return time;
+
+            if(isVisited[row][col] == true) continue;
+            isVisited[row][col] = true;
+
+            for(int k = 0; k < 4 ; k++){
+                int adjRow = row + dx[k];
+                int adjCol = col + dy[k];
+
+                if(adjRow >= 0 && adjRow < m && adjCol >= 0 && adjCol < n && !isVisited[adjRow][adjCol]){
+                    int newTime = time+1;
+                    if(grid[adjRow][adjCol] > newTime){
+                        int wait = ((grid[adjRow][adjCol] - newTime+1) / 2) * 2;
+                        newTime += wait;
+                    }
+                    pq.add(new int[]{newTime, adjRow, adjCol});
+                }
+            }
+        }
+
+        return -1;
+
+    }

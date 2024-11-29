@@ -1,0 +1,15 @@
+1. Minimum Absolute Difference in BST || Easy
+https://leetcode.com/problems/minimum-absolute-difference-in-bst/description/
+
+2. Minimum Obstacle Removal to Reach Corner || Medium || ***
+//Check BFS Solution
+// Used Dijstra
+// Grid question
+// Allow movement in 4 direction -> don't rely on grid dp traversal, think of graph
+// since obstable as 1 think of 0-1 BFS, or Dijstra would work eventually 
+
+3. Shortest Distance After Road Addition Queries I || EASY || *
+//When edge weight is 1, BFS 0-1 could be Used
+
+4. Minimum Time to Visit a Cell In a Grid || Medium || ***
+//Dijstra Code, Nice implementation
