@@ -1,0 +1,29 @@
+Learning:
+
+4 ->    1   0   0
+        2   1   0  bit use K-1
+        3   2   1  bit use K
+
+
+
+1. Bit Manipulation || MEDIUM || *
+//Learn to cleas the bit
+
+2. K-th Bit is Set or Not || EASY
+
+3. Odd or Even || EASY
+
+4. Power of Two || EASY || *
+//Important concept
+
+5. Count total set bits
+
+6. Set the rightmost unset bit || EASY
+
+7. Swap two numbers || EASY || *
+//Important Concept
+https://www.geeksforgeeks.org/problems/swap-two-numbers3844/1
+
+8. Minimum Bit Flips to Convert Number || EASY || *
+//Concept on how to iterate over all bits
+https://leetcode.com/problems/minimum-bit-flips-to-convert-number/description/
