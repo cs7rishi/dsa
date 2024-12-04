@@ -148,3 +148,21 @@ public int minimumTime(int[][] grid) {
         return -1;
 
     }
+
+5. Make String a Subsequence Using Cyclic Increments || EASY || *
+public boolean canMakeSubsequence(String str1, String str2) {
+        int m = str1.length(), n = str2.length();
+        int i = 0 , j = 0;
+        while(i < m && j < n){
+            char a = str1.charAt(i);
+            char b = str2.charAt(j);
+            char c = (char)(((a - 'a' + 1) % 26) + 'a');
+
+            if(a == b || b == c){
+                i++; j++;
+            }else{
+                i++;
+            }
+        }
+        return j == n;
+    }

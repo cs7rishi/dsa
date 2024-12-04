@@ -13,3 +13,10 @@ https://leetcode.com/problems/minimum-absolute-difference-in-bst/description/
 
 4. Minimum Time to Visit a Cell In a Grid || Medium || ***
 //Dijstra Code, Nice implementation
+//isVisited Array is more important
+
+5. Make String a Subsequence Using Cyclic Increments || EASY || *
+https://leetcode.com/problems/make-string-a-subsequence-using-cyclic-increments/description/
+// Used Subsequence DP, Memory Limit Error
+// Conversion Code is important
+// For Subsequence order is not important, 2 pointer could be used
