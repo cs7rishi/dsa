@@ -288,3 +288,113 @@ class Solution {
         }
     }
 }
+
+7008. Number of Enclaves || EASY
+TC: O(4*N*M) 
+SC: O(N)
+public int numEnclaves(int[][] grid) {
+        int m = grid.length;
+        int n = grid[0].length;
+        int count = 0;
+
+        Queue<int[]> q = new LinkedList<>();
+
+        for(int i = 0 ; i < m ; i++){
+            for(int j = 0 ; j < n ; j++){
+                if(grid[i][j] == 1){
+                    count++;
+                    if(i == 0 || i == m-1 || j == 0 || j == n-1){
+                        q.add(new int[]{i,j});
+                        count--;
+                        grid[i][j] = 0;
+                    } 
+                }
+            }
+        }
+        int[] dx = new int[]{1,-1,0,0};
+        int[] dy = new int[]{0,0,-1,1};
+
+        while(!q.isEmpty()){
+            int row = q.peek()[0];
+            int col = q.peek()[1];
+            q.poll();
+
+            for(int i = 0 ; i < 4 ; i++){
+                int adjRow = row + dx[i];
+                int adjCol = col + dy[i];
+
+                if(adjRow < 0 || adjCol < 0 || adjRow >= m || adjCol >= n) continue;
+                else if(grid[adjRow][adjCol] == 1){
+                    grid[adjRow][adjCol] = 0;
+                    count--;
+                    q.add(new int[]{adjRow,adjCol});
+                }
+            }
+        }
+
+        return count;
+    }
+
+7009. Undirected Graph Cycle || EASY || Concept || *
+TC: O(N + 2E) 
+SC: O(N) + O(N) ~ O(N)
+class Solution {
+    boolean[] isVisited;
+    public boolean dfs(int root, ArrayList<ArrayList<Integer>> adj, int parent){
+        if(isVisited[root]) return true;
+        isVisited[root] = true;
+        boolean temp = false;
+        for(int i = 0 ; i < adj.get(root).size() ; i++){
+            if(!isVisited[adj.get(root).get(i)]){
+                temp |= dfs(adj.get(root).get(i), adj, root);
+            }else if(adj.get(root).get(i) != parent){
+                temp |= true;
+            }
+        }
+        return temp;
+    }
+    public boolean isCycle(ArrayList<ArrayList<Integer>> adj) {
+        int n = adj.size();
+        isVisited = new boolean[n];
+        for(int i = 0 ; i < n ; i++){
+            if(!isVisited[i] && dfs(i, adj, -1)){
+                return true;
+            }
+        }
+        return false;
+    }
+}
+
+7010. Undirected Graph Cycle BFS || EASY || Concept || *
+TC: O(N + 2E) 
+SC: O(N) + O(N) ~ O(N)
+class Solution {
+    public boolean bfs(int root, ArrayList<ArrayList<Integer>> adj, boolean[] isVisited){
+        Queue<int[]> q = new LinkedList<>();
+        q.add(new int[]{root, -1});
+        isVisited[root] = true;
+        
+        while(!q.isEmpty()){
+            int u = q.peek()[0];
+            int parent = q.peek()[1];
+            q.poll();
+            
+            for(int i = 0 ; i < adj.get(u).size(); i++){
+                int v = adj.get(u).get(i);
+                if(!isVisited[v]){
+                    isVisited[v] = true;
+                    q.add(new int[]{v,u});
+                }else if(v != parent) return true;
+            }
+        }
+        return false;
+    }
+    public boolean isCycle(ArrayList<ArrayList<Integer>> adj) {
+        int n = adj.size();
+        boolean[] isVisited = new boolean[n];
+        for(int i = 0 ; i < n ; i++){
+            if(!isVisited[i] && bfs(i, adj, isVisited)) return true;
+        }
+        return false;
+    }
+}

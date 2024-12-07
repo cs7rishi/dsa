@@ -26,3 +26,15 @@ https://leetcode.com/problems/01-matrix/description/
 
 7008. Surrounded Regions || EASY
 https://leetcode.com/problems/surrounded-regions/description/
+
+7008. Number of Enclaves || EASY
+https://leetcode.com/problems/number-of-enclaves/description/
+
+7009. Undirected Graph Cycle DFS || EASY || Concept || *
+//Parent and isVisited to be used 
+//Require Parent to check if neghbour node is parent or cycle present
+//In DFS, always mark as isVisited, as soon as visit a node
+
+7010. Undirected Graph Cycle BFS || EASY || Concept || *
+//Similar to Above
+//Check the code implementation
