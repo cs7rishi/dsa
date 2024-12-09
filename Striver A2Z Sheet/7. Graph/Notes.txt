@@ -1,0 +1,25 @@
+$$ Cycle Detection $$
+
+>Undirected Graph
+BFS or DFS both could be used, using parent to check if neigh
+is Parent or neighbour has formed a cycle.
+
+>Directed Graph
+For Directed Graph, Cycle detection code changes as the edges are directed
+And possible is there that the node is visited through other route, hence manage 2 ArrayList
+visited and path array
+
+
+$$ Topology Sort $$
+
+Not Possible Under below conditions:
+1. Graph is Undirected
+2. If Directed graph contains a cycle
+If Edge u -> v is present, i.e vertex u comes before v
+
+>DFS
+Require Stack and addition in stack placement
+
+>Kahn's Algorithm
+
+

@@ -398,3 +398,208 @@ class Solution {
         return false;
     }
 }
+
+7011. Word Ladder || Medium || ***
+TC: O(N*26) 
+SC: O(N)
+    public int ladderLength(String beginWord, String endWord, List<String> wordList) {
+        Set<String> st = new HashSet<>(wordList);
+        if(!st.contains(endWord)) return 0;
+        Queue<Pair<String,Integer>> q = new LinkedList<>();
+        q.add(new Pair(beginWord,1));
+        while(!q.isEmpty()){
+            String initWord = q.peek().getKey();
+            int step = q.peek().getValue();
+            q.poll();
+            for(int i = 0 ; i < initWord.length() ; i++){
+                char current = initWord.charAt(i);
+                for(int j = 0 ; j < 26 ; j++){
+                    char nextChar = (char)('a' + j);
+                    if(current == nextChar) continue;
+                    else {
+                        char[] charArray = initWord.toCharArray();
+                        charArray[i] = nextChar;
+                        String newString = new String(charArray);
+                        if(newString.equals(endWord)) return step+1;
+                        if(st.contains(newString)){
+                            st.remove(newString);
+                            q.add(new Pair(newString, step+1));
+                        }
+                    }
+                }
+            }
+        } 
+        return 0;
+    }
+
+7013. Cycle Detection in Directed Graph (DFS) || Medium || ***
+TC: O(V+E) + O(V) 
+SC: O(2N) + O(N)
+
+class Solution {
+    private boolean isCycle(int node, ArrayList<Integer> ans, boolean[] isVisited, boolean[] isPath, ArrayList<ArrayList<Integer>> adjList){
+        isVisited[node] = true;
+        isPath[node] = true;
+
+        for(int v : adjList.get(node)){
+            if(isPath[v]){
+                return true;
+            }
+            else if(!isVisited[v]){
+                if(isCycle(v,ans,isVisited,isPath,adjList)){
+                    return true;
+                }
+            }
+        }
+
+        ans.add(node);
+        isPath[node] = false;
+        return false;
+    }
+    public int[] findOrder(int numCourses, int[][] pre) {
+        ArrayList<ArrayList<Integer>> adjList = new ArrayList<>();
+        for(int i = 0 ; i < numCourses ; i++) adjList.add(new ArrayList<>());
+
+        for(int i = 0 ; i < pre.length; i++){
+            int v = pre[i][0];
+            int u = pre[i][1];
+
+            adjList.get(u).add(v);
+        }
+
+        boolean isVisited[] = new boolean[numCourses];
+        boolean path[] = new boolean[numCourses];
+        boolean flag = false;
+        ArrayList<Integer> ans = new ArrayList<>();
+
+        for(int i = 0 ; i < numCourses ; i++){
+            if(!isVisited[i]){
+                if(isCycle(i,ans, isVisited, path, adjList)){
+                    flag = true;
+                    break;
+                }
+            }
+        }
+
+        if(flag == true){
+            return new int[]{};
+        }
+        Collections.reverse(ans);
+        int[] order = new int[numCourses];
+        for(int i = 0 ; i < numCourses; i++){
+            order[i] = ans.get(i);
+        }
+        return order;
+    }
+}
+
+
+7014. Topo Sort DFS || Medium || ***
+//DFS code
+TC: O(V+E) + O(V) 
+SC: O(2N) + O(N)
+
+class Solution {
+    // Function to return list containing vertices in Topological order.
+    static void dfs(int node, boolean[] isVisited, Stack<Integer> st, ArrayList<ArrayList<Integer>> adj){
+        isVisited[node] = true;
+        for(int v : adj.get(node)){
+            if(!isVisited[v]){
+                dfs(v, isVisited, st, adj);
+            }
+        }
+        st.add(node);
+        
+    }
+    static ArrayList<Integer> topologicalSort(ArrayList<ArrayList<Integer>> adj) {
+        int n = adj.size();
+        boolean isVisited[] = new boolean[n];
+        ArrayList<Integer> order = new ArrayList<>();
+        Stack<Integer> st = new Stack<>();
+        
+        for(int i = 0 ; i < n ; i++){
+            if(!isVisited[i]){
+                dfs(i, isVisited, st, adj);
+            }
+        }
+        
+        while(!st.isEmpty()){
+            order.add(st.pop());
+        }
+        
+        return order;
+        
+    }
+}
+
+7015. Kahn's Algorithm || Medium || ***
+TC: O(V+E) + O(V) 
+SC: O(2N) + O(N) // Usually Striver don't consider space for ans, calculation
+
+    static ArrayList<Integer> topologicalSort(ArrayList<ArrayList<Integer>> adj) {
+        int n = adj.size();
+        int[] inDegree = new int[n];
+        Queue<Integer> q = new LinkedList<>();
+        ArrayList<Integer> ans = new ArrayList<>();
+        for(int i = 0 ; i < n ; i++){
+            for(int v : adj.get(i)){
+                inDegree[v]++;
+            }
+        }
+        
+        for(int i = 0 ; i < n ; i++){
+            if(inDegree[i] == 0) q.add(i);
+        }
+        
+        
+        while(!q.isEmpty()){
+            int u = q.poll();
+            ans.add(u);
+            
+            for(int v : adj.get(u)){
+                inDegree[v]--;
+                
+                if(inDegree[v] == 0)q.add(v);
+            }
+        }
+        
+        return ans;
+    }
+
+7017. Find eventual safe states || EASY || PENDING || *
+TC: O(V+E) + O(VlogV) 
+SC: O(N) Queue + O(N) inDegree + O(N) adjList
+
+    public List<Integer> eventualSafeNodes(int[][] graph) {
+        int n = graph.length;
+        List<Integer> ans = new ArrayList<>();
+        int[] inDegree = new int[n];
+        List<List<Integer>> adjList = new ArrayList<>();
+        for(int i = 0 ; i < n ; i++) adjList.add(new ArrayList<>());
+
+        for(int u = 0 ; u < graph.length; u++){
+            for(int j = 0 ; j < graph[u].length ; j++){
+                int v = graph[u][j];
+                adjList.get(v).add(u);
+                inDegree[u]++;
+            }
+        }
+
+        Queue<Integer> q = new LinkedList<>();
+        for(int i = 0 ; i < n ; i++){
+            if(inDegree[i] == 0) q.add(i);
+        }
+
+        while(!q.isEmpty()){
+            int u = q.poll();
+            ans.add(u);
+
+            for(int v : adjList.get(u)){
+                inDegree[v]--;
+                if(inDegree[v] == 0) q.add(v);
+            }
+        }
+
+        Collections.sort(ans);
+        return ans;
+    }

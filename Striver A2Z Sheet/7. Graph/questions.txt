@@ -31,10 +31,54 @@ https://leetcode.com/problems/surrounded-regions/description/
 https://leetcode.com/problems/number-of-enclaves/description/
 
 7009. Undirected Graph Cycle DFS || EASY || Concept || *
+https://www.geeksforgeeks.org/problems/detect-cycle-in-an-undirected-graph/1
 //Parent and isVisited to be used 
 //Require Parent to check if neghbour node is parent or cycle present
 //In DFS, always mark as isVisited, as soon as visit a node
 
 7010. Undirected Graph Cycle BFS || EASY || Concept || *
+https://www.geeksforgeeks.org/problems/detect-cycle-in-an-undirected-graph/1
 //Similar to Above
 //Check the code implementation
+
+7011. Word Ladder || Medium || ***
+https://leetcode.com/problems/word-ladder/
+//Figure why removing from set is required
+//Nice implementation
+
+7012. Word Ladder II || Medium || ***
+
+
+7013. Cycle Detection in Directed Graph (DFS) || Medium || ***
+https://leetcode.com/problems/course-schedule-ii/description/
+//Logic is different from undirected, need to maintain path also
+//Go through java implementation too
+
+
+7014. Topo Sort DFS || Medium || *** 
+https://www.geeksforgeeks.org/problems/topological-sort/1
+//Fundamental
+//Uses Stack with DFS
+//Position of stack addition and reversal is important
+
+7015. Kahn's Algorithm || Medium || ***
+https://www.geeksforgeeks.org/problems/topological-sort/1
+//Fundamental
+//No isVisited is required, works on inDegree
+
+7016. Cycle Detection in Directed Graph (BFS) || Kahn' Algo || ***
+https://www.geeksforgeeks.org/problems/detect-cycle-in-a-directed-graph/1
+//Uses Kahn's Algo
+//If topo sort size is not equals to V, cycle present
+
+7016. Course Schedule - I  || EASY 
+https://leetcode.com/problems/course-schedule/
+//Easy Kahn Algo implementation
+
+7016. Course Schedule - II || EASY 
+https://leetcode.com/problems/course-schedule-ii/
+//Easy Kahn Algo implementation
+
+7017. Find eventual safe states || EASY || PENDING || *
+https://leetcode.com/problems/find-eventual-safe-states/description/
+//Check for better solution
