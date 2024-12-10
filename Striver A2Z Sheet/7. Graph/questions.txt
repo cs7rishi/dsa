@@ -55,6 +55,8 @@ https://leetcode.com/problems/course-schedule-ii/description/
 //Go through java implementation too
 
 
+>>>>>> Topology Sort <<<<<<<
+
 7014. Topo Sort DFS || Medium || *** 
 https://www.geeksforgeeks.org/problems/topological-sort/1
 //Fundamental
@@ -82,3 +84,26 @@ https://leetcode.com/problems/course-schedule-ii/
 7017. Find eventual safe states || EASY || PENDING || *
 https://leetcode.com/problems/find-eventual-safe-states/description/
 //Check for better solution
+
+
+7018. Alien dictionary
+
+>>>>>> Shortest Path <<<<<<<
+
+7019. Shortest Path in UG with unit weights || EASY
+https://www.geeksforgeeks.org/problems/shortest-path-in-undirected-graph-having-unit-distance/1
+//0-1 BFS implementation
+
+7020. Shortest Path in DAG
+
+7021. Djisktra's Algorithm
+7022. Why priority Queue is used in Djisktra's Algorithm
+7023. Shortest path in a binary maze
+7024. Path with minimum effort
+7025. Cheapest flights within k stops
+7026. Network Delay time
+7026. Number of ways to arrive at destination
+7028. Minimum steps to reach end from start by performing multiplication and mod operations with array elements
+7029. Bellman Ford 
+7030. Floyd Warshal Algorithm
+7031. Find the city with the smallest number of neighbors in a threshold distance

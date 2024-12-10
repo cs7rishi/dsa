@@ -603,3 +603,47 @@ SC: O(N) Queue + O(N) inDegree + O(N) adjList
         Collections.sort(ans);
         return ans;
     }
+
+7019. Shortest Path in UG with unit weights || EASY
+TC: O(N+2M)
+SC: O(N+M) O(N) Queue + O(N) isVisite + O(N) distance
+    public int[] shortestPath(int[][] edges,int n,int m ,int src) {
+        ArrayList<ArrayList<Integer>> adjList = new ArrayList<>();
+        for(int i = 0 ; i < n ; i++) adjList.add(new ArrayList<>());
+        
+        for(int i = 0 ; i < edges.length; i++){
+            int u = edges[i][0];
+            int v = edges[i][1];
+            
+            adjList.get(u).add(v);
+            adjList.get(v).add(u);
+        }
+        
+        boolean isVisited[] = new boolean[n];
+        int[] ans = new int[n];
+        Queue<Integer> q = new LinkedList<>();
+        
+        Arrays.fill(ans,-1);
+        ans[src] = 0;
+        q.add(src);
+        int dist = 0;
+        
+        while(!q.isEmpty()){
+            int size = q.size();
+            dist++;
+            
+            while(size-- > 0){
+                int u = q.poll();
+                isVisited[u] = true;
+                for(int v : adjList.get(u)){
+                    if(!isVisited[v]){
+                        q.add(v);
+                        isVisited[v] = true;
+                        ans[v] = dist;
+                    }    
+                }
+            }
+        }
+        
+        return ans;
+    }
