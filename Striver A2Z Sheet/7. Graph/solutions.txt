@@ -647,3 +647,717 @@ SC: O(N+M) O(N) Queue + O(N) isVisite + O(N) distance
         
         return ans;
     }
+
+7021. Djisktra's Algorithm || EASY || **
+TC: O( E log(V) )
+SC: O( |E| + |V| ) 
+ArrayList<Integer> dijkstra(ArrayList<ArrayList<iPair>> adj, int src) {
+        int INF = Integer.MAX_VALUE;
+        int n = adj.size();
+        
+        ArrayList<Integer> ans = new ArrayList<>();
+        for(int i = 0 ; i < n ; i++) ans.add(INF);
+        
+        boolean isVisited[] = new boolean[n];
+        
+        PriorityQueue<iPair> pq = new PriorityQueue<>((a,b) -> a.first - b.first);
+        pq.add(new iPair(0,src));
+        
+        
+        while(!pq.isEmpty()){
+            int ud = pq.peek().first;
+            int u = pq.peek().second;
+            pq.poll();
+            
+            if(isVisited[u]) continue;
+            isVisited[u] = true;
+            ans.set(u,ud);
+            
+            
+            for(iPair pair : adj.get(u)){
+                int v = pair.first;
+                int wt = pair.second;
+                
+                if(!isVisited[v] && ud + wt < ans.get(v)){
+                    pq.add(new iPair(ud+wt, v));
+                }
+            }
+        }
+        
+        return ans;
+        
+    }
+
+7021. B
+//Could remove isVisited from the code
+//Code for Dense Graph
+ArrayList<Integer> dijkstra(ArrayList<ArrayList<iPair>> adj, int src) {
+        int INF = Integer.MAX_VALUE;
+        int n = adj.size();
+        
+        ArrayList<Integer> ans = new ArrayList<>();
+        for(int i = 0 ; i < n ; i++) ans.add(INF);
+        
+        PriorityQueue<iPair> pq = new PriorityQueue<>((a,b) -> a.first - b.first);
+        pq.add(new iPair(0,src));
+        ans.set(src,0);
+        
+        
+        while(!pq.isEmpty()){
+            int ud = pq.peek().first;
+            int u = pq.peek().second;
+            pq.poll();
+            
+            if(ud != ans.get(u)) continue;
+            for(iPair pair : adj.get(u)){
+                int v = pair.first;
+                int wt = pair.second;
+                if(ud + wt < ans.get(v)){
+                    pq.add(new iPair(ud+wt, v));
+                    ans.set(v,ud+wt);
+                }
+            }
+        }
+        
+        return ans;
+        
+    }
+
+7023. Shortest path in a binary maze || EASY || *
+TC: O(N*M*8)
+SC: O(N^2 + N)
+public int shortestPathBinaryMatrix(int[][] grid) {
+        int n = grid.length;
+        int INF = Integer.MAX_VALUE;
+
+        int[][] dist = new int[n][n];
+        for(int[] t: dist) Arrays.fill(t,INF);
+
+        Queue<Pair<Integer,Integer>> q = new LinkedList<>();
+        if(grid[0][0] ==  0){
+            q.add(new Pair(0,0));
+            dist[0][0] = 1;
+        }
+        int[] dx = new int[]{0,1,0,-1,-1,1,1,-1};
+        int[] dy = new int[]{1,0,-1,0,1,1,-1,-1};
+        while(!q.isEmpty()){
+                int row = q.peek().getKey();
+                int col = q.peek().getValue();
+                q.poll();
+
+                for(int k = 0 ; k < 8 ; k++){
+                    int adjRow = row + dx[k];
+                    int adjCol = col + dy[k];
+
+                    if(adjRow < 0 || adjCol < 0 || adjRow >= n || adjCol >= n || grid[adjRow][adjCol] == 1) continue;
+                    else if(dist[adjRow][adjCol] > dist[row][col] + 1){
+                        dist[adjRow][adjCol] = dist[row][col]+1;
+                        q.add(new Pair(adjRow,adjCol));
+                    }
+                }
+        }
+
+        return dist[n-1][n-1] == INF ? -1 : dist[n-1][n-1];
+    }
+
+7024. Path with minimum effort || EASY 
+TC: O(N*M*4 log( N*M))
+SC: O(N*M)
+
+    public int minimumEffortPath(int[][] heights) {
+        int n = heights.length;
+        int m = heights[0].length;
+
+        int[][] effort = new int[n][m];
+        for(int[] t : effort) Arrays.fill(t, Integer.MAX_VALUE);
+        
+        PriorityQueue<int[]> pq = new PriorityQueue<>((a,b)->a[0] - b[0]);
+        pq.add(new int[]{0,0,0});
+        effort[0][0] = 0;
+
+        int dx[] = new int[]{1,-1,0,0};
+        int dy[] = new int[]{0,0,-1,1};
+
+        while(!pq.isEmpty()){
+            int e = pq.peek()[0];
+            int row = pq.peek()[1];
+            int col = pq.peek()[2];
+            pq.poll();
+
+            if(row == n-1 && col == m-1) return e;
+            if(e != effort[row][col]) continue;
+
+            for(int k = 0 ; k < 4 ; k++){
+                int adjRow = row + dx[k];
+                int adjCol = col + dy[k];
+
+                if(adjRow < 0 || adjCol < 0 || adjRow >= n || adjCol >= m) continue;
+                else if(effort[adjRow][adjCol] > Math.max(e,Math.abs(heights[row][col] - heights[adjRow][adjCol]))){
+                    int newEffort = Math.max(e,Math.abs(heights[row][col] - heights[adjRow][adjCol]));
+                    effort[adjRow][adjCol] = newEffort;
+                    pq.add(new int[]{newEffort, adjRow, adjCol});
+
+                }
+            }
+        }
+        return effort[n-1][m-1];
+    }
+
+7025. Cheapest flights within k stops || EASY || *
+
+7025.A.
+TC: O(Mlog(N))
+SC: O(M + N)
+    public int findCheapestPrice(int n, int[][] flights, int src, int dst, int k) {
+        int INF = -1;
+        List<List<Pair<Integer,Integer>>> adjList = new ArrayList<>();
+        for(int i = 0 ; i < n ; i++) adjList.add(new ArrayList<>());
+
+        for(int i = 0 ; i < flights.length ; i++){
+            int u = flights[i][0];
+            int v = flights[i][1];
+            int wt = flights[i][2];
+            adjList.get(u).add(new Pair(v,wt));
+        }
+
+        int[] minPrice = new int[n];
+        Arrays.fill(minPrice, INF);
+        minPrice[src] = 0;
+
+        PriorityQueue<int[]> pq = new PriorityQueue<>((a,b) -> a[0] - b[0]);
+        pq.add(new int[]{0,src,0});
+
+        while(!pq.isEmpty()){
+            int[] ele = pq.poll();
+            int stop = ele[0];
+            int u = ele[1];
+            int uPrice = ele[2];
+
+            if(stop > k) continue;
+
+            for(Pair<Integer,Integer> p : adjList.get(u)){
+                int v = p.getKey();
+                int wt = p.getValue();
+                if(minPrice[v] == INF || minPrice[v] > uPrice + wt){
+                    minPrice[v] = uPrice + wt;
+                    pq.add(new int[]{stop+1,v,uPrice+wt});
+                }
+            }
+        }
+        return minPrice[dst];
+    }
+
+7025.B. Using Queue
+TC: O(N)
+SC: O(M + N)
+    public int findCheapestPrice(int n, int[][] flights, int src, int dst, int k) {
+        int INF = -1;
+        List<List<Pair<Integer,Integer>>> adjList = new ArrayList<>();
+        for(int i = 0 ; i < n ; i++) adjList.add(new ArrayList<>());
+
+        for(int i = 0 ; i < flights.length ; i++){
+            int u = flights[i][0];
+            int v = flights[i][1];
+            int wt = flights[i][2];
+            adjList.get(u).add(new Pair(v,wt));
+        }
+
+        int[] minPrice = new int[n];
+        Arrays.fill(minPrice, INF);
+        minPrice[src] = 0;
+
+        Queue<int[]> pq = new LinkedList<>();
+        pq.add(new int[]{0,src,0});
+
+        while(!pq.isEmpty()){
+            int[] ele = pq.poll();
+            int stop = ele[0];
+            int u = ele[1];
+            int uPrice = ele[2];
+
+            if(stop > k) continue;
+
+            for(Pair<Integer,Integer> p : adjList.get(u)){
+                int v = p.getKey();
+                int wt = p.getValue();
+                if(minPrice[v] == INF || minPrice[v] > uPrice + wt){
+                    minPrice[v] = uPrice + wt;
+                    pq.add(new int[]{stop+1,v,uPrice+wt});
+                }
+            }
+        }
+        return minPrice[dst];
+    }
+
+7026. Network Delay time || EASY 
+
+7026.A. Bellman Ford
+TC: O(N*M)
+SC: O(N)
+
+    public int networkDelayTime(int[][] times, int n, int k) {
+        int INF = -1;
+        int[] d = new int[n];
+        Arrays.fill(d,INF);
+        d[k-1] = 0;
+
+        for(int i = 0 ; i < n ; i++){
+            for(int j = 0 ; j < times.length ; j++){
+                int u = times[j][0]-1;
+                int v = times[j][1]-1;
+                int wt = times[j][2];
+
+                if(d[u] != INF && (d[v] == INF || d[v] > d[u] + wt)){
+                    d[v] = d[u] + wt;
+                }
+            }
+        }
+
+        int mx = 0;
+        for(int t : d){
+            if(t == -1) return -1;
+            mx = Math.max(mx, t);
+        }
+        return mx;
+    }
+
+7026.A. Djisktra
+TC: O(MlogV + M + N + N)
+SC: O(N + M + N(minTIme) + N(Queue))
+
+    public int networkDelayTime(int[][] times, int n, int k) {
+        int INF = -1;
+        k--;
+        List<List<Pair<Integer,Integer>>> adjList = new ArrayList<>();
+        for(int i = 0 ; i < n ; i++) adjList.add(new ArrayList<>());
+        for(int j = 0 ; j < times.length ; j++){
+            int u = times[j][0]-1;
+            int v = times[j][1]-1;
+            int wt = times[j][2];
+
+            adjList.get(u).add(new Pair<>(v,wt));
+        }
+
+        int[] minTime = new int[n];
+        Arrays.fill(minTime,INF);
+        minTime[k] = 0;
+        
+        PriorityQueue<Pair<Integer,Integer>> pq = new PriorityQueue<>((a,b)->a.getKey() - b.getKey());
+        pq.add(new Pair(0,k));
+
+        while(!pq.isEmpty()){
+            int t = pq.peek().getKey();
+            int u = pq.peek().getValue();
+            pq.poll();
+
+            for(Pair<Integer,Integer> p : adjList.get(u)){
+                int v = p.getKey();
+                int wt = p.getValue();
+
+                if(minTime[v] == INF || minTime[v] > t + wt){
+                    minTime[v] = t + wt;
+                    pq.add(new Pair(minTime[v], v));
+                }
+            }
+        }
+
+        int mx = 0;
+        for(int t : minTime){
+            if(t == -1) return -1;
+            mx = Math.max(mx,t);
+        }
+
+        return mx;
+    }
+
+7027. Number of ways to arrive at destination || Medium || ***
+TC: O(ElogV)
+SC: O(N)
+
+    public int countPaths(int n, int[][] roads) {
+        int INF = Integer.MAX_VALUE;
+        int MOD = 1000_000_007;
+        int[] distance = new int[n];
+        int[] ways = new int[n];
+
+        Arrays.fill(distance,INF);
+        distance[0] = 0;
+        ways[0] = 1;
+
+        List<List<Pair<Integer,Integer>>> adjList = new ArrayList<>();
+
+        for(int i = 0 ; i < n ; i++) adjList.add(new ArrayList<>());
+        for(int i = 0 ; i < roads.length ; i++){
+            int u = roads[i][0];
+            int v = roads[i][1];
+            int wt = roads[i][2];
+
+            adjList.get(u).add(new Pair(v,wt));
+            adjList.get(v).add(new Pair(u,wt));
+        }
+
+        PriorityQueue<Pair<Integer,Integer>> pq = new PriorityQueue<>((a,b) -> a.getKey()-b.getKey());
+        pq.add(new Pair(0,0));
+        while(!pq.isEmpty()){
+            int d = pq.peek().getKey();
+            int u = pq.peek().getValue();
+            pq.poll();
+
+            for(Pair<Integer,Integer> p : adjList.get(u)){
+                int v = p.getKey();
+                int wt = p.getValue();
+                if(d+wt < distance[v]){
+                    distance[v] = d + wt;
+                    ways[v] = ways[u] % MOD;
+
+                    pq.add(new Pair(distance[v], v));
+                }else if (d+wt == distance[v]){
+                    ways[v] = (ways[v] + ways[u]) % MOD;
+                }
+            }
+        }
+
+        return ways[n-1];
+    }
+
+7028. Minimum steps to reach end from start by performing multiplication and mod operations with array elements || EASY || *
+TC: O(10^5 * n)
+SC: O(10^5 * n)
+    int minimumMultiplications(int[] arr, int start, int end) {
+        int MOD = 100_000;
+        int n = arr.length;
+        int[] step = new int[MOD+1];
+        Arrays.fill(step,-1);
+        
+        Queue<int[]> pq = new LinkedList<>();
+        pq.add(new int[]{0,start});
+        
+        while(!pq.isEmpty()){
+            int moves = pq.peek()[0];
+            int oldStart = pq.peek()[1];
+            
+            pq.poll();
+            if(oldStart == end) return moves;
+            
+            for(int i = 0 ; i < arr.length ; i++){
+                int newStart = (oldStart * arr[i]) % MOD;
+                
+                if(step[newStart] == -1 || step[newStart] > moves+1){
+                    step[newStart] = moves+1;
+                    pq.add(new int[]{moves+1,newStart});
+                }
+            }
+        }
+        
+        return -1;
+    }
+
+7029. Bellman Ford || Fundamental || *
+TC: O(V*E)
+SC: O(V)
+static int[] bellmanFord(int V, int[][] edges, int src) {
+        int INF = 1000_000_00;
+        int distance[] = new int[V];
+        Arrays.fill(distance,INF);
+        
+        distance[src] = 0;
+        boolean flag = false;
+        for(int i = 0 ; i <= V ; i++){
+            flag = false;
+            for(int j = 0 ; j < edges.length ; j++){
+                int u = edges[j][0];
+                int v = edges[j][1];
+                int wt = edges[j][2];
+                if(distance[u] != INF && distance[v] > distance[u] + wt){
+                    distance[v] = distance[u] + wt;
+                    flag = true;
+                }
+            }
+        }
+        
+        if(flag) return new int[]{-1};
+        return distance;
+        
+    }
+
+7030. Floyd Warshal Algorithm || Fundamental || *
+TC: O(V^3)
+SC: O(V^2)
+    public void shortestDistance(int[][] mat) {
+        int n = mat.length;
+        int INF = Integer.MAX_VALUE;
+        
+        for(int i = 0 ; i < n ;i++){
+            for(int j = 0 ; j < n ; j++){
+                if(mat[i][j] == -1){
+                    mat[i][j] = INF;
+                }
+            }
+        }
+        
+        for(int k = 0 ; k < n ; k++){
+            for(int i = 0 ; i < n ; i++){
+                for(int j = 0 ; j < n ; j++){
+                    if(mat[i][k] != INF && mat[k][j] != INF){
+                        mat[i][j] = Math.min(mat[i][j],mat[i][k] + mat[k][j]);
+                    }
+                }
+            }
+        }
+        
+        for(int i = 0 ; i < n ;i++){
+            for(int j = 0 ; j < n ; j++){
+                if(mat[i][j] == INF){
+                    mat[i][j] = -1;
+                }
+            }
+        }
+    }
+
+7031. Find the city with the smallest number of neighbors in a threshold distance || EASY || *
+TC: O(V^3)
+SC: O(V^2)
+
+public int findTheCity(int n, int[][] edges, int th) {
+        int INF = Integer.MAX_VALUE;
+        int[][] adjM = new int[n][n];
+        for(int[] t: adjM) Arrays.fill(t, INF);
+        for(int i = 0 ; i < edges.length; i++){
+            int u = edges[i][0];
+            int v = edges[i][1];
+            int w = edges[i][2];
+
+            adjM[u][v] = w;
+            adjM[v][u] = w;
+        }
+        for(int k = 0 ; k < n ; k++){
+            for(int i = 0 ; i < n ; i++){
+                for(int j = 0 ; j < n ; j++){
+                    if(adjM[i][k] != INF && adjM[k][j] != INF){
+                        adjM[i][j] = Math.min(adjM[i][j] , adjM[i][k] + adjM[k][j]);
+                    }
+                }
+            }
+        }
+        int ansCity = -1;
+        int smallestReach = n+1;
+        for(int i= 0 ; i < n ; i++){
+            int tempReach = 0;
+            for(int j = 0 ; j < n ; j++){
+                if(i != j && adjM[i][j] <= th){
+                    tempReach++;
+                }
+            }
+            if(tempReach <= smallestReach){
+                ansCity = i;
+                smallestReach = tempReach;
+            }
+        }
+
+        return ansCity;
+    }
+
+7032. Prim's Algorithm || Fundamental || *
+TC: O(ElogE)
+SC: O(E)Queue + O(V)isVisited  
+    static int spanningTree(int V, int E, List<List<int[]>> adj) {
+        
+        PriorityQueue<Pair<Integer,Integer>> pq = new PriorityQueue<>((a,b)->a.getKey() - b.getKey());
+        boolean isVisited[] = new boolean[V];
+        
+        pq.add(new Pair(0,0));
+        int sum = 0;
+        
+        while(!pq.isEmpty()){
+            int uWeight = pq.peek().getKey();
+            int uNode = pq.peek().getValue();
+            pq.poll();
+                
+            if(isVisited[uNode]) continue;
+            isVisited[uNode] = true;
+            sum += uWeight;
+            
+            for(int[] p : adj.get(uNode)){
+                int vNode = p[0];
+                int vWeight = p[1];
+                
+                if(!isVisited[vNode]){
+                    pq.add(new Pair(vWeight,vNode));
+                }
+            }
+        }
+        
+        return sum;
+    }
+    
+    static class Pair<K,V>{
+        K key;
+        V value;
+        
+        Pair(K key,V value){
+            this.key = key;
+            this.value = value;
+        }
+        
+        K getKey(){
+            return key;
+        }
+        
+        V getValue(){
+            return value;
+        }
+    }
+
+7033.Kruskal's Algorithm / UnionByRank/ UnionBySize || Fundamental || **
+TC:
+SC:
+
+class Solution {
+    static int spanningTree(int V, int E, List<List<int[]>> adj) {
+        int[] rank = new int[V];
+        int[] parent = new int[V];
+        
+        for(int i = 0 ; i < V ; i++){
+            parent[i] = i;
+        }
+        
+        List<List<Integer>> edges = new ArrayList<>();
+        for(int i = 0 ; i < adj.size(); i++){
+            for(int[] edge : adj.get(i)){
+                edges.add(new ArrayList<>(List.of(edge[1],i,edge[0])));
+            }
+        }
+        
+        Collections.sort(edges,(a,b) -> a.get(0)-b.get(0));
+        int sum = 0;
+        DisjointSet ds = new DisjointSet(V);
+        
+        for(int i = 0 ; i < edges.size(); i++){
+            int w = edges.get(i).get(0);
+            int u = edges.get(i).get(1);
+            int v = edges.get(i).get(2);
+            
+            if(ds.findParent(u) != ds.findParent(v)){
+                sum+=w;
+                ds.unionBySize(u,v);
+            }
+        }
+        
+        return sum;
+    }
+    
+    static class DisjointSet{
+        int[] rank;
+        int[] parent;
+        int[] size;
+        
+        DisjointSet(int n){
+            rank = new int[n];
+            parent = new int[n];
+            size = new int[n];
+            
+            for(int i = 0 ; i < n ; i++){
+                rank[i] = 0;
+                parent[i] = i;
+                size[i] = 1;
+            }
+        }
+        
+        int findParent(int node){
+            if(parent[node] == node) return node;
+            return parent[node] = findParent(parent[node]);
+        }
+        
+        void unionByRank(int u, int v){
+            int p_u = findParent(u);
+            int p_v = findParent(v);
+            
+            int r_u = rank[p_u];
+            int r_v = rank[p_v];
+            
+            if(r_u < r_v){
+                parent[p_u] = p_v;
+            }else if(r_v < r_u){
+                parent[p_v] = p_u;
+            }else{
+                parent[p_u] = p_v;
+                rank[p_v]++;
+            }
+        }
+        
+        void unionBySize(int  u, int v){
+            int p_u = findParent(u);
+            int p_v = findParent(v);
+            
+            int s_u = size[p_u];
+            int s_v = size[p_v];
+            
+            if(s_u < s_v){
+                parent[p_u] = p_v;
+                size[p_u] += size[p_v];
+            }else{
+                parent[p_v] = p_u;
+                size[p_v] += size[p_u];
+            }
+        }
+    }
+}
+
+7034. Number of operations to make network connected || EASY
+class Solution {
+    class DisjointSet{
+        int[] rank;
+        int[] parent;
+        DisjointSet(int n){
+            rank = new int[n];
+            parent = new int[n];
+            for(int i = 0 ; i < n ; i++){
+                rank[i] = 0;
+                parent[i] = i;        
+            }
+        }
+
+        int findParent(int node){
+            if(parent[node] == node) return node;
+            return parent[node] = findParent(parent[node]);
+        }
+
+        void unionByRank(int u , int v){
+            int p_u = parent[u];
+            int p_v = parent[v];
+
+            int r_u = rank[p_u];
+            int r_v = rank[p_v];
+
+            if(r_u < r_v){
+                parent[p_u] = p_v;
+            }else if(r_v < r_u){
+                parent[p_v] = p_u;
+            }else{
+                parent[p_v] = p_u;
+                rank[p_v]++;
+            }
+        }
+    }
+    public int makeConnected(int n, int[][] conn) {
+        DisjointSet ds = new DisjointSet(n);
+
+        for(int i = 0 ; i < conn.length ; i++){
+            int u = conn[i][0];
+            int v = conn[i][1];
+            if(ds.findParent(u) != ds.findParent(v)){
+                ds.unionByRank(u,v);
+            }
+        }
+
+        int components = 0;
+        for(int i = 0 ; i < n ; i++){
+            if(ds.parent[i] == i){
+                components++;
+            }
+        }
+
+        return conn.length < n-1 ? -1 : components-1;
+
+    }
+}
