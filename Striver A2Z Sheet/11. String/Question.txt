@@ -1,0 +1,49 @@
+1. Remove Outermost Parentheses || EASY || Fundamental
+https://leetcode.com/problems/remove-outermost-parentheses/description/
+
+2. Reverse Words in a String || EASY || Fundamental
+https://leetcode.com/problems/reverse-words-in-a-string/description/
+
+3. Largest Odd Number in String || Medium || Fundamental
+https://leetcode.com/problems/largest-odd-number-in-string/
+
+4. Longest Common Prefix || EASY || Use Trie || ***
+https://leetcode.com/problems/longest-common-prefix/description/
+
+5. Isomorphic Strings || Hard || Fundamental || ***
+Only 256 Character are there in ASCII character
+https://leetcode.com/problems/isomorphic-strings/
+
+6. Rotate String
+https://leetcode.com/problems/rotate-string/description/
+
+7. Valid Anagram || EASY
+https://leetcode.com/problems/valid-anagram/description/
+
+8. Sort Characters By Frequency || EASY || Foundation
+https://leetcode.com/problems/sort-characters-by-frequency/
+
+9. Maximum Nesting Depth of Paranthesis || EASY
+https://leetcode.com/problems/maximum-nesting-depth-of-the-parentheses/description/
+
+10. Roman to Integer || EASY || ***
+https://leetcode.com/problems/roman-to-integer/description/
+
+11. String to Integer (atoi) || Medium || ***
+https://leetcode.com/problems/string-to-integer-atoi/description/
+
+12. Count Number of Substrings || Medium || ***
+https://www.geeksforgeeks.org/problems/count-number-of-substrings4528/1?
+// Use sliding window atMost Trick
+
+13. Sum of Beauty of All Substrings || Medium || ***
+//TreeMap could be used instead of looping all over
+https://leetcode.com/problems/sum-of-beauty-of-all-substrings/description/
+
+14. Rotate String || EASY || ***
+https://leetcode.com/problems/rotate-string/description/
+
+15. Longest Palindromic Substring || Medium || ***
+// Did'nt use DP
+//Normal two pointer approach
+https://leetcode.com/problems/longest-palindromic-substring/description/

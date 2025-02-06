@@ -1,0 +1,213 @@
+5. Isomorphic Strings || Hard || Fundamental || ***
+class Solution {
+    public boolean isIsomorphic(String s, String t) {
+        int n = s.length();
+        // int[] mappedTo = new int[26];
+        // boolean[] isUsed = new boolean[26];
+        Map<Character,Character> mappedTo = new HashMap<>();
+        Set<Character> isUsed = new HashSet<>();
+
+
+        Map<Integer,Integer> mp = new HashMap<>();
+        for(int i = 0 ; i < n ; i++){
+            // int key = s.charAt(i)-'a';
+            // int eVal = t.charAt(i)-'a';
+            char key = s.charAt(i);
+            char eVal = t.charAt(i);
+
+            // System.out.println(Arrays.toString(mappedTo));
+            // System.out.println(Arrays.toString(isUsed));
+
+            if(mappedTo.get(key) == null && isUsed.contains(eVal)) return false;
+            if(mappedTo.containsKey(key) && mappedTo.get(key) != eVal) return false;
+
+            mappedTo.put(key,eVal);
+            isUsed.add(eVal);
+
+        }
+
+        // System.out.println(Arrays.toString(mappedTo));
+        // System.out.println(Arrays.toString(isUsed));
+
+        return true;
+    }
+}
+
+10. Roman to Integer || EASY || ***
+class Solution {
+    private int getValue(char ch){
+        switch(ch){
+            case 'I' : return 1;
+            case 'V' : return 5;
+            case 'X' : return 10;
+            case 'L' : return 50;
+            case 'C' : return 100;
+            case 'D' : return 500;
+            case 'M' : return 1000;
+        }
+
+        return 0;
+    }
+    public int romanToInt(String s) {
+        int n = s.length();
+        int prev = 0;
+        int ans = 0;
+        for(int i = n-1 ; i>= 0 ; i--){
+            char ch = s.charAt(i);
+            int val = getValue(ch);
+
+            if(val >= prev){
+                ans+=val;
+                prev=val;
+            }else if(val < prev){
+                ans-=val;
+            }
+        }
+
+        return ans;
+    }
+}
+
+11. String to Integer (atoi) || Medium || ***
+public int myAtoi(String s) {
+        int i = 0,  n = s.length(), sign = 1;
+        //handle whitespaces
+        while(i < n && s.charAt(i) == ' ') i++;
+
+        //handle sign
+        if(i < n && (s.charAt(i) == '-' || s.charAt(i) == '+')){
+            sign = s.charAt(i) == '-' ? -1 : 1;
+            i++;
+        } 
+
+        //handle leading zeros
+        while(i < n && s.charAt(i) == '0') i++;
+
+        int ans = 0;
+        while(i < n){
+            char ch = s.charAt(i);
+
+            if(ch < '0' || ch > '9') return sign*ans;
+            int value = Integer.parseInt(String.valueOf(ch));
+
+            if(ans > (Integer.MAX_VALUE - value)/10){
+                return sign == 1 ? Integer.MAX_VALUE : Integer.MIN_VALUE;
+            }
+
+            ans = ans*10 + value;
+            i++;
+        }
+
+        return sign*ans;
+    }
+
+    12. Count Number of Substrings || Medium || ***
+    int atMost(String s, int k){
+        if(k == 0) return 0;
+        int n = s.length();
+        int i = 0 , j = 0;
+        int[] freq = new int[26];
+        int dCount = 0;
+        int result = 0;
+        
+        while(j<n){
+            char ch = s.charAt(j);
+            
+            freq[ch-'a']++;
+            if(freq[ch-'a'] == 1) dCount++;
+            
+            while(dCount > k){
+                freq[s.charAt(i)-'a']--;
+                if(freq[s.charAt(i) - 'a'] == 0) dCount--;
+                
+                i++;
+            }
+            result += j-i+1;
+            j++;
+        }
+        return result;
+    }
+    int countSubstr(String s, int k) {
+        return atMost(s,k) - atMost(s,k-1);
+    }
+
+13. Sum of Beauty of All Substrings || Medium || ***
+TC: O(N^2)
+SC: o(26) = O(1)
+public int beautySum(String s) {
+        int n = s.length();
+        int ans = 0;
+        for(int i = 0 ; i < n ; i++){
+            int[] freq = new int[26];
+            for(int j = i ; j < n ; j++){
+                char ch = s.charAt(j);
+                freq[ch-'a']++;
+
+                int min = Integer.MAX_VALUE;
+                int max = Integer.MIN_VALUE;
+
+                for(int f : freq){
+                    if(f == 0) continue;
+                    min = Math.min(f,min);
+                    max = Math.max(f,max);
+                }
+
+                ans += max-min;
+            }
+        }
+
+        return ans;
+    }
+
+14. Rotate String || EASY || ***
+class Solution {
+    public boolean rotateString(String s, String goal) {
+        int j = 0;
+        int n = s.length() , m = goal.length();
+        if(n != m) return false;
+
+        while(j < m){
+            if(s.charAt(0) == goal.charAt(j)){
+                int k = 0;
+                while(k < n){
+                    int goalIdx = (j + k) % n;
+                    if(s.charAt(k) != goal.charAt(goalIdx)) break;
+                    k++;
+                }
+
+                if(k == n) return true;
+            }
+            j++;
+        }
+
+        return false;
+    }
+}
+
+15. Longest Palindromic Substring || Medium || ***
+TC: O(N3)
+SC: O(N)
+private boolean isPalindrome(String s){
+        int low = 0 , high = s.length()-1;
+        while(low <= high){
+            if(s.charAt(low) != s.charAt(high)) return false;
+            low++;
+            high--;
+        }
+        return true;
+    }
+    public String longestPalindrome(String s) {
+        int n = s.length();
+        String ans = "";
+        int maxLen = 0;
+        for(int i = 0 ; i < n ; i++){
+            for(int j = i + maxLen; j < n ; j++){
+                if(j-i+1 > maxLen && isPalindrome(s.substring(i,j+1))){
+                    maxLen = j-i+1;
+                    ans = s.substring(i,j+1);
+                }
+            }
+        }
+
+        return ans;
+    }

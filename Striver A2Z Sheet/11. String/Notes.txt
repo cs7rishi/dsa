@@ -1,0 +1,11 @@
+* use .length() with String and StringBuilder()
+* StringBuilder could be reassigned to new StringBuilder and not ""
+
+
+* StringBuilder by default holds empty string i.e " "
+
+*TreeMap.firstKey() gives the minimum frequency, and 
+*TreeMap.lastKey() gives the maximum frequency in O(log 26) ≈ O(1) time.
+
+*TreeMap<Integer, String> treeMap = new TreeMap<>(Collections.reverseOrder());
+    To create descending order treeMap
