@@ -11,6 +11,9 @@ https://leetcode.com/problems/majority-element/description/
 1004.Maximum Subarray | Medium
 https://leetcode.com/problems/maximum-subarray/description/
 
+#. Next Permutation || Medium
+https://leetcode.com/problems/next-permutation/description/
+
 1005.Leaders in an Array problem | Medium
 https://www.geeksforgeeks.org/problems/leaders-in-an-array-1587115620/1?utm_source=youtube&utm_medium=collab_striver_ytdescription&utm_campaign=leaders-in-an-array
 
@@ -91,3 +94,14 @@ https://leetcode.com/problems/majority-element-ii/description/
 //ALways have optimal condition for counting pairs
 //Use brackets for Precedence Issue (j - (mid+1)) + 1;
 
+1023. Check if Array Is Sorted and Rotated || EASY || ***
+https://leetcode.com/problems/check-if-array-is-sorted-and-rotated/description/
+
+1024. https://leetcode.com/problems/next-permutation/ || Medium || ***
+https://leetcode.com/problems/next-permutation/
+
+1025. Spiral Matrix || Medium || ***
+https://leetcode.com/problems/spiral-matrix/description/
+
+1026.Maximum Score from Subarray Minimums
+https://www.geeksforgeeks.org/problems/max-sum-in-sub-arrays0824/
