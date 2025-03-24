@@ -16,7 +16,9 @@ Learning:
 4. Power of Two || EASY || *
 //Important concept
 
-5. Count total set bits
+5. Count total set bits || MEDIUM || ***
+https://www.geeksforgeeks.org/problems/count-total-set-bits-1587115620/1
+//learn this question
 
 6. Set the rightmost unset bit || EASY
 
@@ -27,3 +29,39 @@ https://www.geeksforgeeks.org/problems/swap-two-numbers3844/1
 8. Minimum Bit Flips to Convert Number || EASY || *
 //Concept on how to iterate over all bits
 https://leetcode.com/problems/minimum-bit-flips-to-convert-number/description/
+
+9. Subsets || Medium || *
+//PowerSet, should move from 1 to pow(2,n);
+//Recursion could also be used
+https://leetcode.com/problems/subsets/description/
+
+10. Two numbers with odd occurrences || Medium || ***
+//Hashset for Brute
+//Bit Manipulation for Optimal
+//Arrays.sort(primitive, comparator), does'nt word
+https://www.geeksforgeeks.org/problems/two-numbers-with-odd-occurrences5846/1
+
+11. XOR of numbers in a given range || EASY || *
+https://www.geeksforgeeks.org/problems/find-xor-of-numbers-from-l-to-r/1
+Important observation/pattern with % 4
+
+n % 4 == 0, xor = N
+n % 4 == 1, xor = 1
+n % 4 == 2, xor = N + 1
+n % 4 == 3, xor = 0
+
+12. Print Prime Factors of a Number || Fundamental || *
+https://www.geeksforgeeks.org/problems/prime-factors5052/1
+
+13. All Divisors of a Number || Fundamental || *
+https://www.geeksforgeeks.org/problems/all-divisors-of-a-number/1
+
+14. Sieve of Eratosthenes || Fundamental || *
+https://leetcode.com/problems/count-primes/description/
+//Optimization is Important
+
+15. Find Prime Factorisation of a Number using Sieve || EASY || *
+https://www.geeksforgeeks.org/problems/prime-factorization-using-sieve/1
+//Based on above question
+//Need to take care of array initialization step
+
