@@ -1,0 +1,204 @@
+6. N meetings in one room || MEDIUM || *
+TC: O(N) + O(NlogN) + O(N)
+SC: O(N)
+    public int maxMeetings(int start[], int end[]) {
+        int n = start.length;
+        List<int[]> meetings = new ArrayList<>();
+        for(int i = 0 ; i < n ; i++){
+            meetings.add(new int[]{start[i],end[i]});
+        }
+        
+        Collections.sort(meetings,(a,b) -> a[1] - b[1]);
+        
+        int prevEnd = -1;
+        int count = 0;
+        for(int i = 0 ; i < n ; i++){
+            if(prevEnd < meetings.get(i)[0]){
+                count++;
+                prevEnd = meetings.get(i)[1];
+            }
+        }
+        
+        return count;
+    }
+
+7. Jump Game || EASY 
+TC: O(N)
+SC: O(1)
+    public boolean canJump(int[] nums) {
+        int range = nums[0];
+        int n = nums.length;
+
+        for(int i = 0 ; i < n && i <= range ; i++){
+            range = Math.max(range,nums[i] + i);
+
+            if(range >= n - 1) return true;
+        }
+
+        return range >= n-1 ? true : false;
+    }
+
+8. Jump Game 2 || MEDIUM || ***
+TC: O(N)
+SC: O(1)
+    public int jump(int[] nums) {
+        int maxRange = nums[0], range = 0, jumps = 0, n = nums.length;
+        for(int i = 0 ; i < n && i <= range ; i++){
+            maxRange = Math.max(maxRange,nums[i]+i);
+
+            if(i == range && i != n-1){
+                range = maxRange;
+                jumps++;
+            }
+        }
+        return jumps;
+    }
+
+9. Minimum number of platforms required for a railway || EASY
+TC: O(NlogN) + O(NlogN) + O(2N)
+SC: O(1)
+    static int findPlatform(int arr[], int dep[]) {
+        int i = 0, j = 0, n = arr.length;
+        Arrays.sort(arr);
+        Arrays.sort(dep);
+        
+        int platform = 0;
+        int ans = 0;
+        while( i < n && j < n){
+            if(arr[i] <= dep[j]){
+                ans = Math.max(ans, ++platform);
+                i++;
+            }else{
+                platform--;
+                j++;
+            }
+        }
+        return ans;
+    }
+
+10. Job sequencing Problem || EASY || ***
+TC: O(NlogN)
+SC: O(N)
+    public ArrayList<Integer> JobSequencing(int[] id, int[] deadline, int[] profit) {
+        int n = deadline.length;
+        
+        
+        int maxDeadLine = 0;
+        for(int t : deadline) maxDeadLine = Math.max(maxDeadLine, t);
+        
+        int[] selectedJob = new int[maxDeadLine + 1];
+        Arrays.fill(selectedJob,-1);
+        
+        int jobCount = 0;
+        int totalProfit = 0;
+        
+        List<int[]> merged = new ArrayList<>();
+        for(int i = 0 ; i < n ; i++){
+            merged.add(new int[]{id[i], deadline[i], profit[i]});
+        }
+        Collections.sort(merged, (a,b) -> b[2] - a[2]);
+        
+        for(int[] t : merged){
+            for(int i = t[1] ; i > 0 ; i--){
+                if(selectedJob[i] == -1){
+                    selectedJob[i] = t[0];
+                    jobCount++;
+                    totalProfit += t[2];
+                    
+                    break;
+                }
+            }
+        }
+        
+        return new ArrayList<>(List.of(jobCount,totalProfit));
+    }
+
+12. Program for Shortest Job First (or SJF) CPU Scheduling || EASY
+TC: O(NlogN) + O(N)
+SC: O(1)
+    static int solve(int bt[] ) {
+        Arrays.sort(bt);
+        int time = 0;
+        int waitTime = 0;
+        
+        for(int i = 0 ; i < bt.length ; i++){
+            waitTime += time;
+            time += bt[i];
+        }
+        
+        return waitTime/bt.length; 
+    }
+
+14. Insert Interval || MEDIUM || ***
+TC: O(N)
+SC: O(1)
+    public int[][] insert(int[][] intervals, int[] newInterval) {
+
+        int n = intervals.length, i = 0;
+        List<int[]> res = new ArrayList<>();
+
+        while(i<n && intervals[i][1]< newInterval[0]){
+            res.add(intervals[i]);
+            i++;
+        }
+
+        while(i<n && intervals[i][0] <= newInterval[1]){
+            newInterval[0] = Math.min(newInterval[0],intervals[i][0]);
+            newInterval[1] = Math.max(newInterval[1],intervals[i][1]);
+            i++;
+        }
+
+        res.add(newInterval);
+
+        while(i<n){
+            res.add(intervals[i]);
+            i++;
+        }
+
+        return res.toArray(new int[res.size()][]);
+        
+    }
+
+15. Merge Intervals || EASY || *
+TC: O(NlogN)
+SC: O(1)
+    public int[][] merge(int[][] intervals) {
+        Arrays.sort(intervals, (a,b) -> a[0] - b[0]);
+        List<int[]> ans = new ArrayList<>();
+
+        int prevStart = intervals[0][0];
+        int prevEnd = intervals[0][1];
+
+        for(int i = 1 ; i < intervals.length ; i++){
+            if(prevEnd < intervals[i][0]){
+                ans.add(new int[]{prevStart, prevEnd});
+                prevStart = intervals[i][0];
+                prevEnd = intervals[i][1];
+            }else{
+                prevStart = Math.min(prevStart, intervals[i][0]);
+                prevEnd = Math.max(prevEnd, intervals[i][1]);
+            }
+        }
+
+        ans.add(new int[]{prevStart, prevEnd});
+        return ans.toArray(new int[ans.size()][]);
+    }
+
+16. Non-overlapping Intervals || EASY || *
+TC: O(NlogN)
+SC: O(1)
+    public int eraseOverlapIntervals(int[][] intervals) {
+        Arrays.sort(intervals, (a,b) -> a[1] - b[1]);
+
+        int count = 0;
+        int prevEnd = Integer.MIN_VALUE;
+
+        for(int i = 0 ; i < intervals.length ; i++){
+            if(prevEnd <= intervals[i][0]){
+                count++;
+                prevEnd = intervals[i][1];
+            }
+        }
+
+        return intervals.length - count;
+    }

@@ -1,0 +1,45 @@
+
+1. Assign Cookies
+2. Fractional Knapsack Problem
+3. Greedy algorithm to find minimum number of coins
+4. Lemonade Change
+5. Valid Paranthesis Checker
+
+
+6. N meetings in one room || MEDIUM || ***
+https://www.geeksforgeeks.org/problems/n-meetings-in-one-room-1587115620/1
+//Sort the meetings based on the end time
+//Understand the greediness in this question
+
+7. Jump Game || EASY 
+https://leetcode.com/problems/jump-game/
+
+8. Jump Game 2 || MEDIUM || ***
+https://leetcode.com/problems/jump-game-ii/
+
+9. Minimum number of platforms required for a railway || EASY
+https://www.geeksforgeeks.org/problems/minimum-platforms-1587115620/1
+//sort the array
+
+10. Job sequencing Problem || EASY || ***
+https://www.geeksforgeeks.org/problems/job-sequencing-problem-1587115620/1
+//Just logic is important
+
+11. Candy
+
+12. Program for Shortest Job First (or SJF) CPU Scheduling || EASY
+https://www.geeksforgeeks.org/problems/shortest-job-first/1?
+
+13. Program for Least Recently Used (LRU) Page Replacement Algorithm
+
+
+14. Insert Interval || MEDIUM || ***
+https://leetcode.com/problems/insert-interval/
+
+15. Merge Intervals || EASY || *
+https://leetcode.com/problems/merge-intervals/
+//Based on above problem, sort the array to make sure ans
+
+16. Non-overlapping Intervals || EASY || *
+https://leetcode.com/problems/non-overlapping-intervals/
+//Same as N meeting in One Room
