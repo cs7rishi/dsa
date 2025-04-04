@@ -16,3 +16,38 @@ eg NlogN sorting to NlogK, based on question
 5004. Merge M sorted Lists || Easy 
 //Could use inplace, but time complexity could be as n^2, hence use heap
 
+5005. Replace each array element by its corresponding rank || EASY
+https://www.geeksforgeeks.org/problems/replace-elements-by-its-rank-in-the-array/1?
+
+5006. Task Scheduler
+
+5007. Hands of Straights || Medium || ***
+https://leetcode.com/problems/hand-of-straights/
+//TreeMap, good implementation like, firstKey and lastKey
+
+>> Hard <<
+
+5008. Design twitter || Medium || ***
+https://leetcode.com/problems/design-twitter/
+
+5009. Connect `n` ropes with minimal cost || DP question
+
+5010. Kth largest element in a stream of running integers || Easy || *
+https://leetcode.com/problems/kth-largest-element-in-a-stream/
+//Learn TreeSet. does'nt allow duplicate value, remember
+Learn TreeSet .first() .last() .pollFirst() . pollLast()
+
+5011. Maximum Sum Combination || Medium || ***
+https://www.interviewbit.com/problems/maximum-sum-combinations/
+// Better solution possible
+//Current: sort both, do n2 with Heap
+
+5012. Find Median from Data Stream || Medium || *
+https://leetcode.com/problems/find-median-from-data-stream/description/
+//Make sure the heaps are sorted in order
+
+
+5013. K most frequent elements || Medium || ***
+https://leetcode.com/problems/top-k-frequent-elements/
+//Learn quickSort for this question
+

@@ -1,0 +1,30 @@
+1.Max Chunks To Make Sorted || EASY
+TC: O(n)
+SC: O(1)
+public int maxChunksToSorted(int[] arr) {
+       int maxHere = 0;
+       int chunks = 0;
+       for(int i = 0 ; i < arr.length ; i++){
+        maxHere = Math.max(arr[i],maxHere);
+        if(maxHere <= i) chunks++;
+       } 
+
+       return chunks;
+    }
+
+6. Sum of Subarrays || Medium || ***
+TC: O(n)
+SC: O(1)
+    long MOD = 1000_000_007;
+    public long subarraySum(int[] arr) {
+        // code here
+        long sum = 0L;
+        int n = arr.length;
+        for(int i = 0 ; i < arr.length ; i++){
+            long width = 1L * (i+1) * (n-i);
+            sum+= (width*arr[i])%MOD;
+            sum%= MOD;
+        }
+        
+        return sum;
+    }

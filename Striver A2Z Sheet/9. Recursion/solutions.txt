@@ -1,1 +1,95 @@
 Reverse String || EASY
+
+9002. Pow(x, n) || MEDIUM || ***
+TC: O(log2N);
+SC: O(logN);
+    public double myPow(double x, long n) {
+        if(n == 0) return 1;
+
+        if(n < 0){
+            return 1 / myPow(x,-n);
+        }
+
+        if(n % 2 == 0){
+            double half = myPow(x,n/2);
+            return half * half;
+        }else{
+            return x * myPow(x,n-1);
+        }
+
+    }
+
+9003. Count Good numbers || MEDIUM || ***
+TC: O(log2N);
+SC: O(logN);
+class Solution {
+    long mod = 1000_000_007;
+    private long pow(int x, long n){
+        if(n == 0) return 1;
+
+        if(n % 2 == 0){
+            long half = pow(x, n/2);
+            return (half * half) % mod;
+        }else{
+            return (x * pow(x,n-1) % mod);
+        }
+    }
+    public int countGoodNumbers(long n) {
+        if(n % 2 == 0){
+            return (int)pow(20,n/2); 
+        }else{
+            return (int)((5 * pow(20, n/2)) % mod);
+        }
+    }
+}
+
+9001. Generate all binary strings || EASY || *
+TC: 2^N
+SC: O(N) Auxillary Space
+class Solution {
+    public static void recursion(int n , String temp, List<String> ans){
+        if(temp.length() == n){
+            ans.add(temp);
+            return;
+        }
+        char ch = temp.charAt(temp.length()-1);
+        
+        if(ch == '0'){
+            recursion(n,temp+'0',ans);
+            recursion(n,temp+'1',ans);
+        }else{
+            recursion(n,temp+'0',ans);
+        }
+    }
+    public static List<String> generateBinaryStrings(int n) {
+        List<String> ans = new ArrayList<>();
+        
+        recursion(n,"0", ans);
+        recursion(n,"1", ans);
+        
+        return ans;
+    }
+}
+
+9002. Generate Paranthesis || EASY || *
+class Solution {
+    private List<String> ans = new ArrayList<>();
+    private void recursion(String temp, int open , int close, int n){
+        if(open > n || close > n) return;
+        if(open == close && close == n){
+            ans.add(temp);
+            return;
+        }
+
+        if(open == close){
+            recursion(temp + '(', open + 1, close, n);
+        }else{
+            recursion(temp + '(', open + 1, close, n);
+            recursion(temp + ')', open, close + 1, n);
+        }
+    }
+    public List<String> generateParenthesis(int n) {
+        recursion("(", 1, 0, n);
+        return ans;
+    }
+}

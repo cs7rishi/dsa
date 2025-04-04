@@ -120,3 +120,301 @@ class Solution {
         return ans;
     }
 }
+
+Square Root || * 
+TC: O(log(N))
+SC: O(1);
+int floorSqrt(int n) {
+        int front = 2 , back = n;
+        while(front <= back){
+            int mid = (front + back)/2;
+            
+            if(mid * mid <= n){
+                front = mid+1;
+            }else{
+                back = mid - 1;
+            }
+        }
+        
+        return back;
+    }
+
+Find the Nth root of a number using binary search || EASY || *
+TC: O(log(N))
+SC: O(1);
+class Solution {
+    int checkPower(int k , int n , int m){
+        long result = 1;
+        for(int i = 1 ; i <=n ; i++){
+            result *= k;
+            
+            if(result > m) return 1;
+        }
+        return result == m ? 0 : -1;
+    }
+    public int nthRoot(int n, int m) {
+       int front = 1,back = m;
+       while(front <= back){
+           int mid = (front + back)/2;
+           
+           if(checkPower(mid,n,m) == 0) return mid;
+           else if(checkPower(mid,n,m) == -1) front = mid+1;
+           else back = mid-1;
+       }
+       
+       return -1;
+    }
+}
+
+
+
+
+
+
+
+Aggressive Cows || EASY || *
+
+class Solution {
+    public static int aggressiveCows(int[] stalls, int k) {
+        Arrays.sort(stalls);
+        int n = stalls.length, low = 1, high = stalls[n-1] - stalls[0];
+        
+        while(low <= high){
+            int mid = low + (high - low)/2;
+            
+            boolean isPossible = calc(stalls, mid, k);
+            if(isPossible){
+                low = mid + 1;
+            }else{
+                high = mid - 1;
+            }
+        }
+        
+        return high;
+    }
+    
+    public static boolean calc(int[] stalls, int dist, int k){
+        k-=1;
+        int count = 0, prev = stalls[0];
+        
+        for(int i = 1 ; i < stalls.length ; i++){
+            if(stalls[i] - prev >= dist){
+                count++;
+                prev = stalls[i];
+            }
+            
+            if(count == k) return true;
+        }
+        return false;
+    }
+}
+
+Book Allocation Problem || HARD || ***
+public class Solution {
+    public static int calc(ArrayList<Integer> arr, int n, int maxPages){
+        long adjPages = 0;
+        int m = 0;
+
+        for(int bookPages : arr){
+            if(adjPages + bookPages > maxPages){
+                m++;
+                adjPages = 0;
+            }
+
+            adjPages += bookPages;
+        }
+        return m+1;
+    }
+    public static int findPages(ArrayList<Integer> arr, int n, int m) {
+        if(m > n) return -1;
+        int low = 0, high = 0;
+        for(int a : arr){
+            low = Math.max(low, a);
+            high += a;
+        }
+
+        while(low <= high){
+            int mid = low + (high-low)/2;
+
+            int students = calc(arr, n, mid);
+
+            if(students > m){
+                low = mid + 1;
+            }else{
+                high = mid-1;
+            }
+        }
+
+        return low;
+    }
+}
+
+Split Array Largest Sum || HARD || ***
+class Solution {
+    private int calc(int[] nums, int maxSum){
+        int adjSum = 0;
+        int k = 0;
+
+        for(int num : nums){
+            if(adjSum + num <= maxSum){
+                adjSum += num;
+            }else{
+                adjSum = num;
+                k++;
+            }
+        }
+        return k+1;
+    }
+    public int splitArray(int[] nums, int k) {
+        int low = 0, high = 0;
+        for(int num : nums){
+            low = Math.max(low, num);
+            high += num;
+        }
+
+        while(low <= high){
+            int mid = low + (high-low)/2;
+            int subArrays = calc(nums, mid);
+            if(subArrays > k){
+                low = mid + 1;
+            }else{
+                high = mid - 1;
+            }
+        }
+        return low;
+    }
+}
+
+
+Painter's Partition Problem || Medium || *
+public class Solution 
+{
+    public static int calc(ArrayList<Integer> boards, int time){
+        int adjBoard = 0;
+        int painters = 0;
+
+        for(int board : boards){
+            if(adjBoard + board > time){
+                painters++;
+                adjBoard = 0;
+            }
+
+            adjBoard += board;
+        }
+        return painters+1;
+    }
+    public static int findLargestMinDistance(ArrayList<Integer> boards, int k)
+    {
+        int low = 0 , high = 0;
+        for(int board : boards){
+            low = Math.max(low,board);
+            high += board;
+        }
+
+        while(low <= high){
+            int mid = low + (high - low)/2;
+
+            int painters = calc(boards, mid);
+            if(painters > k){
+                low = mid + 1;
+            }else{
+                high = mid - 1;
+            }
+        }
+
+        return low;
+    }
+}
+
+Median of 2 sorted arrays || EASY || *
+    public double findMedianSortedArrays(int[] nums1, int[] nums2) {
+        int n = nums1.length, m = nums2.length;
+        int totalEle = n+m;
+
+        int index2 = totalEle / 2;
+        int index1 = index2 - 1;
+
+        int ele1 = -1, ele2 = -1;
+        int k = 0;
+        int i = 0 , j = 0;
+        while(i < n && j < m){
+            if(nums1[i] <= nums2[j]){
+                if(k == index1) ele1 = nums1[i];
+                if(k == index2) ele2 = nums1[i];
+                i++;
+            }else{
+                if(k == index1) ele1 = nums2[j];
+                if(k == index2) ele2 = nums2[j];
+                j++;
+            }
+            k++;
+        }
+
+        while(i < n){
+            if(k == index1) ele1 = nums1[i];
+            if(k == index2) ele2 = nums1[i]; 
+            k++; i++;
+        }
+        while(j < m){
+            if(k == index1) ele1 = nums2[j];
+            if(k == index2) ele2 = nums2[j]; 
+            k++; j++;
+        }
+
+        if(totalEle % 2 == 1) return ele2;
+
+        return ((double)ele2 + (double)ele1)/2;
+    }
+
+Row with max 1s || EASY
+class Solution {
+    public int findFirstOccurence(int arr[][], int row){
+        int low = 0 , high = arr[0].length - 1;
+        
+        while(low <= high){
+            int mid = (low + high ) / 2;
+            
+            if(arr[row][mid] >= 1){
+                high = mid - 1;
+            }else{
+                low = mid + 1;
+            }
+        }
+        
+        return low;
+    }
+    public int rowWithMax1s(int arr[][]) {
+        int rowIndex = -1;
+        int maxCount = 0;       
+        int n = arr.length, m = arr[0].length;
+        
+        for(int i = 0 ; i < n ; i++){
+            int colIndex = findFirstOccurence(arr,i);
+            int oneCount = m - colIndex;
+            
+            if(oneCount > maxCount){
+                maxCount = oneCount;
+                rowIndex = i;
+            }
+        }
+        
+        return rowIndex;
+    }
+}
+
+Search in a 2 D matrix || EASY || *
+    public boolean searchMatrix(int[][] matrix, int target) {
+        int n = matrix.length , m = matrix[0].length;
+        int low = 0 , high = m*n - 1;
+
+        while(low <= high){
+            int mid = (low + high) / 2;
+            int r = mid / m;
+            int c = mid % m;
+            int num = matrix[r][c];
+            if(num == target) return true;
+            else if(num > target) high = mid - 1;
+            else low = mid + 1;
+        }
+        return false;
+    }

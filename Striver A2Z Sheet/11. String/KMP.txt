@@ -1,0 +1,18 @@
+459. Repeated Substring Pattern || Medium
+https://leetcode.com/problems/repeated-substring-pattern/description/
+// KMP showcase common prefix and suffix
+// n - lps[n-1] gives the shortest repeating substring
+
+214. Shortest Palindrome || Medium
+https://leetcode.com/problems/shortest-palindrome/description/
+// KMP start giving issue on empty string, hence appended "#" in the string
+
+1392. Longest Happy Prefix || Medium
+https://leetcode.com/problems/longest-happy-prefix/description/
+//Standard KMP Problem
+
+2156. Find Substring With Given Hash Value || Medium
+https://leetcode.com/problems/find-substring-with-given-hash-value/description/
+//Use Long for mod calculation, learn mod computation
+//Don't use substring instead use charAt
+//Use rolling hash, for multiple use KMP algorithm

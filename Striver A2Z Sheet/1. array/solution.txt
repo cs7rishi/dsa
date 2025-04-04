@@ -853,6 +853,8 @@ class Solution {
 }
 
 1026.Maximum Score from Subarray Minimums || Medium || ***
+TC: O(N);
+SC: O(1)
 class Solution {
     // Function to find pair with maximum sum
     public int pairWithMaxSum(int arr[]) {
@@ -862,6 +864,44 @@ class Solution {
             ans = Math.max(ans, arr[i-1] + arr[i]);
         }
         
+        return ans;
+    }
+}
+
+1027.Maximum Product Subarray || Medium || ***
+TC: O(N)
+SC: O(1)
+public int maxProduct(int[] nums) {
+        int pre = 1, suff = 1, ans = Integer.MIN_VALUE, n = nums.length;
+        for(int i = 0 ; i < n ; i++){
+            if(pre == 0) pre = 1;
+            if(suff == 0) suff = 1;
+            pre *= nums[i];
+            suff *= nums[n-1-i];
+            ans = Math.max(ans, Math.max(pre,suff));
+        }
+        return ans;
+    }
+
+1028. Pascal's Triangle I & II || Medium || ***
+TC: O(n*r)
+SC: O(1)
+class Solution {
+    private int nCr(int n , int r){
+        long res = 1;
+        for(int i = 0 ; i < r ; i++){
+            res = res * (n-i);
+            res = res / (i+1);
+        }
+        return (int)res;
+    }
+    public List<Integer> getRow(int rowIndex) {
+        rowIndex++;
+        List<Integer> ans = new ArrayList<>();
+        for(int c = 1 ; c <= rowIndex ; c++){
+            ans.add(nCr(rowIndex-1,c-1));
+        }
+
         return ans;
     }
 }

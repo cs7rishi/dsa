@@ -1,0 +1,244 @@
+1. Implement TRIE | INSERT | SEARCH | STARTSWITH || Medium || ****
+class Trie {
+    Node root;
+    public Trie() {
+        root = new Node();
+    }
+    
+    public void insert(String word) {
+        Node temp = root;
+        for(char ch : word.toCharArray()){
+            if(!temp.containsKey(ch)){
+                temp.putKey(ch, new Node());
+            }
+            
+            temp = temp.getKey(ch);
+        }
+
+        temp.setEnd();
+    }
+    
+    public boolean search(String word) {
+        Node temp = root;
+        for(char ch : word.toCharArray()){
+            if(!temp.containsKey(ch)) return false;
+
+            temp = temp.getKey(ch);
+        }
+
+        return temp.isEnd();
+    }
+    
+    public boolean startsWith(String prefix) {
+        Node temp = root;
+        for(char ch : prefix.toCharArray()){
+            if(!temp.containsKey(ch)) return false;
+
+            temp = temp.getKey(ch);
+        }
+
+        return true;
+    }
+
+    class Node{
+        Node[] links;
+        boolean isEnd;
+
+        Node(){
+            links = new Node[26];
+            isEnd = false;
+        }
+
+        boolean containsKey(char ch){
+            return links[ch-'a'] != null;
+        }
+
+        Node getKey(char ch){
+            return links[ch-'a'];
+        }
+
+        void putKey(char ch, Node node){
+            links[ch-'a'] = node;
+        }
+
+        boolean isEnd(){
+            return isEnd;
+        }
+
+        void setEnd(){
+            isEnd = true;
+        }
+    }
+}
+
+
+2. Implement Trie - 2 (Prefix Tree) || EASY
+public class Trie {
+    Node root;
+    public Trie() {
+        root = new Node();
+    }
+
+    public void insert(String word) {
+        Node temp = root;
+        for(char ch : word.toCharArray()){
+            if(!temp.containsKey(ch)){
+                temp.putKey(ch,new Node());
+            }
+
+            temp = temp.getKey(ch);
+            temp.preCount +=1;
+        }
+
+        temp.setEnd();
+        temp.wordCount +=1;
+    }
+
+    public int countWordsEqualTo(String word) {
+        Node temp = root;
+        for(char ch : word.toCharArray()){
+            if(!temp.containsKey(ch)) return 0;
+
+            temp = temp.getKey(ch);
+        }
+
+        return temp.wordCount;
+    }
+
+    public int countWordsStartingWith(String word) {
+        Node temp = root;
+        for(char ch : word.toCharArray()){
+            if(!temp.containsKey(ch)) return 0;
+
+            temp = temp.getKey(ch);
+        }
+
+        return temp.preCount;
+    }
+
+    public void erase(String word) {
+        Node temp = root;
+        for(char ch : word.toCharArray()){
+            temp = temp.getKey(ch);
+            temp.preCount -=1;
+        }
+
+        temp.wordCount-=1;
+    }
+    
+    class Node{
+        Node[] links;
+        boolean isEnd;
+        int wordCount;
+        int preCount;
+
+        Node(){
+            links = new Node[26];
+            isEnd = false;
+            wordCount = 0;
+            preCount = 0;
+        }
+
+        boolean containsKey(char ch){
+            return links[ch-'a'] != null;
+        }
+
+        Node getKey(char ch){
+            return links[ch-'a'];
+        }
+
+        void putKey(char ch, Node node){
+            links[ch-'a'] = node;
+        }
+
+        boolean isEnd(){
+            return isEnd;
+        }
+
+        void setEnd(){
+            isEnd = true;
+        }
+    }
+}
+
+3. Longest String with All Prefixes
+class Solution {
+
+  public static String completeString(int n, String[] a) {
+    Arrays.sort(a, (b,c) -> b.length() - c.length());
+    Node root = new Node();
+
+    int maxLen = 0;
+    String ans = "";
+
+
+    //Populating all the Prefix;
+    for(String str : a){
+        Node temp = root;
+        for(char ch: str.toCharArray()){
+          if(!temp.containsKey(ch)){
+            temp.putKey(ch, new Node());
+          }
+
+          temp = temp.getKey(ch);
+        }
+
+        temp.setEnd();
+    }
+
+    for(String str : a){
+      Node temp = root;
+      StringBuilder builder = new StringBuilder();
+
+      for(char ch: str.toCharArray()){
+        if(!temp.containsKey(ch)) break;
+        
+        temp = temp.getKey(ch);
+        if(!temp.isEnd) break;
+        else builder.append(ch); 
+      }
+
+      if(builder.length() == maxLen){
+        ans = ans.compareTo(builder.toString()) <= 0 ? ans : builder.toString();
+      }
+      else if(builder.length() > maxLen){
+        maxLen = builder.length();
+        ans = builder.toString();
+      }
+    }
+
+    return ans.length() == 0 ? "None" : ans;
+  }
+
+  static class Node{
+
+    Node[] links;
+    boolean isEnd;
+
+    Node(){
+      links = new Node[26];
+      isEnd = false;
+    }
+
+    boolean containsKey(char ch){
+      return links[ch-'a'] != null;
+    }
+
+    Node getKey(char ch){
+      return links[ch-'a'];
+    }
+
+    void putKey(char ch, Node node){
+      links[ch-'a'] = node;
+    }
+
+    boolean isEnd(){
+      return isEnd;
+    }
+
+    void setEnd(){
+      isEnd = true;
+    }
+
+  }
+}

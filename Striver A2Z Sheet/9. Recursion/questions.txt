@@ -5,4 +5,48 @@ Q. Print N to 1 without loop || EASY
 Power of Two || EASY || *
 // 2^x cant be 0 or -ve
 
+9001. Recursive Implementation of atoi()
 
+9002. Pow(x, n) || MEDIUM || *
+https://leetcode.com/problems/powx-n/
+//take care of last -ve value transformation to long to prevent overflow
+
+9003. Count Good numbers || MEDIUM || ***
+https://leetcode.com/problems/count-good-numbers/description/
+//Implementation of Binary Exponential
+
+9004. Sort a stack using recursion || EASY || ***
+https://www.geeksforgeeks.org/problems/sort-a-stack/1
+//Logic is important
+
+9005. Reverse a stack using recursion || EASY || *
+https://www.geeksforgeeks.org/problems/reverse-a-stack/1
+//Same algo as above
+
+9006. Generate all binary strings || EASY || ***
+https://www.geeksforgeeks.org/problems/generate-all-binary-strings/1
+//Default template for recursion
+
+9007. Generate Paranthesis || EASY || *
+https://leetcode.com/problems/generate-parentheses/
+//Understand the time complexity of this code
+
+9000. Print all subsequences/Power Set
+9000. Learn All Patterns of Subsequences (Theory)
+9000. Count all subsequences with sum K
+9000. Check if there exists a subsequence with sum K
+9000. Combination Sum
+9000. Combination Sum-II	
+9000. Subset Sum-I
+9000. Subset Sum-II
+9000. Combination Sum - III
+9000. Letter Combinations of a Phone number
+
+9000.Palindrome Partitioning
+9000.Word Search
+9000.N Queen
+9000.Rat in a Maze
+9000.Word Break
+9000.M Coloring Problem
+9000.Sudoko Solver
+9000.Expression Add Operators

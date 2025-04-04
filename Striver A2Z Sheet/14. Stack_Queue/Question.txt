@@ -1,0 +1,46 @@
+>> Learning <<
+
+14001. Implement Stack using Arrays || EASY
+https://www.geeksforgeeks.org/problems/implement-stack-using-array/1
+
+14002. Implement Queue using Arrays || EASY
+https://www.geeksforgeeks.org/problems/implement-queue-using-array/1
+
+14003. Implement Stack using Queue
+
+14004. Implement Queue using Stack
+14005. Implement stack using Linkedlist
+14006. Implement queue using Linkedlist
+14007. Check for balanced paranthesis
+14008. Implement Min Stack
+
+>> Prefix, Infix, PostFix Conversion <<
+
+14009. Infix to Postfix Conversion using Stack
+14010. Prefix to Infix Conversion
+14011. Prefix to Postfix Conversion
+14012. Postfix to Prefix Conversion
+14013. Postfix to Infix
+14014. Convert Infix To Prefix Notation
+
+>> Monotonic Stack/ Queue Problems <<
+
+14015. Next Greater Element
+14016. Next Greater Element 2
+14017. Next Smaller Element
+14018. Number of NGEs to the right
+14019. Trapping Rainwater
+14020. Sum of subarray minimum
+14021. Asteroid Collision
+14022. Sum of subarray ranges
+14023. Remove k Digits
+14024. Largest rectangle in a histogram
+14025. Maximal Rectangles
+
+>> Implementation Problems <<
+
+14026. Sliding Window maximum
+14027. Stock span problem
+14028. The Celebrity Problem
+14029. LRU cache (IMPORTANT)
+14030. LFU cache

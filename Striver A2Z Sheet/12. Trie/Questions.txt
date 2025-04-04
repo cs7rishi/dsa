@@ -1,0 +1,9 @@
+1. Implement TRIE | INSERT | SEARCH | STARTSWITH || Medium || ****
+https://leetcode.com/problems/implement-trie-prefix-tree/
+
+2. Implement Trie - 2 (Prefix Tree) || EASY
+https://www.naukri.com/code360/problems/implement-trie_1387095?
+
+3. Longest String with All Prefixes || EASY || ***
+//Pending Optimize code
+https://www.naukri.com/code360/problems/complete-string_2687860?

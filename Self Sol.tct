@@ -166,3 +166,32 @@ public boolean canMakeSubsequence(String str1, String str2) {
         }
         return j == n;
     }
+
+6. Design a Number Container System
+class NumberContainers {
+    Map<Integer,Integer> indexToValueMap;
+    Map<Integer,PriorityQueue<Integer>> valueToIndexMap;
+
+    public NumberContainers() {
+        indexToValueMap = new HashMap<>();
+        valueToIndexMap = new HashMap<>();
+    }
+    
+    public void change(int index, int number) {
+
+        if(indexToValueMap.containsKey(index)){
+            int prevNum = indexToValueMap.get(index);
+            if(prevNum == number) return;
+
+            valueToIndexMap.get(prevNum).remove(index);
+        }
+
+        indexToValueMap.put(index,number);        
+        valueToIndexMap.computeIfAbsent(number, k -> new PriorityQueue<>()).offer(index);
+    }
+    
+    public int find(int number) {
+        PriorityQueue<Integer> pq = valueToIndexMap.getOrDefault(number, new PriorityQueue<>());
+        return pq.isEmpty() ? -1 : pq.peek();
+    }
+}

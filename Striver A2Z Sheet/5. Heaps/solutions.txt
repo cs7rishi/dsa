@@ -120,3 +120,217 @@ SC: O(K)
         prev.next = null;
         return head.next;
     }
+
+5005. Replace each array element by its corresponding rank || EASY
+TC: O(NLogN) building, O(NlogN) processing
+SC: O(N)
+    static int[] replaceWithRank(int arr[], int N) {
+        PriorityQueue<int[]> pq = new PriorityQueue<>((a,b) -> a[0] - b[0]);
+        for(int i = 0 ; i < arr.length ; i++){
+            pq.add(new int[]{arr[i],i});
+        }
+        
+        int rank = 0;
+        int prev = -1;
+        while(!pq.isEmpty()){
+            int ele = pq.peek()[0];
+            int index = pq.peek()[1];
+            pq.poll();
+            
+            if(prev != ele){
+                rank++;
+            }
+            prev = ele;
+            arr[index] = rank;
+        }
+        return arr;
+    }
+
+5007. Hands of Straights || Medium || ***
+TC: O(MLogN) building, O(N*groupSize*logN)
+SC: O(M)
+    public boolean isNStraightHand(int[] hand, int groupSize) {
+        TreeMap<Integer,Integer> mp = new TreeMap<>();
+        for(int h : hand) mp.put(h, mp.getOrDefault(h,0)+1);
+
+        for(int key : mp.keySet()){
+            if(mp.get(key) > 0){
+                for(int i = 1 ; i < groupSize ; i++){
+                    if(mp.getOrDefault(key+i,0) < mp.get(key)) return false;
+
+                    mp.put(key+i, mp.get(key+i) - mp.get(key));
+                }
+                mp.put(key,0);
+            }
+        }
+        
+        return true;
+    }
+
+
+5008. Design twitter || Medium || ***
+class Twitter {
+    Map<Integer,Set<Integer>> followMap;
+    Map<Integer,List<Pair<Integer,Integer>>> tweetMap;
+    int time = 0;
+
+    public Twitter() {
+        followMap = new HashMap<>();
+        tweetMap = new HashMap<>();
+    }
+    
+    public void postTweet(int userId, int tweetId) {
+        tweetMap.computeIfAbsent(userId, k -> new ArrayList<>()).add(new Pair(tweetId, time++));
+
+    }
+    
+    public List<Integer> getNewsFeed(int userId) {
+        PriorityQueue<Pair<Integer,Integer>> newsFeed = new PriorityQueue<>((a,b) -> a.getValue()-b.getValue());
+        
+        //Add friends posts
+        Set<Integer> friends = followMap.getOrDefault(userId, new HashSet<>());
+        for(int friendId : friends){
+            for(Pair<Integer,Integer> post : tweetMap.getOrDefault(friendId, new ArrayList<>())){
+                newsFeed.add(post);
+                if(newsFeed.size() > 10) newsFeed.poll();
+            }
+        }
+
+        //Add user posts
+        for(Pair<Integer,Integer> post : tweetMap.getOrDefault(userId, new ArrayList<>())){
+            newsFeed.add(post);
+            if(newsFeed.size() > 10) newsFeed.poll();
+        }
+
+        List<Integer> ans = new ArrayList<>();
+        while(!newsFeed.isEmpty()) ans.add(newsFeed.poll().getKey());
+
+        Collections.reverse(ans);
+        return ans;
+    }
+    
+    public void follow(int followerId, int followeeId) {
+        followMap.computeIfAbsent(followerId, k-> new HashSet<>()).add(followeeId);
+    }
+    
+    public void unfollow(int followerId, int followeeId) {
+        if(followMap.containsKey(followerId))
+            followMap.get(followerId).remove((Integer)followeeId);
+    }
+}
+
+
+5010. Kth largest element in a stream of running integers || Easy || *
+class KthLargest {
+    PriorityQueue<Integer> pq = new PriorityQueue<>();
+    int limit;
+    public KthLargest(int k, int[] nums) {
+        limit = k;
+        for(int num : nums){
+            pq.add(num);
+            if(pq.size() > limit) pq.poll();
+        }
+    }
+    
+    public int add(int val) {
+        pq.add(val);
+        if(pq.size() > limit) pq.poll();
+        return pq.peek();
+    }
+}
+
+5012. Find Median from Data Stream || Medium || *
+TC: O(logN), not nlogN, because at each operation, you are given only 1 number to add
+SC: O(N)
+class MedianFinder {
+    PriorityQueue<Integer> minHeap;
+    PriorityQueue<Integer> maxHeap;
+
+    public MedianFinder() {
+        minHeap = new PriorityQueue<>();
+        maxHeap = new PriorityQueue<>((a,b) -> b - a);
+    }
+    
+    public void addNum(int num) {
+        if(minHeap.size() == maxHeap.size()){
+            maxHeap.add(num);
+            inOrder();
+        }else{
+            minHeap.add(num);
+            inOrder();
+        }
+    }
+
+    private void inOrder(){
+        while(!minHeap.isEmpty() && !maxHeap.isEmpty() && maxHeap.peek() > minHeap.peek()){
+            int a = minHeap.poll();
+            int b = maxHeap.poll();
+
+            maxHeap.add(a);
+            minHeap.add(b);
+        }
+    }
+    
+    public double findMedian() {
+        if(!minHeap.isEmpty() && !maxHeap.isEmpty() && minHeap.size() == maxHeap.size()){
+            return ((double)minHeap.peek() + (double)maxHeap.peek())/(double)2;
+        }
+
+        return (double)maxHeap.peek();
+    }
+}
+
+5011. Maximum Sum Combination || Medium || ***
+TC: O(NlogN + NlogN + n2logC + ClogC)
+public ArrayList<Integer> solve(ArrayList<Integer> A, ArrayList<Integer> B, int C) {
+        Collections.sort(A);
+        Collections.sort(B);
+        Collections.reverse(A);
+        Collections.reverse(B);
+        
+        PriorityQueue<Integer> pq = new PriorityQueue<>();
+        for(int i = 0 ; i < A.size() ; i++){
+            for(int j = 0 ; j < B.size() ; j++){
+                int val = A.get(i) + B.get(j);
+                
+                pq.add(val);
+                if(pq.size() > C) pq.poll();
+                if(pq.size() == C && val < pq.peek()) break;
+            }
+        }
+        
+        ArrayList<Integer> ans = new ArrayList<>();
+        while(!pq.isEmpty()){
+            ans.add(pq.poll());
+        }
+        
+        Collections.reverse(ans);
+        return ans;
+    }
+
+
+5013. K most frequent elements || Medium || ***
+TC: O(n + m log k + k log k)
+SC: O(n + k)
+
+public int[] topKFrequent(int[] nums, int k) {
+        Map<Integer,Integer> mp = new HashMap<>();
+        for(int num : nums){
+            mp.put(num, mp.getOrDefault(num,0)+1);
+        }
+
+        PriorityQueue<Pair<Integer,Integer>> pq 
+            = new PriorityQueue<>((a,b) -> a.getValue() - b.getValue());
+
+        for(int key : mp.keySet()){
+            pq.add(new Pair(key, mp.get(key)));
+
+            if(pq.size() > k) pq.poll();
+        }
+
+        int[] ans = new int[k--];
+        for( ; k >= 0 ; k--){
+            ans[k] = pq.poll().getKey();
+        }
+        return ans;
+    }

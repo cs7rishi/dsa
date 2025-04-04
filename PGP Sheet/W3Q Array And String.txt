@@ -1,0 +1,15 @@
+1.Max Chunks To Make Sorted || EASY
+https://leetcode.com/problems/max-chunks-to-make-sorted/
+
+2. Minimum Absolute Difference in BST || EASY
+//Inorder traversal
+https://leetcode.com/problems/minimum-absolute-difference-in-bst/description/
+
+3. Rotate Array || EASY
+
+4. Minimum Limit of Balls in a Bag
+https://leetcode.com/problems/minimum-limit-of-balls-in-a-bag/description/
+
+6. Sum of Subarrays || Medium || ***
+https://www.geeksforgeeks.org/problems/sum-of-subarrays2229/1
+//Subarray logic is important

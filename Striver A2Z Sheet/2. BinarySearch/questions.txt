@@ -17,3 +17,68 @@ https://leetcode.com/problems/search-insert-position/description/
 //Remember about the condition where does lower bound and upper end, if 
 does'nt found the target
 eg. if(l == n || nums[l] != target) return new int[]{-1,-1};
+
+Square Root || EASY
+https://www.geeksforgeeks.org/problems/square-root/
+//Math.sqrt(n) coult be used too
+
+Find the Nth root of a number using binary search || EASY || *
+https://www.geeksforgeeks.org/problems/find-nth-root-of-m5843/
+//Create a checkPower method, which checks if ans -1,0,1 and normal binarySearch
+
+Koko Eating Bananas || Medium || *
+https://leetcode.com/problems/koko-eating-bananas/description/
+//Used % instead of /, back points to answer, on inflection front would point to the answer
+//InDirectly Propotional relation
+
+Minimum days to make M bouquets || Medium || *
+https://leetcode.com/problems/minimum-number-of-days-to-make-m-bouquets/description/
+//Understand how the inflection point works
+
+Find the Smallest Divisor Given a Threshold || EASY || *
+https://leetcode.com/problems/find-the-smallest-divisor-given-a-threshold/description/
+//InDirectly Propotional relation
+//Check why front is only representing answer
+
+Capacity To Ship Packages Within D Days || EASY || *
+https://leetcode.com/problems/capacity-to-ship-packages-within-d-days/description/
+//Check condition where shipCapacity < individual weight
+
+Aggressive Cows || EASY || *
+https://www.geeksforgeeks.org/problems/aggressive-cows/0
+//Worked with boolean condition
+
+>>> Thinking Quesions <<<
+Book Allocation Problem || HARD || ***
+https://www.naukri.com/code360/problems/allocate-books_1090540?
+//The maxPages condition might not always be true, but it is always the upperbount >=
+//and later conceives to == just before inflection
+
+Split Array Largest Sum || HARD || ***
+https://leetcode.com/problems/split-array-largest-sum/description/
+//How do choose the binarySearch condition, in these question and above
+
+Painter's Partition Problem || Medium || *
+https://www.naukri.com/code360/problems/painter-s-partition-problem_1089557
+//Think of lower bound question to understand the working in head
+
+Median of 2 sorted arrays || EASY || * || PENDING
+https://leetcode.com/problems/median-of-two-sorted-arrays/description/
+//Explore binary search in the solution
+
+Kth element of 2 sorted arrays || EASY || * || PENDING
+https://www.geeksforgeeks.org/problems/k-th-element-of-two-sorted-array1317/1
+//Explore Binary Search Solution
+
+Row with max 1s || EASY
+https://www.geeksforgeeks.org/problems/row-with-max-1s0023/1
+//Lower Bound implementation
+
+Search in a 2 D matrix || EASY || *
+https://leetcode.com/problems/search-a-2d-matrix/description/
+//Use col , to get the row, as well as column
+
+Search in a row and column wise sorted matrix || Medium || ***
+https://leetcode.com/problems/search-a-2d-matrix-ii/
+//here 2 binary serach can't be applied, check reasons in code
+//Learn the Optimal Approach

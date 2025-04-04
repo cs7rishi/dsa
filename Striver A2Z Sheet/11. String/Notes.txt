@@ -9,3 +9,5 @@
 
 *TreeMap<Integer, String> treeMap = new TreeMap<>(Collections.reverseOrder());
     To create descending order treeMap
+
+* compareTo() for string is available to check lexiographical order;

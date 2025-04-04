@@ -103,5 +103,12 @@ https://leetcode.com/problems/next-permutation/
 1025. Spiral Matrix || Medium || ***
 https://leetcode.com/problems/spiral-matrix/description/
 
-1026.Maximum Score from Subarray Minimums
+1026.Maximum Score from Subarray Minimums || Medium || ***
 https://www.geeksforgeeks.org/problems/max-sum-in-sub-arrays0824/
+
+1027.Maximum Product Subarray || Medium || ***
+https://leetcode.com/problems/maximum-product-subarray/description/
+
+1028. Pascal's Triangle I & II || Medium || ***
+https://leetcode.com/problems/pascals-triangle-ii/description/
+Handle the testcase properly, specially the holding the value in long type

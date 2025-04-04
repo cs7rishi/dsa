@@ -1361,3 +1361,258 @@ class Solution {
 
     }
 }
+
+7035. Most stones removed with same rows or columns || Medium || ***
+class Solution {
+    class DisjointSet{
+        int[] rank;
+        int[] parent;
+        DisjointSet(int n){
+            rank = new int[n];
+            parent = new int[n];
+            for(int i = 0 ; i < n ; i++){
+                rank[i] = 0;
+                parent[i] = i;        
+            }
+        }
+
+        int findParent(int node){
+            if(parent[node] == node) return node;
+            return parent[node] = findParent(parent[node]);
+        }
+
+        void unionByRank(int u , int v){
+            int p_u = parent[u];
+            int p_v = parent[v];
+
+            int r_u = rank[p_u];
+            int r_v = rank[p_v];
+
+            if(r_u < r_v){
+                parent[p_u] = p_v;
+            }else if(r_v < r_u){
+                parent[p_v] = p_u;
+            }else{
+                parent[p_v] = p_u;
+                rank[p_u]++;
+            }
+        }
+    }
+    public int removeStones(int[][] stones) {
+        int n = stones.length;
+        int maxRow = 0;
+        int maxCol = 0;
+
+        for(int i = 0 ; i < stones.length ; i++){
+            maxRow = Math.max(maxRow,stones[i][0]);
+            maxCol = Math.max(maxCol, stones[i][1]);
+        }
+
+        DisjointSet ds = new DisjointSet(maxRow + maxCol + 2);
+        Set<Integer> st = new HashSet<>();
+        for(int i = 0 ; i < stones.length ; i++){
+            int row = stones[i][0];
+            int col = stones[i][1] + maxRow + 1;
+
+            if(ds.findParent(row) != ds.findParent(col)){
+                ds.unionByRank(row,col);
+            }
+            st.add(row);
+            st.add(col);
+        }
+
+        int comp = 0;
+        for(int t : st){
+            if(ds.findParent(t) == t) comp++;
+        }
+        return n - comp;
+    }
+}
+
+7036. Accounts merge || MEDIUM || ***
+
+class Solution {
+    class DisjointSet{
+        Map<String,Integer> rankMap;
+        Map<String,String> parentMap;
+
+        DisjointSet(){
+            rankMap = new HashMap<>();
+            parentMap = new HashMap<>();
+        }
+
+        void add(String email){
+            parentMap.put(email,email);
+            rankMap.put(email,0);
+        }
+
+        String findParent(String email){
+            // if(!parentMap.containsKey(email)){
+            //     parentMap.put(email,email);
+            //     rankMap.put(email,0);
+            // }
+
+            if(parentMap.get(email).equals(email)) return email;
+            String parent = findParent(parentMap.get(email));
+            parentMap.put(email,parent);
+            return parent;
+        }
+
+        void union(String u, String v){
+            String p_u = findParent(u);
+            String p_v = findParent(v);
+
+            if(p_u.equals(p_v)) return;
+
+            int r_u = rankMap.get(p_u);
+            int r_v = rankMap.get(p_v);
+
+            if(r_u < r_v){
+                parentMap.put(p_u,p_v);
+            }else if(r_v < r_u){
+                parentMap.put(p_v,p_u);
+            }else{
+                parentMap.put(p_u,p_v);
+                int rank = rankMap.get(p_v);
+                rankMap.put(p_v,rank+1);
+            }
+        }
+    }
+    public List<List<String>> accountsMerge(List<List<String>> accounts) {
+        Map<String,String> nameMap = new HashMap<>();
+        Map<String,List<String>> emailMap = new HashMap<>();
+        DisjointSet ds = new DisjointSet();
+
+        for(List<String> account : accounts){
+            nameMap.put(account.get(1), account.get(0));
+
+            for(int i = 1 ; i < account.size(); i++){
+                if(!ds.parentMap.containsKey(account.get(i))){
+                    ds.add(account.get(i));
+                }
+                if(i >= 2){
+                    ds.union(account.get(i),account.get(i-1));
+                }
+            }
+        }
+
+        for(Map.Entry<String,String> entry : ds.parentMap.entrySet()){
+            String email = entry.getKey();
+            String parent = ds.findParent(entry.getValue());
+            
+            if(emailMap.containsKey(parent)){
+                emailMap.get(parent).add(email);
+            }else{
+                emailMap.put(parent, new ArrayList<>(List.of(email)));
+            }
+        }
+
+        List<List<String>> ans = new ArrayList<>();
+        for(String primaryEmail : emailMap.keySet()){
+            List<String> emails = emailMap.get(primaryEmail);
+            Collections.sort(emails);
+            emails.add(0,nameMap.get(primaryEmail));
+            ans.add(emails);
+        }
+        return ans;
+    }
+}
+
+7038. Making a Large Island || MEDIUM || ***
+class Solution {
+    class DisjointSet{
+        int[] parent;
+        int[] size;
+
+        DisjointSet(int n){
+            parent = new int[n];
+            size = new int[n];
+
+            for(int i = 0 ; i < n ; i++){
+                parent[i] = i;
+                size[i] = 1;
+            }
+        }
+
+        int findParent(int node){
+            if(parent[node] == node) return node;
+            return parent[node] = findParent(parent[node]);
+        }
+
+        void union(int u , int v){
+            int p_u = findParent(u);
+            int p_v = findParent(v);
+
+            if(p_u == p_v) return;
+
+            int s_u = size[p_u];
+            int s_v = size[p_v];
+
+            if(s_u < s_v){
+                parent[p_u] = p_v;
+                size[p_v] += size[p_u];
+            }else{
+                parent[p_v] = p_u;
+                size[p_u] += size[p_v];
+            }
+        }
+    }
+    public int largestIsland(int[][] grid) {
+        int row = grid.length;
+        int col = grid[0].length;
+
+        int[] dx = new int[]{1,-1,0,0};
+        int[] dy = new int[]{0,0,1,-1};
+
+        DisjointSet ds = new DisjointSet(row*col);
+        int maxSize = 0;
+        for(int i = 0 ; i < row ; i++){
+            for(int j = 0 ; j < col ; j++){
+                if(grid[i][j] == 1){
+                    int a = (i * col) + j;
+                    
+                    for(int k = 0 ; k < 4 ; k++){
+                        int adjRow = i + dx[k];
+                        int adjCol = j + dy[k];
+
+                        if(adjRow >= 0 && adjCol >= 0 && adjRow < row && adjCol < col && grid[adjRow][adjCol] == 1){
+                            int b = adjRow * col + adjCol;
+                            ds.union(a,b);
+                        }
+                    }
+                }
+            }
+        }
+        int maxIsland = 0;
+        Set<Integer> st = new HashSet<>();
+        boolean hasZero = false;
+        for(int i = 0 ; i < row ; i++){
+            for(int j = 0 ; j < col ; j++){
+                if(grid[i][j] == 0){
+                    hasZero = true;
+                    int sum = 0;
+                    
+                    for(int k = 0 ; k < 4 ; k++){
+                        int adjRow = i + dx[k];
+                        int adjCol = j + dy[k];
+
+                        if(adjRow >= 0 && adjCol >= 0 && adjRow < row && adjCol < col && grid[adjRow][adjCol] == 1){
+                            int b = adjRow * col + adjCol;
+                            st.add(ds.findParent(b));
+                        }
+                    }
+
+                    for(int t : st){
+                        sum += ds.size[t];
+                    }
+                    st.clear();
+                    maxIsland = Math.max(sum+1,maxIsland);
+                }
+            }
+        }
+
+        if(!hasZero) return row * col;
+
+        return maxIsland;
+    }
+}

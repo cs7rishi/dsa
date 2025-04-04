@@ -161,17 +161,22 @@ https://www.geeksforgeeks.org/problems/minimum-spanning-tree/1
 7034. Number of operations to make network connected || EASY
 https://leetcode.com/problems/number-of-operations-to-make-network-connected/
 
-7035. Most stones removed with same rows or columns
+7035. Most stones removed with same rows or columns || Medium || ***
+//Could be solved using DFS
+//Important is the naming of row of col to perform operations
+//Size of parent array is important
 https://leetcode.com/problems/most-stones-removed-with-same-row-or-column/
 
-7036. Accounts merge
+7036. Accounts merge || MEDIUM || ***
+//Always use ds.findParent for finding parent
 https://leetcode.com/problems/accounts-merge/
 
 7037. Number of island II
 https://leetcode.com/problems/number-of-islands-ii/description/
 
-7038. Making a Large Island
+7038. Making a Large Island || MEDIUM || ***
+//DFS could be used
 https://leetcode.com/problems/making-a-large-island/
 
-7039. Swim in rising water
+7039. Swim in rising water || Pending
 https://leetcode.com/problems/swim-in-rising-water/description/
