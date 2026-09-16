@@ -1,10 +1,11 @@
 $$ Cycle Detection $$
 
 >Undirected Graph
-BFS or DFS both could be used, using parent to check if neigh
+BFS or DFS both could be used, using parent to check if neighbour
 is Parent or neighbour has formed a cycle.
 
 >Directed Graph
+For Directed Graph, mere circle does'nt mean cycle, direction of edge decide cycle
 For Directed Graph, Cycle detection code changes as the edges are directed
 And possible is there that the node is visited through other route, hence manage 2 ArrayList
 visited and path array
@@ -21,5 +22,19 @@ If Edge u -> v is present, i.e vertex u comes before v
 Require Stack and addition in stack placement
 
 >Kahn's Algorithm
+
+
+>>>>>>2026<<<<<<<<
+In graph there has to be something related isVisited, so to avoid duplication of paths,
+eg. removing words from set in word ladder
+
+
+When to mark any node as visited
+| Algorithm and goal                     | When to mark                               | Remove afterward?        |
+| -------------------------------------- | ------------------------------------------ | ------------------------ |
+| BFS traversal or shortest path         | When enqueueing                            | No                       |
+| DFS reachability/traversal             | When entering the node                     | No                       |
+| DFS all paths                          | When entering the current path             | Yes, during backtracking |
+| DFS cycle detection in directed graphs | Use states: unvisited, visiting, completed | Change state on exit     |
 
 

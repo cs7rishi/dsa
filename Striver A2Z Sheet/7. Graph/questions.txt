@@ -35,22 +35,41 @@ https://www.geeksforgeeks.org/problems/detect-cycle-in-an-undirected-graph/1
 //Parent and isVisited to be used 
 //Require Parent to check if neghbour node is parent or cycle present
 //In DFS, always mark as isVisited, as soon as visit a node
+// GFG Link seem to have some issue with method argument
 
 7010. Undirected Graph Cycle BFS || EASY || Concept || *
 https://www.geeksforgeeks.org/problems/detect-cycle-in-an-undirected-graph/1
 //Similar to Above
 //Check the code implementation
+// GFG Link seem to have some issue with method argument
 
 7011. Word Ladder || Medium || ***
 https://leetcode.com/problems/word-ladder/
 //Figure why removing from set is required
+//Note how its a BFS question and DFS, since its basically a 0-1 shortest path question
 //Nice implementation
 
 7012. Word Ladder II || Medium || ***
+https://leetcode.com/problems/word-ladder-ii/
+//Check why its bfs question and not a DFS question
+//Learn multi direction search could work here ?
+//Also question seems graph and ask for shortest, think of 0-1 BFS
+
+More:
+Both red → ted → tex and red → rex → tex reach tex at the same shortest level, so we keep both; afterward, we mark tex visited because reaching it later cannot produce a shortest path.
+visitedThisLevel records tex for removal from wordSet after the level ends, keeping it available while both ted and rex generate their paths to it.
+
+7040. Number of islands || EASY
+https://leetcode.com/problems/number-of-islands/
+//just normal question with char grid
+
+7041. Bipartite Graph || Walmart Rejection || EASY || *** 
+https://leetcode.com/problems/is-graph-bipartite/
+//In DFS, make sure result or each path is contained, and not returned early
 
 
 7013. Cycle Detection in Directed Graph (DFS) || Medium || ***
-https://leetcode.com/problems/course-schedule-ii/description/
+https://www.geeksforgeeks.org/problems/detect-cycle-in-a-directed-graph/1
 //Logic is different from undirected, need to maintain path also
 //Go through java implementation too
 
@@ -62,6 +81,8 @@ https://www.geeksforgeeks.org/problems/topological-sort/1
 //Fundamental
 //Uses Stack with DFS
 //Position of stack addition and reversal is important
+//Push in stack at the end of dfs, i.e u -> v , u should come, 
+//and order is reversed(stack.pop()), so v come first in stack
 
 7015. Kahn's Algorithm || Medium || ***
 https://www.geeksforgeeks.org/problems/topological-sort/1
@@ -81,12 +102,18 @@ https://leetcode.com/problems/course-schedule/
 https://leetcode.com/problems/course-schedule-ii/
 //Easy Kahn Algo implementation
 
-7017. Find eventual safe states || EASY || PENDING || *
+7017. Find eventual safe states || EASY || *
 https://leetcode.com/problems/find-eventual-safe-states/description/
-//Check for better solution
+//Intuition for reversing the graph is important, how Kahn solves it
+//Check how it could be solved with DFS too
+The recognition pattern: when something becomes eligible only after all its dependencies are resolved, think Kahn’s algorithm.
 
+7018. Alien dictionary || Medium || ***
+https://www.geeksforgeeks.org/problems/alien-dictionary/1
+Todo: TC SC Pending
+//Make sure to know dictionary law
+//Only compare adjacent word character and not every pair, its wastefull
 
-7018. Alien dictionary
 
 >>>>>> Shortest Path <<<<<<<
 
@@ -95,6 +122,7 @@ https://www.geeksforgeeks.org/problems/shortest-path-in-undirected-graph-having-
 //0-1 BFS implementation
 
 7020. Shortest Path in DAG || PENDING
+https://www.geeksforgeeks.org/problems/shortest-path-in-directed-acyclic-graph/1
 //Use TopoSort for this question
 
 7021. Djisktra's Algorithm || EASY || *

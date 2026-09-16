@@ -400,37 +400,48 @@ class Solution {
 }
 
 7011. Word Ladder || Medium || ***
-TC: O(N*26) 
-SC: O(N)
+TC: O(N*L^2), where L is length of each word 
+SC: O(NL)
+    class Solution {
     public int ladderLength(String beginWord, String endWord, List<String> wordList) {
-        Set<String> st = new HashSet<>(wordList);
-        if(!st.contains(endWord)) return 0;
-        Queue<Pair<String,Integer>> q = new LinkedList<>();
-        q.add(new Pair(beginWord,1));
-        while(!q.isEmpty()){
-            String initWord = q.peek().getKey();
-            int step = q.peek().getValue();
-            q.poll();
-            for(int i = 0 ; i < initWord.length() ; i++){
-                char current = initWord.charAt(i);
-                for(int j = 0 ; j < 26 ; j++){
-                    char nextChar = (char)('a' + j);
-                    if(current == nextChar) continue;
-                    else {
-                        char[] charArray = initWord.toCharArray();
-                        charArray[i] = nextChar;
-                        String newString = new String(charArray);
-                        if(newString.equals(endWord)) return step+1;
-                        if(st.contains(newString)){
-                            st.remove(newString);
-                            q.add(new Pair(newString, step+1));
+        Queue<String> queue = new ArrayDeque<>();
+        Set<String> isVisited = new HashSet<>();
+        Set<String> wordSet= new HashSet<>(wordList);
+
+        if(!wordSet.contains(endWord)) return 0;
+        
+        queue.offer(beginWord);
+        isVisited.add(beginWord);
+        int step = 0;
+        while(!queue.isEmpty()){
+            int size = queue.size();
+            step++;
+
+            if(step > wordSet.size()) return 0;
+
+            for(int i = 0 ; i < size ; i++){
+                String initialWord = queue.poll();
+                for(int j = 0 ; j < initialWord.length(); j++){
+                    for(char ch = 'a' ; ch <= 'z' ; ch++){
+                        if(ch == initialWord.charAt(j)) continue;
+                        String nextWord = replaceChar(initialWord,ch,j);
+
+                        if(nextWord.equals(endWord)) return step+1;
+                        if(wordSet.contains(nextWord) && !isVisited.contains(nextWord)){
+                            queue.offer(nextWord);
+                            isVisited.add(nextWord);
                         }
                     }
                 }
             }
-        } 
+        }
         return 0;
     }
+
+    public String replaceChar(String word, char ch, int index){
+        return word.substring(0,index) + ch + word.substring(index+1);
+    }
+}
 
 7013. Cycle Detection in Directed Graph (DFS) || Medium || ***
 TC: O(V+E) + O(V) 
@@ -603,6 +614,102 @@ SC: O(N) Queue + O(N) inDegree + O(N) adjList
         Collections.sort(ans);
         return ans;
     }
+
+7018. Alien dictionary || Medium || ***
+class Solution {
+	static Map<Character, HashSet<Character>> charMap = new HashMap<>();
+	static int[] inDegree = new int[26];
+	
+	public void foundNode(char node) {
+		int index = node - 'a';
+		if (inDegree[index] == -1) {
+			inDegree[index] = 0;
+		}
+		
+		charMap.putIfAbsent(node, new HashSet<>());
+	}
+	
+	public void mapEntry(char u, char v) {
+		foundNode(u);
+		foundNode(v);
+		
+		if (charMap.get(u).add(v)) {
+			inDegree[v - 'a']++;
+		}
+		
+	}
+	public boolean developGraph(String[] words) {
+		// Register every character
+		for (String word : words) {
+			for (char ch : word.toCharArray()) {
+				foundNode(ch);
+			}
+		}
+		
+		// Compare only adjacent words
+		for (int i = 0 ; i < words.length - 1 ; i++) {
+			String word1 = words[i];
+			String word2 = words[i + 1];
+			
+			int minLength = Math.min(word1.length(), word2.length());
+			int k = 0;
+			
+			while (k < minLength && word1.charAt(k) == word2.charAt(k)) {
+				k++;
+			}
+			
+			if (k < minLength) {
+				// First different character determines the edge
+				mapEntry(word1.charAt(k), word2.charAt(k));
+			} else if (word1.length() > word2.length()) {
+				// Invalid: longer word appears before its prefix
+				return false;
+			}
+		}
+		return true;
+	}
+	public String findOrder(String[] words) {
+		charMap.clear();
+		Arrays.fill(inDegree, -1);
+		
+		if (!developGraph(words)) {
+			return "";
+		}
+		
+		Queue<Character> queue = new ArrayDeque<>();
+		int nodeCount = 0;
+		
+		for (int i = 0 ; i < 26 ; i++) {
+		    if(inDegree[i] != -1){
+		        nodeCount++;
+		    }
+		        
+			if (inDegree[i] == 0){
+				queue.offer((char)('a' + i));
+			}
+		}
+		
+		StringBuilder sb = new StringBuilder();
+		
+		while (!queue.isEmpty()) {
+			char node = queue.poll();
+			sb.append(node);
+			
+			for (char adjNode: charMap.get(node)) {
+				int index = adjNode - 'a';
+				inDegree[index]--;
+				
+				if (inDegree[index] == 0)
+					queue.offer(adjNode);
+			}
+		}
+		
+		if(sb.length() != nodeCount) return "";
+		return sb.toString();
+		
+	}
+}
+
 
 7019. Shortest Path in UG with unit weights || EASY
 TC: O(N+2M)
@@ -1614,5 +1721,106 @@ class Solution {
         if(!hasZero) return row * col;
 
         return maxIsland;
+    }
+}
+
+7041. Bipartite Graph || Walmart Rejection || EASY || *** 
+TC: O(V+E)
+SC: O(V)
+
+class Solution {
+    private boolean bfs(int start, int[][] graph, int[] colors) {
+        Queue<Integer> queue = new ArrayDeque<>();
+
+        queue.offer(start);
+        colors[start] = 0;
+
+        while (!queue.isEmpty()) {
+            int node = queue.poll();
+
+            for (int neighbor : graph[node]) {
+                if (colors[neighbor] == -1) {
+                    colors[neighbor] = 1 - colors[node];
+                    queue.offer(neighbor);
+                } else if (colors[neighbor] == colors[node]) {
+                    return false;
+                }
+            }
+        }
+
+        return true;
+    }
+
+    private boolean dfs(
+        int node,
+        int color,
+        int[][] graph,
+        int[] colors
+    ) {
+        colors[node] = color;
+
+        for (int neighbor : graph[node]) {
+            if (colors[neighbor] == -1) {
+                if (!dfs(neighbor, 1 - color, graph, colors)) {
+                    return false;
+                }
+            } else if (colors[neighbor] == color) {
+                return false;
+            }
+        }
+
+        return true;
+    }
+
+    public boolean isBipartite(int[][] graph) {
+        int[] colors = new int[graph.length];
+        Arrays.fill(colors, -1);
+
+        for (int node = 0; node < graph.length; node++) {
+            if (colors[node] == -1 &&
+                !dfs(node, 0, graph, colors)) {
+                return false;
+            }
+        }
+
+        return true;
+    }
+}
+
+7040. Number of islands || EASY
+TC: mn
+SC: mn
+class Solution {
+    int[] dx = new int[]{1,-1,0,0};
+    int[] dy = new int[]{0,0,-1,1};
+    
+    public void dfs(char[][] grid, int row, int col, int m , int n){
+        if(row < 0 || col < 0 || row >= m || col >=n || grid[row][col] != '1') return;
+
+        grid[row][col] = 'x';
+        for(int i = 0 ; i < 4 ; i++){
+            int adjRow = row + dx[i];
+            int adjCol = col + dy[i];
+
+            dfs(grid, adjRow, adjCol, m , n);
+        }
+        return;
+    }
+    public int numIslands(char[][] grid) {
+        int m = grid.length;
+        int n = grid[0].length;
+        
+        int count = 0;
+        for(int i = 0 ; i < m ; i++){
+            for(int j = 0 ; j < n ; j++){
+                if(grid[i][j] == '1'){
+                    dfs(grid, i , j, m, n);
+                    count++;
+                }
+            }
+        }
+
+        return count;
+
     }
 }
