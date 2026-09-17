@@ -1275,36 +1275,80 @@ class Solution {
 7030. Floyd Warshal Algorithm || Fundamental || *
 TC: O(V^3)
 SC: O(V^2)
-    public void shortestDistance(int[][] mat) {
-        int n = mat.length;
-        int INF = Integer.MAX_VALUE;
-        
-        for(int i = 0 ; i < n ;i++){
-            for(int j = 0 ; j < n ; j++){
-                if(mat[i][j] == -1){
-                    mat[i][j] = INF;
+    import java.util.*;
+
+class Solution {
+    private static final long INF = Long.MAX_VALUE / 4;
+    private static final long NEG_INF = Long.MIN_VALUE / 4;
+
+    public long[][] allPairsShortestPath(int V, int[][] edges) {
+        long[][] distance = new long[V][V];
+
+        for (long[] row : distance) {
+            Arrays.fill(row, INF);
+        }
+
+        for (int i = 0; i < V; i++) {
+            distance[i][i] = 0;
+        }
+
+        // Directed graph
+        for (int[] edge : edges) {
+            int u = edge[0];
+            int v = edge[1];
+            int weight = edge[2];
+
+            // Handles multiple edges between the same vertices
+            distance[u][v] = Math.min(distance[u][v], weight);
+        }
+
+        // Normal Floyd–Warshall
+        for (int k = 0; k < V; k++) {
+            for (int i = 0; i < V; i++) {
+                if (distance[i][k] == INF) {
+                    continue;
+                }
+
+                for (int j = 0; j < V; j++) {
+                    if (distance[k][j] == INF) {
+                        continue;
+                    }
+
+                    distance[i][j] = Math.min(
+                        distance[i][j],
+                        distance[i][k] + distance[k][j]
+                    );
                 }
             }
         }
-        
-        for(int k = 0 ; k < n ; k++){
-            for(int i = 0 ; i < n ; i++){
-                for(int j = 0 ; j < n ; j++){
-                    if(mat[i][k] != INF && mat[k][j] != INF){
-                        mat[i][j] = Math.min(mat[i][j],mat[i][k] + mat[k][j]);
+
+        // Record which pairs are affected by negative cycles.
+        boolean[][] affected = new boolean[V][V];
+
+        for (int k = 0; k < V; k++) {
+            if (distance[k][k] < 0) {
+                for (int i = 0; i < V; i++) {
+                    for (int j = 0; j < V; j++) {
+                        if (distance[i][k] != INF &&
+                            distance[k][j] != INF) {
+                            affected[i][j] = true;
+                        }
                     }
                 }
             }
         }
-        
-        for(int i = 0 ; i < n ;i++){
-            for(int j = 0 ; j < n ; j++){
-                if(mat[i][j] == INF){
-                    mat[i][j] = -1;
+
+        for (int i = 0; i < V; i++) {
+            for (int j = 0; j < V; j++) {
+                if (affected[i][j]) {
+                    distance[i][j] = NEG_INF;
                 }
             }
         }
+
+        return distance;
     }
+}
 
 7031. Find the city with the smallest number of neighbors in a threshold distance || EASY || *
 TC: O(V^3)
