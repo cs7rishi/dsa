@@ -758,42 +758,77 @@ SC: O(N+M) O(N) Queue + O(N) isVisite + O(N) distance
 7021. Djisktra's Algorithm || EASY || **
 TC: O( E log(V) )
 SC: O( |E| + |V| ) 
-ArrayList<Integer> dijkstra(ArrayList<ArrayList<iPair>> adj, int src) {
-        int INF = Integer.MAX_VALUE;
-        int n = adj.size();
+class Solution {
+    public ArrayList<Integer> dijkstra(int V, int[][] edges, int src) {
+        List<List<Pair<Integer,Integer>>> adjList = new ArrayList<>();
         
-        ArrayList<Integer> ans = new ArrayList<>();
-        for(int i = 0 ; i < n ; i++) ans.add(INF);
-        
-        boolean isVisited[] = new boolean[n];
-        
-        PriorityQueue<iPair> pq = new PriorityQueue<>((a,b) -> a.first - b.first);
-        pq.add(new iPair(0,src));
-        
-        
-        while(!pq.isEmpty()){
-            int ud = pq.peek().first;
-            int u = pq.peek().second;
-            pq.poll();
+        for(int i = 0 ; i < V ;i++){
+            adjList.add(new ArrayList<>());
+        }
+        for(int i = 0 ; i < edges.length; i++){
+            int u = edges[i][0];
+            int v = edges[i][1];
+            int wt = edges[i][2];
             
-            if(isVisited[u]) continue;
-            isVisited[u] = true;
-            ans.set(u,ud);
+            adjList.get(u).add(new Pair(v, wt));
+            adjList.get(v).add(new Pair(u, wt));
+        }
+        
+        
+        int[] distance = new int[V];
+        Arrays.fill(distance,-1);
+        //node, distance
+        Queue<Pair<Integer,Integer>> queue 
+            = new PriorityQueue<>((a,b) -> a.getValue() - b.getValue());
+        
+        queue.offer(new Pair<>(src,0));
+        distance[src] = 0;
+        
+        while(!queue.isEmpty()){
+            int node = queue.peek().getKey();
+            int dist = queue.peek().getValue();
+            // System.out.println("node: " + node " dist: " + dist);
+            queue.poll();
             
+            if(distance[node] < dist) continue;
             
-            for(iPair pair : adj.get(u)){
-                int v = pair.first;
-                int wt = pair.second;
-                
-                if(!isVisited[v] && ud + wt < ans.get(v)){
-                    pq.add(new iPair(ud+wt, v));
+            for(Pair<Integer,Integer> adjNodePair : adjList.get(node)){
+                int adjNode = adjNodePair.getKey();
+                int wt = adjNodePair.getValue();
+                // System.out.println("adjNode: " + adjNode + " wt: " + wt);
+                if(distance[adjNode] == -1 || distance[adjNode] > distance[node] + wt){
+                    distance[adjNode] = distance[node] + wt;
+                    queue.offer(new Pair<>(adjNode, distance[adjNode]));
                 }
             }
+        }
+        ArrayList<Integer> ans = new ArrayList<>();
+        for(int d : distance){
+            ans.add(d);
         }
         
         return ans;
         
     }
+    
+    class Pair<K,V>{
+        K key;
+        V value;
+        
+        Pair(K key, V value){
+            this.key = key;
+            this.value = value;
+        }
+        
+        K getKey(){
+            return this.key;
+        }
+        
+        V getValue(){
+            return this.value;
+        }
+    }
+}
 
 7021. B
 //Could remove isVisited from the code
@@ -871,44 +906,54 @@ public int shortestPathBinaryMatrix(int[][] grid) {
 TC: O(N*M*4 log( N*M))
 SC: O(N*M)
 
+    class Solution {
     public int minimumEffortPath(int[][] heights) {
-        int n = heights.length;
-        int m = heights[0].length;
+        int m = heights.length;
+        int n = heights[0].length;
+        int INF = Integer.MAX_VALUE;
+        int[] dx = new int[]{1,-1,0,0};
+        int[] dy = new int[]{0,0,-1,1};
 
-        int[][] effort = new int[n][m];
-        for(int[] t : effort) Arrays.fill(t, Integer.MAX_VALUE);
-        
-        PriorityQueue<int[]> pq = new PriorityQueue<>((a,b)->a[0] - b[0]);
-        pq.add(new int[]{0,0,0});
-        effort[0][0] = 0;
+        int[][] minEffort = new int[m][n];
+        for(int[] row : minEffort) Arrays.fill(row,INF);
 
-        int dx[] = new int[]{1,-1,0,0};
-        int dy[] = new int[]{0,0,-1,1};
+        Queue<int[]> queue = new PriorityQueue<>((a,b) -> a[0] - b[0]);
+        queue.offer(new int[]{0,0,0});
+        minEffort[0][0] = 0;
 
-        while(!pq.isEmpty()){
-            int e = pq.peek()[0];
-            int row = pq.peek()[1];
-            int col = pq.peek()[2];
-            pq.poll();
+        while(!queue.isEmpty()){
+            int[] current = queue.poll();
 
-            if(row == n-1 && col == m-1) return e;
-            if(e != effort[row][col]) continue;
+            int effort = current[0];
+            int row = current[1];
+            int col = current[2];
 
-            for(int k = 0 ; k < 4 ; k++){
-                int adjRow = row + dx[k];
-                int adjCol = col + dy[k];
+            if(effort > minEffort[row][col]) continue;
 
-                if(adjRow < 0 || adjCol < 0 || adjRow >= n || adjCol >= m) continue;
-                else if(effort[adjRow][adjCol] > Math.max(e,Math.abs(heights[row][col] - heights[adjRow][adjCol]))){
-                    int newEffort = Math.max(e,Math.abs(heights[row][col] - heights[adjRow][adjCol]));
-                    effort[adjRow][adjCol] = newEffort;
-                    pq.add(new int[]{newEffort, adjRow, adjCol});
+            if(row == m-1 && col == n-1) return effort;
 
+            for(int i = 0 ; i < 4 ; i++){
+                int adjRow = row + dx[i];
+                int adjCol = col + dy[i];
+                
+                if(adjRow < 0 || adjCol < 0 || adjRow >= m || adjCol >= n) continue;
+
+                int heightDiff = Math.abs(
+                    heights[row][col] - heights[adjRow][adjCol]
+                );
+
+                int nextEffort = Math.max(effort, heightDiff);
+                
+                if(nextEffort < minEffort[adjRow][adjCol]){
+                    minEffort[adjRow][adjCol] = nextEffort;
+                    queue.offer(new int[]{nextEffort,adjRow,adjCol});
                 }
             }
         }
-        return effort[n-1][m-1];
+
+        return -1;
     }
+}
 
 7025. Cheapest flights within k stops || EASY || *
 
@@ -1002,31 +1047,35 @@ SC: O(M + N)
 TC: O(N*M)
 SC: O(N)
 
+class Solution {
     public int networkDelayTime(int[][] times, int n, int k) {
-        int INF = -1;
-        int[] d = new int[n];
-        Arrays.fill(d,INF);
-        d[k-1] = 0;
+        int INF = Integer.MAX_VALUE;
+        int[] timeTaken = new int[n+1];
+        Arrays.fill(timeTaken,INF);
+        timeTaken[k] = 0;
 
         for(int i = 0 ; i < n ; i++){
-            for(int j = 0 ; j < times.length ; j++){
-                int u = times[j][0]-1;
-                int v = times[j][1]-1;
-                int wt = times[j][2];
+            for(int[] edge : times){
+                int u = edge[0];
+                int v = edge[1];
+                int wt = edge[2];
 
-                if(d[u] != INF && (d[v] == INF || d[v] > d[u] + wt)){
-                    d[v] = d[u] + wt;
+                if(timeTaken[u] != INF && (timeTaken[v] == INF || timeTaken[v] > timeTaken[u] + wt)){
+                    timeTaken[v] = timeTaken[u] + wt;
                 }
             }
         }
 
-        int mx = 0;
-        for(int t : d){
-            if(t == -1) return -1;
-            mx = Math.max(mx, t);
+        int ans = 0;
+        System.out.println(Arrays.toString(timeTaken));
+        for(int i = 1 ; i <= n ; i++){
+            if(timeTaken[i] == INF) return -1;
+            ans = Math.max(ans,timeTaken[i]);
         }
-        return mx;
+
+        return ans;
     }
+}
 
 7026.A. Djisktra
 TC: O(MlogV + M + N + N)
@@ -1162,30 +1211,66 @@ SC: O(10^5 * n)
 7029. Bellman Ford || Fundamental || *
 TC: O(V*E)
 SC: O(V)
-static int[] bellmanFord(int V, int[][] edges, int src) {
-        int INF = 1000_000_00;
-        int distance[] = new int[V];
-        Arrays.fill(distance,INF);
-        
+import java.util.*;
+
+class Solution {
+    public ArrayList<Integer> bellmanFord(
+        int V,
+        int[][] edges,
+        int src
+    ) {
+        final int INF = 100_000_000;
+
+        int[] distance = new int[V];
+        Arrays.fill(distance, INF);
         distance[src] = 0;
-        boolean flag = false;
-        for(int i = 0 ; i <= V ; i++){
-            flag = false;
-            for(int j = 0 ; j < edges.length ; j++){
-                int u = edges[j][0];
-                int v = edges[j][1];
-                int wt = edges[j][2];
-                if(distance[u] != INF && distance[v] > distance[u] + wt){
-                    distance[v] = distance[u] + wt;
-                    flag = true;
+
+        // Relax every edge V - 1 times.
+        for (int i = 0; i < V - 1; i++) {
+            boolean updated = false;
+
+            for (int[] edge : edges) {
+                int u = edge[0];
+                int v = edge[1];
+                int weight = edge[2];
+
+                if (distance[u] != INF &&
+                    distance[v] > distance[u] + weight) {
+
+                    distance[v] = distance[u] + weight;
+                    updated = true;
                 }
             }
+
+            // No changes means all shortest paths are finalized.
+            if (!updated) {
+                break;
+            }
         }
-        
-        if(flag) return new int[]{-1};
-        return distance;
-        
+
+        // If an edge can still be relaxed, a reachable
+        // negative-weight cycle exists.
+        for (int[] edge : edges) {
+            int u = edge[0];
+            int v = edge[1];
+            int weight = edge[2];
+
+            if (distance[u] != INF &&
+                distance[v] > distance[u] + weight) {
+
+                return new ArrayList<>(List.of(-1));
+            }
+        }
+
+        ArrayList<Integer> answer = new ArrayList<>(V);
+
+        for (int dist : distance) {
+            answer.add(dist);
+        }
+
+        return answer;
     }
+}
 
 7030. Floyd Warshal Algorithm || Fundamental || *
 TC: O(V^3)

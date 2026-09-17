@@ -38,3 +38,12 @@ When to mark any node as visited
 | DFS cycle detection in directed graphs | Use states: unvisited, visiting, completed | Change state on exit     |
 
 
+hashSet.add(Object) outputs true, if it aceepted value
+
+>>>>Dijkstra<<<<
+//Could be used on undirected, directed both
+//Can't be used if -ve weight present
+
+
+>>>Bellman<<<<<
+Bellman could be used to find Negative cycles
