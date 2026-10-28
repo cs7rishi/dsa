@@ -1,45 +1,63 @@
+>>>>> Easy <<<<<
 
-1. Assign Cookies
-2. Fractional Knapsack Problem
-3. Greedy algorithm to find minimum number of coins
-4. Lemonade Change
-5. Valid Paranthesis Checker
+15001 | A2Z | Assign Cookies
+https://leetcode.com/problems/assign-cookies/
 
+15002 | A2Z | Lemonade Change
+https://leetcode.com/problems/lemonade-change/
 
-6. N meetings in one room || MEDIUM || ***
+15003 | A2Z | Fractional Knapsack
+https://www.geeksforgeeks.org/problems/fractional-knapsack-1587115620/1
+
+15004 | SDE | Jump Game || EASY || *
+https://leetcode.com/problems/jump-game/
+//condition are important
+
+>>>>> Scheduling and Interval Problems <<<<<
+
+15005 | A2Z | Program for Shortest Job First (or SJF) CPU Scheduling
+https://www.geeksforgeeks.org/problems/shortest-job-first/1?
+
+15006 | SDE | Job sequencing Problem
+https://www.geeksforgeeks.org/problems/job-sequencing-problem-1587115620/1
+//Just logic is important
+
+15007 | SDE | N meetings in one room
 https://www.geeksforgeeks.org/problems/n-meetings-in-one-room-1587115620/1
 //Sort the meetings based on the end time
 //Understand the greediness in this question
 
-7. Jump Game || EASY 
-https://leetcode.com/problems/jump-game/
+15008 | SDE | Non-overlapping Intervals
+https://leetcode.com/problems/non-overlapping-intervals/
+//Same as N meeting in One Room
 
-8. Jump Game 2 || MEDIUM || ***
-https://leetcode.com/problems/jump-game-ii/
-
-9. Minimum number of platforms required for a railway || EASY
-https://www.geeksforgeeks.org/problems/minimum-platforms-1587115620/1
-//sort the array
-
-10. Job sequencing Problem || EASY || ***
-https://www.geeksforgeeks.org/problems/job-sequencing-problem-1587115620/1
-//Just logic is important
-
-11. Candy
-
-12. Program for Shortest Job First (or SJF) CPU Scheduling || EASY
-https://www.geeksforgeeks.org/problems/shortest-job-first/1?
-
-13. Program for Least Recently Used (LRU) Page Replacement Algorithm
-
-
-14. Insert Interval || MEDIUM || ***
+15009 | SDE | Insert Interval
 https://leetcode.com/problems/insert-interval/
 
-15. Merge Intervals || EASY || *
+15010 | A2Z | Merge Intervals
 https://leetcode.com/problems/merge-intervals/
 //Based on above problem, sort the array to make sure ans
 
-16. Non-overlapping Intervals || EASY || *
-https://leetcode.com/problems/non-overlapping-intervals/
-//Same as N meeting in One Room
+15011 | SDE | Minimum number of platforms required for a railway
+https://www.geeksforgeeks.org/problems/minimum-platforms-1587115620/1
+//sort the array
+
+>>>>> Hard <<<<<
+
+15012 | SDE | Valid Paranthesis Checker || ***
+https://leetcode.com/problems/valid-parenthesis-string/
+//Understand the intuition
+
+15013 | SDE | Candy
+https://leetcode.com/problems/candy/
+
+15014 | A2Z | Jump Game 2
+https://leetcode.com/problems/jump-game-ii/
+
+>>>>> Other Problems <<<<<
+
+15015 | A2Z | Greedy algorithm to find minimum number of coins
+https://leetcode.com/problems/coin-change/
+
+15016 | A2Z | Program for Least Recently Used (LRU) Page Replacement Algorithm
+https://leetcode.com/problems/lru-cache/

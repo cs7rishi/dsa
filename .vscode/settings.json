@@ -1,0 +1,14 @@
+{
+  "code-runner.executorMap": {
+    "cpp": "cd $dir && SDKROOT=/Library/Developer/CommandLineTools/SDKs/MacOSX26.sdk /opt/homebrew/bin/g++-16 -std=gnu++17 $fileName -o $fileNameWithoutExt && $dir$fileNameWithoutExt"
+  },
+  "code-runner.runInTerminal": true,
+  "terminal.integrated.env.osx": {
+    "CC": "/opt/homebrew/bin/gcc-16",
+    "CXX": "/opt/homebrew/bin/g++-16",
+    "SDKROOT": "/Library/Developer/CommandLineTools/SDKs/MacOSX26.sdk"
+  },
+  "C_Cpp.default.compilerPath": "/opt/homebrew/bin/g++-16",
+  "C_Cpp.default.intelliSenseMode": "macos-gcc-arm64",
+  "C_Cpp.default.cppStandard": "gnu++17"
+}

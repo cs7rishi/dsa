@@ -1,0 +1,164 @@
+>>>>>>> Fundamentals (Single LL) <<<<<<<
+
+1301 Introduction to Singly LinkedList
+
+1302 Traversal in Linked List || EASY
+https://www.geeksforgeeks.org/problems/print-linked-list-elements/1
+
+1303 Deletion in Linked List 
+
+1304 Insertion in Linked List
+
+1305 Deletion of the head of LL || EASY
+https://www.geeksforgeeks.org/problems/delete-head-of-linked-list/1
+
+1306 Deletion of the tail of Linked List || EASY
+https://www.geeksforgeeks.org/problems/deletion-at-the-end-of-a-linked-list/1
+
+1307 Deletion of the Kth element of Linked List || EASY || *
+https://www.geeksforgeeks.org/problems/delete-a-node-in-single-linked-list/1
+//Edge case, K = n
+
+1308 Delete the element with value X
+
+1309 Insertion at the head of Linked List || EASY
+https://www.geeksforgeeks.org/problems/linked-list-insertion-at-beginning/1
+
+1310 Insertion at the tail of Linked List || EASY
+https://www.geeksforgeeks.org/problems/linked-list-insertion-1587115620/1
+
+1311 Insertion at the Kth position of Linked List || EASY || *
+https://www.geeksforgeeks.org/problems/insertion-at-a-given-position-in-a-linked-list/1
+//Edge case, K = n
+
+1312 Insertion before the value X in Linked List
+
+1313 Find the length of the Linked List || EASY
+https://www.geeksforgeeks.org/problems/count-nodes-of-linked-list/1
+
+1314 Search in Linked List || EASY
+https://www.geeksforgeeks.org/problems/search-in-linked-list-1664434326/1
+
+>>>>>>> Fundamentals (Doubly LL) <<<<<<<
+
+1315 Introduction to Doubly LL
+
+1316 Deletion in Doubly LL
+
+1317 Insertion in DLL
+
+1318 Convert Array to Doubly Linked List
+https://www.geeksforgeeks.org/problems/create-a-doubly-linked-list-from-a-given-array/1
+
+1319 Delete Tail of Doubly Linked List
+
+1320 Delete Kth Element of Doubly Linked List
+https://www.geeksforgeeks.org/problems/delete-node-in-doubly-linked-list/1
+
+1321 Removing given node in Doubly Linked List
+
+1322 Insert node before head in Doubly Linked List
+
+1323 Insert node before tail in Doubly Linked List
+
+1324 Insert node before (kth node) in Doubly Linked List
+
+1325 Insert before given node in Doubly Linked List
+
+1326 Delete head of Doubly Linked List
+https://www.geeksforgeeks.org/problems/delete-head-of-doubly-linked-list/1
+
+1327 Reverse a Doubly Linked List
+https://www.geeksforgeeks.org/problems/reverse-a-doubly-linked-list/1
+
+>>>>>>> Logic Building <<<<<<<
+
+1328 Add two numbers in Linked List || EASY
+https://leetcode.com/problems/add-two-numbers/
+
+1329 Segregate odd and even nodes in Linked List || EASY
+https://leetcode.com/problems/odd-even-linked-list/
+
+1330 Sort a Linked List of 0's 1's and 2's || EASY || *
+https://www.geeksforgeeks.org/problems/given-a-linked-list-of-0s-1s-and-2s-sort-it/1
+//Variable names can't start from integer
+
+1331 Remove Nth node from the back of the LL || EASY || ***
+https://leetcode.com/problems/remove-nth-node-from-end-of-list/
+//Approach is Awesome for optimial
+
+1332 Reverse a LL || EASY || *
+https://leetcode.com/problems/reverse-linked-list/
+
+>>>>>>> FAQs (Medium) <<<<<<<
+
+1333 Add one to a number represented by LL
+https://leetcode.com/problems/plus-one-linked-list/
+
+1334 Find Middle of Linked List || EASY || *
+https://leetcode.com/problems/middle-of-the-linked-list/
+//Fundamental
+
+1335 Delete the middle node in LL || EASY
+https://leetcode.com/problems/delete-the-middle-node-of-a-linked-list/
+//Its easy to maintain a newHead, for edge cases
+
+1336 Check if LL is palindrome or not || EASY || *
+https://leetcode.com/problems/palindrome-linked-list/
+
+1337 Find the intersection point of Y LL || EASY || ***
+https://leetcode.com/problems/intersection-of-two-linked-lists/
+//Code is tricky, Based on Math
+
+1338 Detect a loop in LL || EASY || *
+https://leetcode.com/problems/linked-list-cycle/
+//For loop, starting slow fast at 0th index, and checking prior, would always
+//show a loop
+
+1339 Find the starting point in LL || EASY || ***
+https://leetcode.com/problems/linked-list-cycle-ii/description/
+//Math is important behind this
+//Also check for the default case, where list size is 1 0r 0
+//Always check wheather loop exist or not
+
+1340 Length of loop in LL || EASY
+https://www.geeksforgeeks.org/problems/find-length-of-loop/1
+
+>>>>>>> FAQs (Hard) <<<<<<<
+
+1341 Reverse LL in group of given size K || Medium || ***
+https://leetcode.com/problems/reverse-nodes-in-k-group/
+
+1342 Rotate a LL || Medium || ***
+https://leetcode.com/problems/rotate-list/
+//New concept, join the head and tail, and form a new head and tail
+
+1343 Merge two Sorted Lists || EASY
+https://leetcode.com/problems/merge-two-sorted-lists/
+
+1344 Flattening of LL || Medium || *
+https://www.geeksforgeeks.org/problems/flattening-a-linked-list/1
+//Time complexity of heap is better
+
+1345 Sort LL
+https://leetcode.com/problems/sort-list/
+
+1346 Clone a LL with random and next pointer
+https://leetcode.com/problems/copy-list-with-random-pointer/
+
+>>>>>>> FAQS (DLL) <<<<<<<
+
+1347 Delete all occurrences of a key in DLL || EASY || *
+https://www.geeksforgeeks.org/problems/delete-all-occurrences-of-a-given-key-in-a-doubly-linked-list/1
+
+1348 Remove duplicates from sorted DLL || EASY
+https://www.geeksforgeeks.org/problems/remove-duplicates-from-a-sorted-doubly-linked-list/1
+
+1349 Find Pairs with Given Sum in Doubly Linked List || EASY || ***
+https://www.geeksforgeeks.org/problems/find-pairs-with-given-sum-in-doubly-linked-list/1
+In every 2 pointer, approach there is chance low and high might pass each other
+
+1350. Merge k Sorted Lists || Hard || ***
+https://leetcode.com/problems/merge-k-sorted-lists/description/
+//Better code is available
+//Divide and Conquer Code

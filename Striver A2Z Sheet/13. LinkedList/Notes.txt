@@ -1,0 +1,17 @@
+// Odd length: slow is at the single middle; fast is at the last node.
+// Even length: slow is at the second middle; fast is null.
+while(fast != null && fast.next != null){
+        slow = slow.next;
+        fast = fast.next.next;
+}
+
+always fast and fast.next, until anything else required 
+
+
+>>>>>>>>
+>Also when working with cycle, slow, fast,
+ Check initial case, as slow == fast
+
+> For edge cases like linkedList size 1, 2
+ Its a good a idea to create a newHead for the list
+

@@ -23,3 +23,7 @@ https://leetcode.com/problems/make-string-a-subsequence-using-cyclic-increments/
 
 6. Design a Number Container System
 //computeIfAbsent Functionality for maps
+
+7. My Calendar I || Medium || ** || BS
+https://leetcode.com/problems/my-calendar-i/
+//Binary Search nice question

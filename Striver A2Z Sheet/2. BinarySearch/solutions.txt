@@ -1,5 +1,4 @@
 2001. Binary Search
-
 class Solution {
     public int search(int[] nums, int target) {
         int low = 0 , high = nums.length-1, mid = 0;
@@ -59,17 +58,18 @@ class Solution {
 2002. C.
 //Utilizez concept of bounds
 class Solution {
-    static int findFloor(long arr[], int n, long x) {
-        int low = 0 , high = arr.length -1 ;
+    static int findFloor(int[] arr, int x) {
+        int low = 0 , high = arr.length-1;
         while(low <= high){
-            int mid = low + (high - low)/2;
-            if(arr[mid] <= x){
-                low = mid+1;
-            } else {
+            int mid = low + (high-low)/2;
+            int num = arr[mid];
+            if(num > x){
                 high = mid-1;
+            }else{
+                low = mid + 1;
             }
         }
-        return high;
+        return high ;
     }
 }
 
@@ -87,90 +87,359 @@ class Solution {
         return low;
     }
 
+2004. Ceil The Floor | Medium | ***
+TC: O(NlogN + 2*logN)
+SC: O(1)
+class Solution {
+    public int floor(int x, int[] arr){
+        int low = 0 , high = arr.length-1;
+        while(low <= high){
+            int mid = low + (high-low)/2;
+            if(arr[mid] <= x){
+                low = mid + 1;
+            }else{
+                high = mid - 1;
+            }
+        }
+        // System.out.println("High: " + high);
+        return high >= 0 ? arr[high] : -1;
+    }
+    
+    public int ceil(int x, int[] arr){
+        int low = 0 , high = arr.length-1;
+        while(low <= high){
+            int mid = low + (high-low)/2;
+            if(arr[mid] < x){
+                low = mid + 1;
+            }else{
+               high = mid - 1;
+            }
+        }
+        // System.out.println("Low: " + low);
+        return low == arr.length ? -1 : arr[low];
+    }
+    public int[] getFloorAndCeil(int x, int[] arr) {
+        Arrays.sort(arr);
+        // System.out.println(Arrays.toString(arr));
+        return new int[]{floor(x,arr),ceil(x,arr)};
+        
+    }
+}
+
+2005. Search Insert Position | Easy
+TC: O(logN)
+SC: O(1)
+class Solution {
+    public int searchInsert(int[] nums, int target) {
+        int low = 0 , high = nums.length - 1;
+        while(low <= high){
+            int mid = low + (high-low)/2;
+            int num = nums[mid];
+            if(num < target){
+                low = mid + 1;
+            }else{
+                high = mid -1;
+            }
+        }
+        return low;
+    }
+}
+
+
 2006. Find First and Last Position of Element in Sorted Array
 TC: O(2*logN)
 SC: O(1)
 class Solution {
-    private int upperBound(int[] nums, int target){
-        int low = 0 , high = nums.length - 1;
+    public int insertPosition(int[] nums, int target){
+        int low = 0 , high = nums.length-1;
         while(low <= high){
             int mid = low + (high-low)/2;
-            if(nums[mid] <= target) low = mid + 1;
-            else    high = mid - 1;
+            if(nums[mid] < target){
+                low = mid + 1;
+            }else{
+                high = mid - 1;
+            }
         }
-        return high;
-    }
-    private int lowerBound(int[] nums, int target){
-        int low = 0 , high = nums.length - 1;
-        while(low <= high){
-            int mid = low + (high-low)/2;
-            if(nums[mid] < target) low = mid + 1;
-            else high = mid - 1;
-        }
+
         return low;
     }
     public int[] searchRange(int[] nums, int target) {
-        int n = nums.length;
-        int[] ans = new int[2];
-        int l = lowerBound(nums, target);
-        if(l == n || nums[l] != target) return new int[]{-1,-1};
-        ans[0] = l;
-        int r = upperBound(nums,target);
-        ans[1] = r;
-        return ans;
+        int startIndex = insertPosition(nums,target);
+
+        if(startIndex >= nums.length || nums[startIndex] != target){
+            return new int[]{-1,-1};
+        }else{
+            return new int[]{startIndex, insertPosition(nums,target+1)-1};
+        }
     }
 }
 
-Square Root || * 
-TC: O(log(N))
-SC: O(1);
-int floorSqrt(int n) {
-        int front = 2 , back = n;
-        while(front <= back){
-            int mid = (front + back)/2;
-            
-            if(mid * mid <= n){
-                front = mid+1;
-            }else{
-                back = mid - 1;
+2007. Search in Rotated Sorted Array || EASY || *
+TC: logN
+SC: 1
+class Solution {
+    public int search(int[] nums, int target) {
+        int low = 0, high = nums.length-1;
+        while(low <= high){
+            int mid = low + (high - low)/2;
+            if(nums[mid] == target){
+                return mid;
+            }else if(nums[low] <= nums[mid]){ // low mid target high
+                if(nums[low] <= target && target < nums[mid]){ 
+                    high = mid - 1;
+                }else{
+                    low = mid + 1;
+                }
+            }else if(nums[mid] <= nums[high]){ // mid target high 
+                if(nums[mid] < target && target <= nums[high]){ 
+                    low = mid + 1;
+                }else{
+                    high = mid - 1;
+                }
             }
         }
-        
-        return back;
+        return -1;
     }
+}
 
-Find the Nth root of a number using binary search || EASY || *
+
+2008. Search in Rotated Sorted Array II || Medium || ***
+TC: 
+SC: 
+class Solution {
+    public boolean search(int[] nums, int target) {
+        int low = 0, high = nums.length-1;
+        while(low <= high){
+            int mid = low + (high-low)/2;
+            
+            if(nums[mid] == target){
+                return true;
+            }
+
+            if(nums[low] == nums[mid] && nums[mid] == nums[high]){
+                high--;
+                low++;
+            }else if(nums[low] <= nums[mid]){ // sorted
+                if(nums[low] <= target && target <= nums[mid]){
+                    high = mid - 1;
+                }else{
+                    low = mid + 1;
+                }
+            }else if(nums[mid] <= nums[high]){
+                if(nums[mid] <= target && target <= nums[high]){
+                    low = mid + 1;
+                }else{
+                    high = mid - 1;
+                }
+            } 
+        }
+        return false;
+    }
+}
+
+
+2013. Square Root || * 
 TC: O(log(N))
 SC: O(1);
 class Solution {
-    int checkPower(int k , int n , int m){
-        long result = 1;
-        for(int i = 1 ; i <=n ; i++){
-            result *= k;
-            
-            if(result > m) return 1;
+    public int mySqrt(int x) {
+        if(x <= 1) return x;
+        long low = 1, high = x/2; // check x/2 is fine
+
+        while(low <= high){
+            long mid = low + (high-low)/2;
+            if(mid * mid <= x){
+                low = mid + 1;
+            }else{
+                high = mid - 1;
+            }
         }
-        return result == m ? 0 : -1;
+
+        return (int)high;
+    }
+}
+
+2014.. Find the Nth root of a number using binary search || EASY || *
+TC: O(log(N))
+SC: O(1);
+class Solution {
+    public int checkPower(int x , int y, int exp){
+        int ans = 1;
+        while(y-- > 0){
+            ans *= x;
+        }
+        
+        if(ans < exp) return -1;
+        else if(ans == exp) return 0;
+        else return 1;
     }
     public int nthRoot(int n, int m) {
-       int front = 1,back = m;
-       while(front <= back){
-           int mid = (front + back)/2;
-           
-           if(checkPower(mid,n,m) == 0) return mid;
-           else if(checkPower(mid,n,m) == -1) front = mid+1;
-           else back = mid-1;
-       }
-       
-       return -1;
+        if(m == 0 || m == 1) return m;
+        int low = 2 , high = m/n;
+        while(low <= high){
+            int mid = low + (high-low)/2;
+            if(checkPower(mid,n,m) <= 0){
+                low = mid+1;
+            }else{
+                high = mid-1;
+            }
+        }
+        
+        if(checkPower(high, n, m) == 0) return high;
+        return -1;
+        
     }
 }
 
 
+2015. Find the smallest Divisor || EASY || *
+class Solution {
+    public int divisorSum(int divisor, int[] nums){
+        long sum = 0;
+        for(int num : nums){
+            sum+= Math.ceil((double)num/divisor);
+        }
+
+        return (int)sum;
+    }
+    public int smallestDivisor(int[] nums, int threshold) {
+        int low = 1;
+        int high = 0;
+        for(int num : nums){
+            high = Math.max(high, num);
+        }
+
+        // high = Math.max(high, threshold)
+        while(low <= high){
+            int mid = low + (high-low)/2;
+            int sum = divisorSum(mid,nums);
+            if(sum > threshold){
+                low = mid+1;
+            }else{
+                high = mid-1;
+            }
+        }
+        return low;
+    }
+}
+
+2016. Koko Eating Bananas || Medium || ***
+class Solution {
+    public long hoursReq(int rate, int[] piles){
+        long totalHours = 0;
+        for(int pile : piles){
+            totalHours += Math.ceil((double)pile/rate);
+        }
+
+        return totalHours;
+    }
+    public int minEatingSpeed(int[] piles, int h) {
+        int low = 1;
+        int high = Integer.MIN_VALUE;
+
+        for(int pile : piles){
+            high = Math.max(high,pile);
+        }
+
+        while(low <= high){
+            int currRate = low + (high-low)/2;
+            long actHour = hoursReq(currRate,piles);
+
+            if(actHour > h){
+                low = currRate + 1;
+            }else{
+                high = currRate - 1;
+            }
+        }
+
+        return low;
+    }
+}
+
+2017. Minimum days to make M bouquets || Medium || *
+class Solution {
+    public int makeBouquet(int currDay, int[] bloomDay, int k){
+        int adjFlower = 0;
+        int bouqCount = 0;
+        for(int bDay : bloomDay){
+            if(bDay <= currDay){
+                adjFlower++;
+
+                if(adjFlower == k){
+                    bouqCount++;
+                    adjFlower = 0;
+                }
+            }else{
+                adjFlower = 0;
+            }
+        }
+
+        if(adjFlower == k){
+            bouqCount++;
+        }
+        return bouqCount;
+    }
+
+    public int minDays(int[] bloomDay, int m, int k) {
+        if((long)m*k > bloomDay.length) return -1;
 
 
+        int low = Integer.MAX_VALUE;
+        int high = Integer.MIN_VALUE;
+        for(int day : bloomDay){
+            low = Math.min(low,day);
+            high = Math.max(high,day);
+        }
 
+        while(low <= high){
+            int currDay = low + (high-low)/2;
+            int bqPoss = makeBouquet(currDay, bloomDay, k);
 
+            if(bqPoss < m){
+                low = currDay + 1;
+            }else{
+                high = currDay - 1;
+            }
+        }
+        return low;
+    }
+}
+
+2018. Capacity To Ship Packages Within D Days || Medium || **
+class Solution {
+    // int INF
+    public int totalShips(int[] weights, int shipCapacity){
+        int remaningCap = shipCapacity;
+        int ships = 1;
+        for(int wt : weights){
+            if(remaningCap < wt){
+                ships++;
+                remaningCap = shipCapacity;
+            }
+            remaningCap -= wt;
+        }
+        return ships;
+    }
+    public int shipWithinDays(int[] weights, int days) {
+        int low = Integer.MIN_VALUE;
+        int high = 25_00_0000;
+
+        for(int w : weights){
+            low = Math.max(low, w);
+        }
+        while(low <= high){
+            int mid = low + (high-low)/2;
+            int dayReq = totalShips(weights, mid);
+
+            if(dayReq > days){
+                low = mid + 1;
+            }else{
+                high = mid - 1;
+            }
+        }
+        return low;
+    }
+}
 
 Aggressive Cows || EASY || *
 

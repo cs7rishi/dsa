@@ -1,55 +1,89 @@
+> LowerBound: first element equal or greater than x;
+> UpperBount: first element greater than x;
+> Floor of x is the largest element which is smaller than or equal to x. Floor of x doesn’t exist if x is smaller than smallest element of arr[].
+> Ceil of x is the smallest element which is greater than or equal to x. Ceil of x doesn’t exist if x is greater than greatest element of arr[].
+
 2001. Binary Search
 https://leetcode.com/problems/binary-search/
 
-2002. Lower Bound *** | Medium
+2002. Lower Bound || Meidum || *
 https://www.geeksforgeeks.org/problems/floor-in-a-sorted-array-1587115620/1
 
 2003. Upper Bound | Medium
 https://www.naukri.com/code360/problems/implement-upper-bound_8165383?leftPanelTabValue=SUBMISSION
 
-2004. Ceil The Floor | Medium | *****
+2004. Ceil The Floor | Medium | ***
 https://www.geeksforgeeks.org/problems/ceil-the-floor2802/1
+//Did'nt identify, it could solved using linear search
 
 2005. Search Insert Position | Easy
 https://leetcode.com/problems/search-insert-position/description/
 
 2006. Find First and Last Position of Element in Sorted Array || Medium | *
-//Remember about the condition where does lower bound and upper end, if 
-does'nt found the target
-eg. if(l == n || nums[l] != target) return new int[]{-1,-1};
+https://leetcode.com/problems/find-first-and-last-position-of-element-in-sorted-array/
+Make sure to check the lowerBound index, if target value exist there or not
 
-Square Root || EASY
+2007. Search in Rotated Sorted Array || EASY || *
+https://leetcode.com/problems/search-in-rotated-sorted-array/
+//Boundary check is the most important on both end
+
+2008. Search in Rotated Sorted Array II || Medium || ***
+https://leetcode.com/problems/search-in-rotated-sorted-array-ii/
+//Learn the intuition behind this question
+
+
+2009. Find minimum in Rotated Sorted Array
+
+2010. Find out how many times the array is rotated
+
+2011. Single element in sorted array
+
+2012. Count Occurrences in a Sorted Array
+
+2013. Square Root || EASY || ***
 https://www.geeksforgeeks.org/problems/square-root/
 //Math.sqrt(n) coult be used too
+//Take long, as multiply 2 big numbers
+//for x >=2, its square root is always less than or equal to x / 2
 
-Find the Nth root of a number using binary search || EASY || *
-https://www.geeksforgeeks.org/problems/find-nth-root-of-m5843/
+2014. Find the Nth root of a number using binary search || EASY || **
+https://www.geeksforgeeks.org/problems/find-nth-root-of-m5843/1
 //Create a checkPower method, which checks if ans -1,0,1 and normal binarySearch
+//Right can go as low as m/n
 
-Koko Eating Bananas || Medium || *
+2015. Find the smallest Divisor || EASY || **
+https://leetcode.com/problems/find-the-smallest-divisor-given-a-threshold/
+//Math.ceil((double)x/y);
+
+2016. Koko Eating Bananas || Medium || **
 https://leetcode.com/problems/koko-eating-bananas/description/
-//Used % instead of /, back points to answer, on inflection front would point to the answer
-//InDirectly Propotional relation
+//Min could 1 also
+//Min and max are important for this question
+//Can't take min and max from input here
 
-Minimum days to make M bouquets || Medium || *
+2017. Minimum days to make M bouquets || Medium || **
 https://leetcode.com/problems/minimum-number-of-days-to-make-m-bouquets/description/
 //Understand how the inflection point works
+//In the end check the -1 condition too
+//Why this time take low and high from array itself
 
-Find the Smallest Divisor Given a Threshold || EASY || *
-https://leetcode.com/problems/find-the-smallest-divisor-given-a-threshold/description/
-//InDirectly Propotional relation
-//Check why front is only representing answer
+2018. Capacity To Ship Packages Within D Days || Medium || **
+https://leetcode.com/problems/capacity-to-ship-packages-within-d-days/
+// Here, ship count start from 1
 
-Capacity To Ship Packages Within D Days || EASY || *
-https://leetcode.com/problems/capacity-to-ship-packages-within-d-days/description/
-//Check condition where shipCapacity < individual weight
+2019. Kth Missing Positive Number
+https://leetcode.com/problems/split-array-largest-sum/
 
-Aggressive Cows || EASY || *
+2020. Split Array Largest Sum
+https://leetcode.com/problems/split-array-largest-sum/
+
+2021. Aggressive Cows || EASY || *
 https://www.geeksforgeeks.org/problems/aggressive-cows/0
 //Worked with boolean condition
 
 >>> Thinking Quesions <<<
-Book Allocation Problem || HARD || ***
+
+2022. Book Allocation Problem || HARD || ***
 https://www.naukri.com/code360/problems/allocate-books_1090540?
 //The maxPages condition might not always be true, but it is always the upperbount >=
 //and later conceives to == just before inflection

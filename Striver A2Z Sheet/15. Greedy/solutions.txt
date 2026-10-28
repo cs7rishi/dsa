@@ -1,82 +1,53 @@
-6. N meetings in one room || MEDIUM || *
-TC: O(N) + O(NlogN) + O(N)
-SC: O(N)
-    public int maxMeetings(int start[], int end[]) {
-        int n = start.length;
-        List<int[]> meetings = new ArrayList<>();
-        for(int i = 0 ; i < n ; i++){
-            meetings.add(new int[]{start[i],end[i]});
-        }
-        
-        Collections.sort(meetings,(a,b) -> a[1] - b[1]);
-        
-        int prevEnd = -1;
-        int count = 0;
-        for(int i = 0 ; i < n ; i++){
-            if(prevEnd < meetings.get(i)[0]){
-                count++;
-                prevEnd = meetings.get(i)[1];
-            }
-        }
-        
-        return count;
-    }
+15001 Assign Cookies
+TC:
+SC:
 
-7. Jump Game || EASY 
+15002 Lemonade Change
+TC:
+SC:
+
+15003 Fractional Knapsack Problem
+TC:
+SC:
+
+15004 Jump Game || EASY 
 TC: O(N)
 SC: O(1)
+class Solution {
     public boolean canJump(int[] nums) {
-        int range = nums[0];
-        int n = nums.length;
+        int maxReach = 0;
+        int index = 0;
+        for(int i = 0 ; i < nums.length; i++){
+            if(i > maxReach){
+                return false;
+            }
+            maxReach = Math.max(maxReach, nums[i] + i);
 
-        for(int i = 0 ; i < n && i <= range ; i++){
-            range = Math.max(range,nums[i] + i);
-
-            if(range >= n - 1) return true;
-        }
-
-        return range >= n-1 ? true : false;
-    }
-
-8. Jump Game 2 || MEDIUM || ***
-TC: O(N)
-SC: O(1)
-    public int jump(int[] nums) {
-        int maxRange = nums[0], range = 0, jumps = 0, n = nums.length;
-        for(int i = 0 ; i < n && i <= range ; i++){
-            maxRange = Math.max(maxRange,nums[i]+i);
-
-            if(i == range && i != n-1){
-                range = maxRange;
-                jumps++;
+            if(maxReach >= nums.length -1){
+                return true;
             }
         }
-        return jumps;
+        return true;
     }
+}
 
-9. Minimum number of platforms required for a railway || EASY
-TC: O(NlogN) + O(NlogN) + O(2N)
+15005 Program for Shortest Job First (or SJF) CPU Scheduling || EASY
+TC: O(NlogN) + O(N)
 SC: O(1)
-    static int findPlatform(int arr[], int dep[]) {
-        int i = 0, j = 0, n = arr.length;
-        Arrays.sort(arr);
-        Arrays.sort(dep);
+    static int solve(int bt[] ) {
+        Arrays.sort(bt);
+        int time = 0;
+        int waitTime = 0;
         
-        int platform = 0;
-        int ans = 0;
-        while( i < n && j < n){
-            if(arr[i] <= dep[j]){
-                ans = Math.max(ans, ++platform);
-                i++;
-            }else{
-                platform--;
-                j++;
-            }
+        for(int i = 0 ; i < bt.length ; i++){
+            waitTime += time;
+            time += bt[i];
         }
-        return ans;
+        
+        return waitTime/bt.length; 
     }
 
-10. Job sequencing Problem || EASY || ***
+15006 Job sequencing Problem || EASY || ***
 TC: O(NlogN)
 SC: O(N)
     public ArrayList<Integer> JobSequencing(int[] id, int[] deadline, int[] profit) {
@@ -113,23 +84,54 @@ SC: O(N)
         return new ArrayList<>(List.of(jobCount,totalProfit));
     }
 
-12. Program for Shortest Job First (or SJF) CPU Scheduling || EASY
-TC: O(NlogN) + O(N)
-SC: O(1)
-    static int solve(int bt[] ) {
-        Arrays.sort(bt);
-        int time = 0;
-        int waitTime = 0;
-        
-        for(int i = 0 ; i < bt.length ; i++){
-            waitTime += time;
-            time += bt[i];
+15007 N meetings in one room || MEDIUM || *
+TC: O(N) + O(NlogN) + O(N)
+SC: O(N)
+import java.util.Arrays;
+
+class Solution {
+    public int activitySelection(int[] start, int[] finish) {
+        int n = start.length;
+        List<Pair<Integer,Integer>> timePeriods = new ArrayList<>();
+        for(int i = 0 ; i < n ; i++){
+            timePeriods.add(new Pair(start[i], finish[i]));
         }
         
-        return waitTime/bt.length; 
+        Collections.sort(timePeriods, (a,b) -> a.getValue() - b.getValue());
+        int ans = 0;
+        int prevEnd = -1;
+        for(int i = 0 ; i < n; i++){
+            int currStart = timePeriods.get(i).getKey();
+            
+            if(prevEnd < currStart){
+                prevEnd = timePeriods.get(i).getValue();
+                ans++;
+            }
+        }
+        return ans;
+    }
+}
+
+15008 Non-overlapping Intervals || EASY || *
+TC: O(NlogN)
+SC: O(1)
+    public int eraseOverlapIntervals(int[][] intervals) {
+        Arrays.sort(intervals, (a,b) -> a[1] - b[1]);
+
+        int count = 0;
+        int prevEnd = Integer.MIN_VALUE;
+
+        for(int i = 0 ; i < intervals.length ; i++){
+            if(prevEnd <= intervals[i][0]){
+                count++;
+                prevEnd = intervals[i][1];
+            }
+        }
+
+        return intervals.length - count;
     }
 
-14. Insert Interval || MEDIUM || ***
+15009 Insert Interval || MEDIUM || ***
 TC: O(N)
 SC: O(1)
     public int[][] insert(int[][] intervals, int[] newInterval) {
@@ -159,7 +161,7 @@ SC: O(1)
         
     }
 
-15. Merge Intervals || EASY || *
+15010 Merge Intervals || EASY || *
 TC: O(NlogN)
 SC: O(1)
     public int[][] merge(int[][] intervals) {
@@ -184,21 +186,91 @@ SC: O(1)
         return ans.toArray(new int[ans.size()][]);
     }
 
-16. Non-overlapping Intervals || EASY || *
-TC: O(NlogN)
+15011 Minimum number of platforms required for a railway || EASY
+TC: O(NlogN) + O(NlogN) + O(2N)
 SC: O(1)
-    public int eraseOverlapIntervals(int[][] intervals) {
-        Arrays.sort(intervals, (a,b) -> a[1] - b[1]);
-
-        int count = 0;
-        int prevEnd = Integer.MIN_VALUE;
-
-        for(int i = 0 ; i < intervals.length ; i++){
-            if(prevEnd <= intervals[i][0]){
-                count++;
-                prevEnd = intervals[i][1];
+    static int findPlatform(int arr[], int dep[]) {
+        int i = 0, j = 0, n = arr.length;
+        Arrays.sort(arr);
+        Arrays.sort(dep);
+        
+        int platform = 0;
+        int ans = 0;
+        while( i < n && j < n){
+            if(arr[i] <= dep[j]){
+                ans = Math.max(ans, ++platform);
+                i++;
+            }else{
+                platform--;
+                j++;
             }
         }
-
-        return intervals.length - count;
+        return ans;
     }
+
+15012 | SDE | Valid Paranthesis Checker || ***
+TC: O(n)
+SC: O(1)
+class Solution {
+    public boolean checkValidString(String s) {
+        int minOpen = 0;
+        int maxOpen = 0;
+        
+        for (char c : s.toCharArray()) {
+            if (c == '(') {
+                minOpen++;
+                maxOpen++;
+            } else if (c == ')') {
+                minOpen--;
+                maxOpen--;
+            } else { // c == '*'
+                minOpen--; // Treat as ')'
+                maxOpen++; // Treat as '('
+            }
+            
+            // If even our maximum possible open parentheses are negative, 
+            // we have too many ')'
+            if (maxOpen < 0) {
+                return false;
+            }
+            
+            // We can't have negative open parentheses, meaning we 
+            // shouldn't have used a '*' as a ')'
+            if (minOpen < 0) {
+                minOpen = 0;
+            }
+        }
+        
+        // If the minimum possible open parentheses is 0, it's valid
+        return minOpen == 0;
+    }
+}
+
+
+15013 Candy
+TC:
+SC:
+
+15014 Jump Game 2 || MEDIUM || ***
+TC: O(N)
+SC: O(1)
+    public int jump(int[] nums) {
+        int maxRange = nums[0], range = 0, jumps = 0, n = nums.length;
+        for(int i = 0 ; i < n && i <= range ; i++){
+            maxRange = Math.max(maxRange,nums[i]+i);
+
+            if(i == range && i != n-1){
+                range = maxRange;
+                jumps++;
+            }
+        }
+        return jumps;
+    }
+
+15015 Greedy algorithm to find minimum number of coins
+TC:
+SC:
+
+15016 Program for Least Recently Used (LRU) Page Replacement Algorithm
+TC:
+SC:

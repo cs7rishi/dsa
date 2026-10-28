@@ -1,37 +1,33 @@
 1001.Two Sum  | Medium
-//Indexing changing on sorting so sorting
+//Indexing changing on sorting so avoid sorting
 https://leetcode.com/problems/two-sum/
 
-1002.Sort Colors *** | Medium
+1002.Sort Colors  || Medium ***
 https://leetcode.com/problems/sort-colors/description/
+//windows is hard to remeber
 
-1003.Majority Element *** | Medium
+1003.Majority Element || Medium || *
 https://leetcode.com/problems/majority-element/description/
+//becoz whoever is large, would decrease the count eventually
 
-1004.Maximum Subarray | Medium
+1004.Maximum Subarray || Medium || *
 https://leetcode.com/problems/maximum-subarray/description/
+//Sliding window does'nt work with -ve numbers
+//Kadane work, we only require the maximum, subarray, so shrinking window is not
+//require, even if window, decrease, still it will collaborate for next element
+//hence, don't require shinking, but if its a baggage i.e 0 , or < 0, just drop it
 
-#. Next Permutation || Medium
+Best Time to Buy and Sell Stock
+https://leetcode.com/problems/best-time-to-buy-and-sell-stock/
+
+
+#. Next Permutation || Medium || *
 https://leetcode.com/problems/next-permutation/description/
 
 1005.Leaders in an Array problem | Medium
 https://www.geeksforgeeks.org/problems/leaders-in-an-array-1587115620/1?utm_source=youtube&utm_medium=collab_striver_ytdescription&utm_campaign=leaders-in-an-array
 
-1006.Longest Consecutive Sequence in an Array *** | Medium
-//Consider the case when number can be equal
-//If checking condition between loop(ex. comparision with previous index) don't forget to check after loop too
-
-        for(int t : nums){
-            if( t == 0){
-                mx = Math.max(mx,sum);
-                sum = 0;
-            }else{
-                sum++;
-            }
-        }
-
-        mx = Math.max(mx,sum); //checked condition after loop too
-
+1006.Longest Consecutive Sequence in an Array || Medium || *
 https://www.geeksforgeeks.org/problems/longest-consecutive-subsequence2449/1
 
 1007.Set Matrix Zeroes *** | Medium
@@ -45,17 +41,21 @@ https://leetcode.com/problems/rotate-image/description/
 1009. Rotate Array
 https://leetcode.com/problems/rotate-array/
 
-1010. Longest subarray with given sum K(positives) *** | Medium
-//For sum question always take long
-//Prefix Sum, Sliding Window
+1010. Longest subarray with given sum K(positives) || *** 
+//For sum question always take long, contains +ve, can use sliding window
+//as well as prefix
 
-1011. Longest subarray with sum K (Positives + Negatives) *** | Medium
-//Prefix, No Sliding Window (does'nt work with -ve number, -ve could contribute in future when window moved ahead too)
+1011. Longest subarray with sum K (Positives + Negatives) || Medium || ***
+// Prefix, No Sliding Window (does'nt work with -ve number, 
+// -ve could contribute in future when window moved ahead too)
 https://www.geeksforgeeks.org/problems/longest-sub-array-with-sum-k0809/1
 
-1012. Subarray Sum Equals K
-//Prefix Sum , Sliding window does'nt work with -ve values
+1012. Count Subarray Sum Equals K || Medium || ***
 https://leetcode.com/problems/subarray-sum-equals-k/description/
+// Placement of 0 is important in map, i.e index for sum 0
+//Prefix Sum , Sliding window does'nt work with -ve values
+//Why it has to be sum - k , and not k - sum
+//Since -ve number are there, can't apply sliding window, since not sure, when to shrink window
 
 1013. Majority Element II || Medium || ***
 //Remember to check if element occurs more than mojority times
@@ -68,6 +68,7 @@ https://leetcode.com/problems/majority-element-ii/description/
 //Handle the cases for duplicates when removing set structure
 
 1015. Largest subarray with 0 sum || Medium || ***
+https://www.geeksforgeeks.org/problems/largest-subarray-with-0-sum/1
 //Make sure to don't override the first index in preSum question
 
 1016. Subarray with given XOR || Easy || *
@@ -112,3 +113,12 @@ https://leetcode.com/problems/maximum-product-subarray/description/
 1028. Pascal's Triangle I & II || Medium || ***
 https://leetcode.com/problems/pascals-triangle-ii/description/
 Handle the testcase properly, specially the holding the value in long type
+
+EASY Section
+1029. Check if Array Is Sorted and Rotated
+https://leetcode.com/problems/check-if-array-is-sorted-and-rotated/description/
+//Cover edge case
+
+1030. Rotate Array
+https://leetcode.com/problems/rotate-array/
+//Space Complexity is important

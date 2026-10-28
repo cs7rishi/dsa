@@ -129,6 +129,8 @@ https://www.geeksforgeeks.org/problems/shortest-path-in-directed-acyclic-graph/1
 https://www.geeksforgeeks.org/problems/implementing-dijkstra-set-1-adjacency-matrix/1
 // Fundamental, we could remove the isVisited array from the code
 // Memorize the algo
+// Don't take dicision in exploration, part, 
+// always take decision when polling from queue, as that it best min/correct
 // Also no need to evaluate path = to current distance, exactly smaller distance need to be explored
 // TC: 
 //Dense GraphPQ:  O(N^2 + M)
@@ -188,12 +190,25 @@ https://practice.geeksforgeeks.org/problems/implementing-floyd-warshall2042/1
 //Plan Floyd warshal implementation
 https://leetcode.com/problems/find-the-city-with-the-smallest-number-of-neighbors-at-a-threshold-distance/
 
+
+>>>>>>>>> Minimum spanning tree <<<<<<<<<<<
 7032. Prim's Algorithm || Fundamental || ***
 // Use pair for just finding the MST total weight;
+// Has more important of isVisited, since we can't introduce a edge again in the graph
+// Does'nt work on multiple component, as we explore only current node only, can't reach other component
+// Mark visited when polling from queuee, since in exploring we could figure out shorter edge
+// For undirected, make multiple entry, u -> v & v -> u
+
 
 7033.Kruskal's Algorithm / UnionByRank/ UnionBySize || Fundamental || ***
-//Use Disjoint for dynamic graph
+//Use Disjoint for dynamic graph || Learn the algo
+//Default rank is 0
+//Deafault size is 1
+//Default parent is itself
 https://www.geeksforgeeks.org/problems/minimum-spanning-tree/1
+
+7033.B Minimum Spanning Tree - Kruskal's Algorithm || EASY || ***
+https://www.geeksforgeeks.org/problems/minimum-spanning-tree-kruskals-algorithm/1
 
 7034. Number of operations to make network connected || EASY
 https://leetcode.com/problems/number-of-operations-to-make-network-connected/
